@@ -1,0 +1,5979 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+Pemindai AI - Nutri-Guard
+{% endblock %}
+
+{% block content %}
+
+<style>
+  /* =========================================================
+     NUTRI-GUARD AI
+     SCAN PAGE
+     ========================================================= */
+
+  :root {
+    --scan-lime: #caff3d;
+    --scan-lime-soft: #efffc0;
+    --scan-lime-dark: #a9e82d;
+
+    --scan-green: #10b981;
+    --scan-green-dark: #047857;
+    --scan-green-soft: #ecfdf5;
+
+    --scan-dark: #080c16;
+    --scan-dark-2: #101621;
+    --scan-dark-3: #171e2b;
+
+    --scan-text: #0f172a;
+    --scan-muted: #64748b;
+
+    --scan-border: #e4e9e7;
+    --scan-soft: #f6f8f7;
+    --scan-white: #ffffff;
+
+    --scan-red: #ef4444;
+    --scan-red-soft: #fef2f2;
+
+    --scan-blue: #3b82f6;
+    --scan-blue-soft: #eff6ff;
+
+    --scan-orange: #f59e0b;
+    --scan-orange-soft: #fffbeb;
+
+    --scan-radius-xl: 32px;
+    --scan-radius-lg: 24px;
+    --scan-radius-md: 18px;
+
+    --scan-content: 1480px;
+  }
+
+
+  /* =========================================================
+     PAGE
+     ========================================================= */
+
+  .nutriguard-scan,
+  .nutriguard-scan * {
+    box-sizing: border-box;
+  }
+
+  .nutriguard-scan {
+    width: 100vw;
+    max-width: 100vw;
+
+    position: relative;
+
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+
+    background:
+      linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #f7f9f8 50%,
+        #ffffff 100%
+      );
+
+    color: var(--scan-text);
+
+    overflow-x: hidden;
+
+    padding-bottom: 80px;
+  }
+
+  .scan-container {
+    width: min(
+      var(--scan-content),
+      calc(100% - 64px)
+    );
+
+    margin: 0 auto;
+  }
+
+
+  /* =========================================================
+     HERO
+     ========================================================= */
+
+  .scan-hero-wrap {
+    padding:
+      28px
+      clamp(20px, 3vw, 54px)
+      0;
+  }
+
+  .scan-hero {
+    width: 100%;
+    max-width: 1510px;
+
+    min-height: 330px;
+
+    margin: 0 auto;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 34px;
+
+    background:
+      radial-gradient(
+        circle at 88% 0%,
+        rgba(255, 255, 255, 0.42),
+        transparent 30%
+      ),
+      linear-gradient(
+        125deg,
+        #ccff42 0%,
+        #bdf65d 53%,
+        #a4e879 100%
+      );
+
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1.1fr)
+      minmax(380px, 0.9fr);
+
+    align-items: center;
+
+    gap: 40px;
+
+    padding:
+      54px
+      clamp(35px, 5vw, 76px);
+  }
+
+  .scan-hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 380px;
+    height: 380px;
+
+    right: -130px;
+    top: -210px;
+
+    border-radius: 50%;
+
+    background:
+      rgba(255, 255, 255, 0.18);
+  }
+
+  .scan-hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 230px;
+    height: 230px;
+
+    left: 47%;
+    bottom: -175px;
+
+    border-radius: 50%;
+
+    border:
+      1px solid rgba(15, 23, 42, 0.08);
+  }
+
+  .scan-hero-copy {
+    position: relative;
+    z-index: 3;
+  }
+
+  .scan-overline {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 17px;
+
+    color: #365314;
+
+    font-size: 0.72rem;
+
+    font-weight: 900;
+
+    letter-spacing: 0.06em;
+  }
+
+  .scan-hero-title {
+    max-width: 760px;
+
+    margin:
+      0
+      0
+      18px;
+
+    color: #080c16;
+
+    font-size:
+      clamp(
+        2.8rem,
+        4.7vw,
+        5.3rem
+      );
+
+    line-height: 0.94;
+
+    letter-spacing: -4px;
+
+    font-weight: 950;
+  }
+
+  .scan-hero-title .star {
+    display: inline-block;
+
+    font-size: 0.48em;
+
+    transform:
+      translateY(-15px);
+  }
+
+  .scan-hero-desc {
+    max-width: 650px;
+
+    margin: 0;
+
+    color:
+      rgba(15, 23, 42, 0.72);
+
+    font-size: 0.95rem;
+
+    line-height: 1.7;
+  }
+
+
+  /* =========================================================
+     HERO SIDE
+     ========================================================= */
+
+  .scan-hero-side {
+    min-height: 220px;
+
+    position: relative;
+
+    z-index: 3;
+  }
+
+  .scan-flow-card {
+    width: 315px;
+
+    position: absolute;
+
+    right: 10px;
+    top: 50%;
+
+    transform:
+      translateY(-50%)
+      rotate(2deg);
+
+    padding: 20px;
+
+    border-radius: 25px;
+
+    background: var(--scan-dark);
+
+    box-shadow:
+      0 34px 65px -28px
+      rgba(15, 23, 42, 0.55);
+  }
+
+  .scan-flow-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 21px;
+  }
+
+  .scan-flow-top span {
+    color: #ffffff;
+
+    font-size: 0.72rem;
+
+    font-weight: 850;
+  }
+
+  .scan-flow-live {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    color: #a7f3d0;
+
+    font-size: 0.56rem;
+  }
+
+  .scan-flow-live::before {
+    content: "";
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #10b981;
+
+    box-shadow:
+      0 0 0 4px
+      rgba(16, 185, 129, 0.13);
+  }
+
+  .scan-flow-steps {
+    display: grid;
+
+    gap: 8px;
+  }
+
+  .scan-flow-step {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding:
+      10px
+      11px;
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.06);
+
+    border-radius: 13px;
+
+    background:
+      rgba(255, 255, 255, 0.045);
+  }
+
+  .scan-flow-number {
+    width: 28px;
+    height: 28px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: var(--scan-lime);
+
+    color: #15200c;
+
+    font-size: 0.65rem;
+
+    font-weight: 950;
+  }
+
+  .scan-flow-step strong {
+    display: block;
+
+    color: #ffffff;
+
+    font-size: 0.65rem;
+  }
+
+  .scan-flow-step small {
+    display: block;
+
+    margin-top: 2px;
+
+    color:
+      rgba(255, 255, 255, 0.43);
+
+    font-size: 0.52rem;
+  }
+
+  .scan-floating-ai {
+    position: absolute;
+
+    width: 155px;
+
+    left: 0;
+    bottom: 0;
+
+    z-index: 7;
+
+    padding:
+      13px
+      14px;
+
+    border-radius: 17px;
+
+    background: #ffffff;
+
+    transform:
+      rotate(-4deg);
+
+    box-shadow:
+      0 25px 50px -27px
+      rgba(15, 23, 42, 0.6);
+  }
+
+  .scan-floating-ai small {
+    display: block;
+
+    color: #94a3b8;
+
+    font-size: 0.53rem;
+  }
+
+  .scan-floating-ai strong {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 4px;
+
+    color: #111827;
+
+    font-size: 0.67rem;
+  }
+
+  .scan-floating-ai i {
+    color: var(--scan-green);
+  }
+
+
+  /* =========================================================
+     GUEST NOTICE
+     ========================================================= */
+
+  .scan-guest {
+    margin-top: 22px;
+
+    padding:
+      17px
+      20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    border:
+      1px solid #e5e7eb;
+
+    border-radius: 19px;
+
+    background: #ffffff;
+  }
+
+  .scan-guest-left {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+  }
+
+  .scan-guest-icon {
+    width: 43px;
+    height: 43px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    color: #92400e;
+
+    background: #fef3c7;
+  }
+
+  .scan-guest h6 {
+    margin:
+      0
+      0
+      3px;
+
+    color: #111827;
+
+    font-size: 0.83rem;
+
+    font-weight: 900;
+  }
+
+  .scan-guest p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 0.71rem;
+
+    line-height: 1.5;
+  }
+
+  .scan-guest a {
+    flex-shrink: 0;
+
+    color: #047857;
+
+    text-decoration: none;
+
+    font-size: 0.72rem;
+
+    font-weight: 900;
+  }
+
+
+  /* =========================================================
+     WORKSPACE
+     ========================================================= */
+
+  .scan-workspace {
+    margin-top: 26px;
+
+    display: grid;
+
+    grid-template-columns:
+      minmax(360px, 0.82fr)
+      minmax(0, 1.18fr);
+
+    gap: 22px;
+
+    align-items: stretch;
+  }
+
+  .scan-panel {
+    border:
+      1px solid var(--scan-border);
+
+    border-radius: 28px;
+
+    background: #ffffff;
+
+    box-shadow:
+      0 25px 65px -55px
+      rgba(15, 23, 42, 0.4);
+  }
+
+  .scan-panel-header {
+    padding:
+      26px
+      27px
+      20px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 20px;
+  }
+
+  .scan-panel-head-left {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+  }
+
+  .scan-panel-icon {
+    width: 43px;
+    height: 43px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: var(--scan-lime);
+
+    color: #18210c;
+
+    font-size: 0.94rem;
+  }
+
+  .scan-panel-title {
+    margin:
+      0
+      0
+      4px;
+
+    color: #0f172a;
+
+    font-size: 1.05rem;
+
+    font-weight: 950;
+
+    letter-spacing: -0.4px;
+  }
+
+  .scan-panel-subtitle {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 0.7rem;
+
+    line-height: 1.5;
+  }
+
+  .scan-step-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding:
+      7px
+      10px;
+
+    border-radius: 999px;
+
+    color: #047857;
+
+    background: #ecfdf5;
+
+    font-size: 0.61rem;
+
+    font-weight: 850;
+
+    white-space: nowrap;
+  }
+
+
+  /* =========================================================
+     ACQUISITION
+     ========================================================= */
+
+  .scan-capture-body {
+    padding:
+      0
+      27px
+      27px;
+  }
+
+  .scan-methods {
+    display: grid;
+
+    grid-template-columns:
+      1fr
+      1fr;
+
+    gap: 9px;
+
+    padding: 5px;
+
+    margin-bottom: 17px;
+
+    border-radius: 16px;
+
+    background: #f4f7f5;
+  }
+
+  .scan-method-btn {
+    min-height: 46px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: transparent;
+
+    color: #64748b;
+
+    font-size: 0.75rem;
+
+    font-weight: 850;
+
+    transition:
+      background 0.2s ease,
+      color 0.2s ease,
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .scan-method-btn:hover {
+    color: #111827;
+
+    transform:
+      translateY(-1px);
+  }
+
+  .scan-method-btn.camera {
+    background: #080c16;
+
+    color: #ffffff;
+
+    box-shadow:
+      0 10px 20px -14px
+      rgba(8, 12, 22, 0.8);
+  }
+
+
+  /* =========================================================
+     UPLOAD
+     ========================================================= */
+
+  .scan-upload-zone {
+    min-height: 365px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    padding:
+      35px
+      26px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border:
+      1.5px dashed #bdc8c3;
+
+    border-radius: 23px;
+
+    background:
+      radial-gradient(
+        circle at 50% 20%,
+        rgba(202, 255, 61, 0.13),
+        transparent 35%
+      ),
+      #f8faf9;
+
+    transition:
+      border-color 0.2s ease,
+      background 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .scan-upload-zone:hover,
+  .scan-upload-zone.drag-over {
+    border-color: #84cc16;
+
+    background:
+      linear-gradient(
+        135deg,
+        #f8ffe9,
+        #f6fbf7
+      );
+
+    transform:
+      translateY(-2px);
+  }
+
+  .scan-upload-icon {
+    width: 78px;
+    height: 78px;
+
+    margin-bottom: 20px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 24px;
+
+    background: var(--scan-lime);
+
+    color: #16200d;
+
+    font-size: 1.55rem;
+
+    transform:
+      rotate(-4deg);
+  }
+
+  .scan-upload-icon::after {
+    content: "";
+
+    position: absolute;
+
+    width: 28px;
+    height: 28px;
+
+    right: -8px;
+    bottom: -5px;
+
+    border-radius: 50%;
+
+    background: #080c16;
+
+    border:
+      4px solid #f8faf9;
+  }
+
+  .scan-upload-zone h4 {
+    margin:
+      0
+      0
+      8px;
+
+    color: #111827;
+
+    font-size: 1rem;
+
+    font-weight: 950;
+  }
+
+  .scan-upload-zone p {
+    max-width: 300px;
+
+    margin:
+      0
+      auto;
+
+    color: #64748b;
+
+    font-size: 0.72rem;
+
+    line-height: 1.55;
+  }
+
+  .scan-upload-formats {
+    margin-top: 19px;
+
+    display: inline-flex;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+  }
+
+  .scan-format {
+    padding:
+      5px
+      8px;
+
+    border-radius: 8px;
+
+    border:
+      1px solid #e1e7e4;
+
+    background: #ffffff;
+
+    color: #64748b;
+
+    font-size: 0.55rem;
+
+    font-weight: 850;
+  }
+
+
+  /* =========================================================
+     CAMERA
+     ========================================================= */
+
+  .scan-camera-wrap {
+    position: relative;
+
+    min-height: 365px;
+
+    overflow: hidden;
+
+    border-radius: 23px;
+
+    background: #080b0f;
+  }
+
+  #cameraStream {
+    width: 100%;
+    height: 365px;
+
+    display: block;
+
+    object-fit: cover;
+
+    background: #080b0f;
+  }
+
+  .scan-camera-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.24),
+        transparent 30%,
+        transparent 70%,
+        rgba(0, 0, 0, 0.4)
+      );
+  }
+
+  .scan-corner {
+    width: 37px;
+    height: 37px;
+
+    position: absolute;
+
+    border-color: var(--scan-lime);
+    border-style: solid;
+
+    z-index: 2;
+  }
+
+  .scan-corner.tl {
+    left: 24px;
+    top: 24px;
+
+    border-width:
+      3px
+      0
+      0
+      3px;
+
+    border-radius:
+      12px
+      0
+      0
+      0;
+  }
+
+  .scan-corner.tr {
+    right: 24px;
+    top: 24px;
+
+    border-width:
+      3px
+      3px
+      0
+      0;
+
+    border-radius:
+      0
+      12px
+      0
+      0;
+  }
+
+  .scan-corner.bl {
+    left: 24px;
+    bottom: 74px;
+
+    border-width:
+      0
+      0
+      3px
+      3px;
+
+    border-radius:
+      0
+      0
+      0
+      12px;
+  }
+
+  .scan-corner.br {
+    right: 24px;
+    bottom: 74px;
+
+    border-width:
+      0
+      3px
+      3px
+      0;
+
+    border-radius:
+      0
+      0
+      12px
+      0;
+  }
+
+  .scan-camera-line {
+    position: absolute;
+
+    left: 30px;
+    right: 30px;
+
+    top: 80px;
+
+    height: 2px;
+
+    z-index: 2;
+
+    background:
+      linear-gradient(
+        90deg,
+        transparent,
+        var(--scan-lime),
+        transparent
+      );
+
+    box-shadow:
+      0 0 17px
+      rgba(202, 255, 61, 0.8);
+
+    animation:
+      scanCameraLine
+      2.7s
+      ease-in-out
+      infinite;
+  }
+
+  @keyframes scanCameraLine {
+    0%,
+    100% {
+      top: 65px;
+    }
+
+    50% {
+      top: 275px;
+    }
+  }
+
+  .scan-camera-label {
+    position: absolute;
+
+    left: 50%;
+    top: 19px;
+
+    z-index: 3;
+
+    transform:
+      translateX(-50%);
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding:
+      7px
+      11px;
+
+    border-radius: 999px;
+
+    background:
+      rgba(8, 12, 22, 0.64);
+
+    color: #ffffff;
+
+    backdrop-filter:
+      blur(8px);
+
+    font-size: 0.57rem;
+
+    font-weight: 850;
+  }
+
+  .scan-camera-actions {
+    position: absolute;
+
+    left: 16px;
+    right: 16px;
+    bottom: 15px;
+
+    z-index: 4;
+
+    display: grid;
+
+    grid-template-columns:
+      1fr
+      auto;
+
+    gap: 9px;
+  }
+
+  .scan-camera-btn {
+    min-height: 47px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    font-size: 0.73rem;
+
+    font-weight: 900;
+  }
+
+  .scan-camera-btn.capture {
+    color: #17210c;
+
+    background: var(--scan-lime);
+  }
+
+  .scan-camera-btn.close {
+    width: 48px;
+
+    color: #ffffff;
+
+    background:
+      rgba(255, 255, 255, 0.13);
+
+    backdrop-filter:
+      blur(10px);
+  }
+
+
+  /* =========================================================
+     PREVIEW
+     ========================================================= */
+
+  .scan-preview-wrap {
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 23px;
+
+    background: #080b0f;
+  }
+
+  .scan-preview-frame {
+    height: 365px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+      radial-gradient(
+        circle at center,
+        #18202b,
+        #080b0f
+      );
+  }
+
+  #imagePreview {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    cursor: zoom-in;
+
+    transition:
+      transform 0.35s ease;
+  }
+
+  .scan-preview-frame:hover
+  #imagePreview {
+    transform:
+      scale(1.015);
+  }
+
+  .scan-preview-gradient {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.18),
+        transparent 30%,
+        transparent 70%,
+        rgba(0, 0, 0, 0.55)
+      );
+  }
+
+  .scan-preview-top {
+    position: absolute;
+
+    left: 15px;
+    right: 15px;
+    top: 15px;
+
+    z-index: 3;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
+  }
+
+  .scan-preview-ready {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding:
+      7px
+      10px;
+
+    border-radius: 999px;
+
+    color: #d1fae5;
+
+    background:
+      rgba(8, 12, 22, 0.69);
+
+    backdrop-filter:
+      blur(8px);
+
+    font-size: 0.55rem;
+
+    font-weight: 850;
+  }
+
+  .scan-preview-ready span {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #34d399;
+  }
+
+  .scan-expand-btn {
+    width: 37px;
+    height: 37px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 11px;
+
+    color: #ffffff;
+
+    background:
+      rgba(8, 12, 22, 0.69);
+
+    backdrop-filter:
+      blur(8px);
+  }
+
+  .scan-file-info {
+    position: absolute;
+
+    left: 14px;
+    right: 14px;
+    bottom: 14px;
+
+    z-index: 4;
+
+    padding:
+      12px
+      13px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.08);
+
+    border-radius: 13px;
+
+    background:
+      rgba(8, 12, 22, 0.78);
+
+    backdrop-filter:
+      blur(10px);
+  }
+
+  .scan-file-data {
+    min-width: 0;
+  }
+
+  .scan-file-data strong {
+    max-width: 240px;
+
+    display: block;
+
+    overflow: hidden;
+
+    color: #ffffff;
+
+    font-size: 0.61rem;
+
+    font-weight: 800;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .scan-file-data small {
+    display: block;
+
+    margin-top: 2px;
+
+    color:
+      rgba(255, 255, 255, 0.46);
+
+    font-size: 0.5rem;
+  }
+
+  .scan-reset-btn {
+    flex-shrink: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color:
+      rgba(255, 255, 255, 0.7);
+
+    font-size: 0.58rem;
+
+    font-weight: 850;
+  }
+
+
+  /* =========================================================
+     EXTRACT BUTTON
+     ========================================================= */
+
+  .scan-extract-btn {
+    width: 100%;
+    min-height: 52px;
+
+    margin-top: 13px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: var(--scan-dark);
+
+    color: #ffffff;
+
+    font-size: 0.78rem;
+
+    font-weight: 900;
+
+    box-shadow:
+      0 17px 25px -18px
+      rgba(8, 12, 22, 0.75);
+
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .scan-extract-btn:hover {
+    background: #151b28;
+
+    transform:
+      translateY(-2px);
+  }
+
+  .scan-extract-btn:disabled {
+    opacity: 0.65;
+
+    transform: none;
+  }
+
+
+  /* =========================================================
+     RIGHT FORM
+     ========================================================= */
+
+  .scan-form-body {
+    padding:
+      2px
+      27px
+      27px;
+  }
+
+  .scan-form-section {
+    padding:
+      21px
+      0;
+
+    border-top:
+      1px solid #edf1ef;
+  }
+
+  .scan-form-section:first-child {
+    padding-top: 3px;
+
+    border-top: none;
+  }
+
+  .scan-form-section-head {
+    margin-bottom: 17px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+  }
+
+  .scan-form-section-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 0.77rem;
+
+    font-weight: 900;
+  }
+
+  .scan-form-section-title span {
+    width: 25px;
+    height: 25px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    color: #047857;
+
+    background: #ecfdf5;
+
+    font-size: 0.59rem;
+  }
+
+  .scan-editable {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    color: #64748b;
+
+    font-size: 0.55rem;
+
+    font-weight: 800;
+  }
+
+  .scan-field-grid {
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+  }
+
+  .scan-field-grid.three {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .scan-field.full {
+    grid-column: 1 / -1;
+  }
+
+  .scan-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #536071;
+
+    font-size: 0.68rem;
+
+    font-weight: 850;
+  }
+
+  .scan-label .required {
+    color: #ef4444;
+  }
+
+  .scan-input {
+    min-height: 49px;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: stretch;
+
+    border:
+      1px solid #dfe6e2;
+
+    border-radius: 13px;
+
+    background: #fafcfb;
+
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .scan-input:focus-within {
+    border-color:
+      rgba(16, 185, 129, 0.65);
+
+    background: #ffffff;
+
+    box-shadow:
+      0 0 0 4px
+      rgba(16, 185, 129, 0.08);
+  }
+
+  .scan-input input,
+  .scan-input select {
+    width: 100%;
+    min-width: 0;
+
+    border: none;
+    outline: none;
+
+    padding:
+      0
+      13px;
+
+    background: transparent;
+
+    color: #111827;
+
+    font-size: 0.78rem;
+
+    font-weight: 700;
+
+    box-shadow: none !important;
+  }
+
+  .scan-input select {
+    cursor: pointer;
+  }
+
+  .scan-unit {
+    min-width: 55px;
+
+    padding:
+      0
+      12px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-left:
+      1px solid #e1e7e4;
+
+    background: #f3f6f4;
+
+    color: #64748b;
+
+    font-size: 0.65rem;
+
+    font-weight: 850;
+  }
+
+
+  /* =========================================================
+     NUTRIENT COLORS
+     ========================================================= */
+
+  .scan-input.sugar {
+    border-color: #fecaca;
+
+    background: #fffafa;
+  }
+
+  .scan-input.sugar
+  .scan-unit {
+    color: #dc2626;
+
+    background: #fef2f2;
+
+    border-color: #fee2e2;
+  }
+
+  .scan-input.sodium {
+    border-color: #bfdbfe;
+
+    background: #fbfdff;
+  }
+
+  .scan-input.sodium
+  .scan-unit {
+    color: #2563eb;
+
+    background: #eff6ff;
+
+    border-color: #dbeafe;
+  }
+
+  .scan-input.fat {
+    border-color: #fde68a;
+
+    background: #fffdfa;
+  }
+
+  .scan-input.fat
+  .scan-unit {
+    color: #d97706;
+
+    background: #fffbeb;
+
+    border-color: #fef3c7;
+  }
+
+  .scan-input.positive {
+    border-color: #bbf7d0;
+
+    background: #fbfffc;
+  }
+
+  .scan-input.positive
+  .scan-unit {
+    color: #047857;
+
+    background: #ecfdf5;
+
+    border-color: #d1fae5;
+  }
+
+
+  /* =========================================================
+     INFO CARDS
+     ========================================================= */
+
+  .scan-nutrient-hints {
+    margin-top: 16px;
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(3, 1fr);
+
+    gap: 9px;
+  }
+
+  .scan-hint {
+    padding:
+      12px
+      13px;
+
+    border-radius: 13px;
+
+    background: #f8faf9;
+
+    border:
+      1px solid #e9eeec;
+  }
+
+  .scan-hint-icon {
+    width: 27px;
+    height: 27px;
+
+    margin-bottom: 8px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    font-size: 0.62rem;
+  }
+
+  .scan-hint:nth-child(1)
+  .scan-hint-icon {
+    color: #dc2626;
+
+    background: #fef2f2;
+  }
+
+  .scan-hint:nth-child(2)
+  .scan-hint-icon {
+    color: #2563eb;
+
+    background: #eff6ff;
+  }
+
+  .scan-hint:nth-child(3)
+  .scan-hint-icon {
+    color: #047857;
+
+    background: #ecfdf5;
+  }
+
+  .scan-hint strong {
+    display: block;
+
+    color: #111827;
+
+    font-size: 0.61rem;
+  }
+
+  .scan-hint small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #94a3b8;
+
+    font-size: 0.51rem;
+
+    line-height: 1.4;
+  }
+
+
+  /* =========================================================
+     ANALYZE
+     ========================================================= */
+
+  .scan-analyze-wrap {
+    padding-top: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 18px;
+
+    border-top:
+      1px solid #edf1ef;
+  }
+
+  .scan-analyze-info {
+    max-width: 380px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+  }
+
+  .scan-analyze-info i {
+    margin-top: 3px;
+
+    color: #65a30d;
+  }
+
+  .scan-analyze-info p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 0.62rem;
+
+    line-height: 1.5;
+  }
+
+  .scan-analyze-btn {
+    min-width: 205px;
+    min-height: 52px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: var(--scan-lime);
+
+    color: #17200d;
+
+    font-size: 0.75rem;
+
+    font-weight: 950;
+
+    box-shadow:
+      0 16px 28px -18px
+      rgba(101, 163, 13, 0.55);
+
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .scan-analyze-btn:hover {
+    transform:
+      translateY(-2px);
+
+    box-shadow:
+      0 19px 30px -18px
+      rgba(101, 163, 13, 0.68);
+  }
+
+  .scan-analyze-btn:disabled {
+    opacity: 0.65;
+
+    transform: none;
+  }
+
+
+  /* =========================================================
+     BOTTOM GUIDE
+     ========================================================= */
+
+  .scan-guide {
+    margin-top: 22px;
+
+    padding: 26px;
+
+    display: grid;
+
+    grid-template-columns:
+      0.9fr
+      1.1fr;
+
+    gap: 30px;
+
+    border:
+      1px solid var(--scan-border);
+
+    border-radius: 26px;
+
+    background: #ffffff;
+  }
+
+  .scan-guide-copy h3 {
+    margin:
+      0
+      0
+      8px;
+
+    color: #080c16;
+
+    font-size: 1.35rem;
+
+    font-weight: 950;
+
+    letter-spacing: -0.8px;
+  }
+
+  .scan-guide-copy p {
+    max-width: 450px;
+
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 0.72rem;
+
+    line-height: 1.65;
+  }
+
+  .scan-guide-steps {
+    display: grid;
+
+    grid-template-columns:
+      repeat(3, 1fr);
+
+    gap: 10px;
+  }
+
+  .scan-guide-step {
+    min-height: 115px;
+
+    padding:
+      15px;
+
+    border-radius: 16px;
+
+    background: #f7f9f8;
+  }
+
+  .scan-guide-number {
+    width: 28px;
+    height: 28px;
+
+    margin-bottom: 14px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    color: #18210d;
+
+    background: var(--scan-lime);
+
+    font-size: 0.58rem;
+
+    font-weight: 950;
+  }
+
+  .scan-guide-step strong {
+    display: block;
+
+    color: #111827;
+
+    font-size: 0.66rem;
+  }
+
+  .scan-guide-step small {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #94a3b8;
+
+    font-size: 0.52rem;
+
+    line-height: 1.4;
+  }
+
+
+  /* =========================================================
+     IMAGE PREVIEW MODAL
+     ========================================================= */
+
+  #previewModal
+  .modal-dialog {
+    max-width: 950px;
+  }
+
+  #previewModal
+  .modal-content {
+    overflow: hidden;
+
+    border: none;
+
+    border-radius: 27px;
+
+    background: #080b0f;
+  }
+
+  .preview-modal-header {
+    padding:
+      17px
+      20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    background: #0d1118;
+
+    border-bottom:
+      1px solid
+      rgba(255, 255, 255, 0.07);
+  }
+
+  .preview-modal-title {
+    color: #ffffff;
+
+    font-size: 0.79rem;
+
+    font-weight: 900;
+  }
+
+  .preview-modal-close {
+    width: 35px;
+    height: 35px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    color: #ffffff;
+
+    background:
+      rgba(255, 255, 255, 0.08);
+  }
+
+  .preview-modal-image-wrap {
+    min-height: 420px;
+
+    max-height: 75vh;
+
+    padding: 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+      radial-gradient(
+        circle at center,
+        #19212c,
+        #080b0f
+      );
+  }
+
+  #previewModalImage {
+    max-width: 100%;
+    max-height: 70vh;
+
+    object-fit: contain;
+
+    border-radius: 12px;
+  }
+
+
+  /* =========================================================
+     RESULT MODAL
+     ========================================================= */
+
+  #resultModal
+  .modal-dialog {
+    max-width: 850px;
+  }
+
+  #resultModal
+  .modal-content {
+    overflow: hidden;
+
+    border: none;
+
+    border-radius: 28px;
+
+    box-shadow:
+      0 40px 90px -40px
+      rgba(15, 23, 42, 0.55);
+  }
+
+  .result-modal-head {
+    min-height: 125px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+      27px
+      30px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    background:
+      linear-gradient(
+        125deg,
+        #caff3d,
+        #afea68
+      );
+  }
+
+  .result-modal-head::after {
+    content: "";
+
+    width: 180px;
+    height: 180px;
+
+    position: absolute;
+
+    right: -50px;
+    top: -80px;
+
+    border-radius: 50%;
+
+    background:
+      rgba(255, 255, 255, 0.22);
+  }
+
+  .result-modal-overline {
+    margin-bottom: 6px;
+
+    color: #3f6212;
+
+    font-size: 0.58rem;
+
+    font-weight: 900;
+
+    letter-spacing: 0.06em;
+  }
+
+  .result-modal-head h4 {
+    margin: 0;
+
+    color: #080c16;
+
+    font-size: 1.5rem;
+
+    font-weight: 950;
+
+    letter-spacing: -0.8px;
+  }
+
+  .result-close-btn {
+    width: 37px;
+    height: 37px;
+
+    position: relative;
+
+    z-index: 5;
+
+    border: none;
+
+    border-radius: 11px;
+
+    color: #111827;
+
+    background:
+      rgba(255, 255, 255, 0.6);
+  }
+
+  .result-body {
+    padding:
+      31px;
+  }
+
+  .result-grid {
+    display: grid;
+
+    grid-template-columns:
+      0.85fr
+      1.15fr;
+
+    gap: 28px;
+  }
+
+  .result-grade-box {
+    padding:
+      25px;
+
+    border-radius: 21px;
+
+    background: #f7f9f8;
+
+    border:
+      1px solid #e8edeb;
+  }
+
+  .ns-title {
+    margin-bottom: 16px;
+
+    color: #64748b;
+
+    font-size: 0.64rem;
+
+    font-weight: 950;
+
+    letter-spacing: 0.05em;
+  }
+
+  .ns-bar {
+    height: 39px;
+
+    display: flex;
+
+    overflow: visible;
+
+    border-radius: 20px;
+  }
+
+  .ns-segment {
+    flex: 1;
+
+    height: 39px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color:
+      rgba(255, 255, 255, 0.55);
+
+    font-size: 0.85rem;
+
+    font-weight: 950;
+
+    transition:
+      transform 0.35s
+      cubic-bezier(
+        0.34,
+        1.56,
+        0.64,
+        1
+      );
+  }
+
+  .ns-a {
+    border-radius:
+      20px
+      0
+      0
+      20px;
+
+    background: #038141;
+  }
+
+  .ns-b {
+    background: #85bb2f;
+  }
+
+  .ns-c {
+    background: #fecb02;
+  }
+
+  .ns-d {
+    background: #ee8100;
+  }
+
+  .ns-e {
+    border-radius:
+      0
+      20px
+      20px
+      0;
+
+    background: #e63e11;
+  }
+
+  .ns-segment.active {
+    z-index: 5;
+
+    color: #ffffff;
+
+    border:
+      3px solid #ffffff;
+
+    border-radius: 50px;
+
+    transform:
+      scale(1.28);
+
+    box-shadow:
+      0 8px 18px
+      rgba(15, 23, 42, 0.18);
+  }
+
+  .result-quality {
+    margin-top: 27px;
+  }
+
+  .result-quality h5 {
+    margin:
+      0
+      0
+      4px;
+
+    font-size: 0.9rem;
+
+    font-weight: 950;
+  }
+
+  .result-quality small {
+    color: #94a3b8;
+
+    font-size: 0.6rem;
+  }
+
+  .result-product-label {
+    margin-bottom: 6px;
+
+    color: #94a3b8;
+
+    font-size: 0.57rem;
+
+    font-weight: 900;
+
+    letter-spacing: 0.05em;
+  }
+
+  #resName {
+    margin:
+      0
+      0
+      19px;
+
+    color: #111827;
+
+    font-size: 1.35rem;
+
+    font-weight: 950;
+
+    letter-spacing: -0.7px;
+  }
+
+  #resForwardChaining {
+    padding: 18px;
+
+    border-radius: 17px;
+
+    margin: 0;
+
+    box-shadow: none !important;
+  }
+
+  #resStatusMedis {
+    margin-bottom: 7px;
+
+    font-size: 0.77rem;
+
+    font-weight: 900;
+  }
+
+  #resPesanMedis {
+    margin: 0;
+
+    color: #475569;
+
+    font-size: 0.67rem;
+
+    line-height: 1.6;
+  }
+
+  .result-footer {
+    padding:
+      18px
+      30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    border-top:
+      1px solid #e8edeb;
+
+    background: #f8faf9;
+  }
+
+  .result-btn {
+    min-height: 44px;
+
+    padding:
+      0
+      17px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-size: 0.67rem;
+
+    font-weight: 900;
+  }
+
+  .result-btn.secondary {
+    color: #475569;
+
+    border:
+      1px solid #dce3df;
+
+    background: #ffffff;
+  }
+
+  .result-btn.primary {
+    color: #17200c;
+
+    border: none;
+
+    background: var(--scan-lime);
+  }
+
+
+  /* =========================================================
+     UTILITY
+     ========================================================= */
+
+  .scan-hidden {
+    display: none !important;
+  }
+
+  .scan-reveal {
+    opacity: 0;
+
+    transform:
+      translateY(22px);
+
+    animation:
+      scanReveal
+      0.55s
+      cubic-bezier(
+        0.16,
+        1,
+        0.3,
+        1
+      )
+      forwards;
+  }
+
+  @keyframes scanReveal {
+    to {
+      opacity: 1;
+
+      transform:
+        translateY(0);
+    }
+  }
+
+
+  /* =========================================================
+     RESPONSIVE
+     ========================================================= */
+
+  @media (max-width: 1150px) {
+
+    .scan-container {
+      width:
+        calc(100% - 48px);
+    }
+
+    .scan-hero {
+      grid-template-columns:
+        1fr
+        0.8fr;
+
+      padding:
+        48px
+        44px;
+    }
+
+    .scan-workspace {
+      grid-template-columns:
+        minmax(330px, 0.8fr)
+        minmax(0, 1.2fr);
+    }
+
+    .scan-field-grid.three {
+      grid-template-columns:
+        1fr
+        1fr;
+    }
+
+    .scan-field-grid.three
+    .scan-field:last-child {
+      grid-column:
+        1 / -1;
+    }
+
+  }
+
+
+  @media (max-width: 950px) {
+
+    .scan-container {
+      width:
+        calc(100% - 38px);
+    }
+
+    .scan-hero-wrap {
+      padding:
+        20px
+        19px
+        0;
+    }
+
+    .scan-hero {
+      min-height: auto;
+
+      grid-template-columns: 1fr;
+
+      padding:
+        43px
+        38px;
+
+      gap: 34px;
+    }
+
+    .scan-hero-side {
+      width: 520px;
+
+      max-width: 100%;
+
+      min-height: 230px;
+
+      margin: 0 auto;
+    }
+
+    .scan-flow-card {
+      right: 20px;
+    }
+
+    .scan-workspace {
+      grid-template-columns: 1fr;
+    }
+
+    .scan-upload-zone,
+    .scan-camera-wrap,
+    .scan-preview-frame {
+      min-height: 420px;
+    }
+
+    #cameraStream,
+    .scan-preview-frame {
+      height: 420px;
+    }
+
+    .scan-guide {
+      grid-template-columns: 1fr;
+    }
+
+  }
+
+
+  @media (max-width: 680px) {
+
+    .nutriguard-scan {
+      padding-bottom: 50px;
+    }
+
+    .scan-container {
+      width:
+        calc(100% - 28px);
+    }
+
+    .scan-hero-wrap {
+      padding:
+        13px
+        13px
+        0;
+    }
+
+    .scan-hero {
+      padding:
+        37px
+        22px
+        27px;
+
+      border-radius: 27px;
+    }
+
+    .scan-hero-title {
+      font-size:
+        clamp(
+          2.8rem,
+          14vw,
+          4.1rem
+        );
+
+      letter-spacing: -3px;
+    }
+
+    .scan-hero-desc {
+      font-size: 0.86rem;
+    }
+
+    .scan-hero-side {
+      width: 100%;
+
+      min-height: 250px;
+    }
+
+    .scan-flow-card {
+      width: calc(100% - 35px);
+
+      right: 0;
+    }
+
+    .scan-floating-ai {
+      left: 0;
+      bottom: 1px;
+    }
+
+    .scan-guest {
+      align-items: flex-start;
+
+      flex-direction: column;
+    }
+
+    .scan-panel {
+      border-radius: 23px;
+    }
+
+    .scan-panel-header {
+      padding:
+        21px
+        19px
+        17px;
+    }
+
+    .scan-panel-subtitle {
+      max-width: 250px;
+    }
+
+    .scan-step-badge {
+      display: none;
+    }
+
+    .scan-capture-body,
+    .scan-form-body {
+      padding:
+        0
+        19px
+        21px;
+    }
+
+    .scan-upload-zone {
+      min-height: 320px;
+
+      padding:
+        28px
+        20px;
+    }
+
+    .scan-camera-wrap,
+    #cameraStream,
+    .scan-preview-frame {
+      height: 335px;
+      min-height: 335px;
+    }
+
+    .scan-field-grid,
+    .scan-field-grid.three {
+      grid-template-columns: 1fr;
+    }
+
+    .scan-field-grid.three
+    .scan-field:last-child {
+      grid-column: auto;
+    }
+
+    .scan-nutrient-hints {
+      grid-template-columns: 1fr;
+    }
+
+    .scan-analyze-wrap {
+      align-items: stretch;
+
+      flex-direction: column;
+    }
+
+    .scan-analyze-btn {
+      width: 100%;
+    }
+
+    .scan-guide {
+      padding: 21px;
+    }
+
+    .scan-guide-steps {
+      grid-template-columns: 1fr;
+    }
+
+    .result-body {
+      padding: 22px;
+    }
+
+    .result-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .result-footer {
+      align-items: stretch;
+
+      flex-direction: column;
+    }
+
+    .result-btn {
+      width: 100%;
+    }
+
+  }
+
+
+  @media (max-width: 440px) {
+
+    .scan-hero-side {
+      transform:
+        scale(0.92);
+
+      transform-origin:
+        top center;
+
+      margin-bottom: -18px;
+    }
+
+    .scan-method-btn {
+      font-size: 0.66rem;
+    }
+
+    .scan-panel-head-left {
+      align-items: flex-start;
+    }
+
+    .scan-preview-frame,
+    .scan-camera-wrap,
+    #cameraStream {
+      height: 300px;
+      min-height: 300px;
+    }
+
+  }
+
+
+  @media (
+    prefers-reduced-motion:
+    reduce
+  ) {
+
+    *,
+    *::before,
+    *::after {
+      animation-duration:
+        0.01ms !important;
+
+      animation-iteration-count:
+        1 !important;
+
+      transition-duration:
+        0.01ms !important;
+    }
+
+  }
+</style>
+
+
+<div class="nutriguard-scan">
+
+
+  <!-- ======================================================
+       HERO
+       ====================================================== -->
+
+  <section class="scan-hero-wrap">
+
+    <div class="scan-hero">
+
+
+      <div class="scan-hero-copy">
+
+        <div class="scan-overline">
+
+          <i class="fa-solid fa-camera-viewfinder"></i>
+
+          SMART NUTRITION SCANNER
+
+        </div>
+
+
+        <h1 class="scan-hero-title">
+
+          Pindai Label Gizi
+
+          <span class="star">
+            ✦
+          </span>
+
+          <br>
+
+          Lebih Mudah.
+
+        </h1>
+
+
+        <p class="scan-hero-desc">
+
+          Ambil foto atau unggah Tabel Informasi Nilai Gizi.
+          Sistem akan membantu membaca parameter nutrisi,
+          kemudian Anda dapat memverifikasi data sebelum
+          melakukan analisis Nutri-Score dan rekomendasi konsumsi.
+
+        </p>
+
+      </div>
+
+
+
+      <div class="scan-hero-side">
+
+
+        <div class="scan-flow-card">
+
+          <div class="scan-flow-top">
+
+            <span>
+              Alur Analisis
+            </span>
+
+            <div class="scan-flow-live">
+              Ready
+            </div>
+
+          </div>
+
+
+          <div class="scan-flow-steps">
+
+
+            <div class="scan-flow-step">
+
+              <div class="scan-flow-number">
+                01
+              </div>
+
+              <div>
+
+                <strong>
+                  Foto label
+                </strong>
+
+                <small>
+                  Kamera atau file lokal
+                </small>
+
+              </div>
+
+            </div>
+
+
+            <div class="scan-flow-step">
+
+              <div class="scan-flow-number">
+                02
+              </div>
+
+              <div>
+
+                <strong>
+                  Ekstraksi data
+                </strong>
+
+                <small>
+                  Gemini AI API
+                </small>
+
+              </div>
+
+            </div>
+
+
+            <div class="scan-flow-step">
+
+              <div class="scan-flow-number">
+                03
+              </div>
+
+              <div>
+
+                <strong>
+                  Analisis
+                </strong>
+
+                <small>
+                  Nutri-Score + rekomendasi
+                </small>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+
+        <div class="scan-floating-ai">
+
+          <small>
+            Image processing
+          </small>
+
+          <strong>
+
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+            AI Assisted Scan
+
+          </strong>
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+
+  <div class="scan-container">
+
+
+    <!-- ====================================================
+         GUEST
+         ==================================================== -->
+
+    {% if 'user_id' not in session %}
+
+    <div class="scan-guest scan-reveal">
+
+      <div class="scan-guest-left">
+
+        <div class="scan-guest-icon">
+
+          <i class="fa-solid fa-user-lock"></i>
+
+        </div>
+
+
+        <div>
+
+          <h6>
+            Anda menggunakan Mode Tamu
+          </h6>
+
+          <p>
+            Analisis tetap dapat digunakan, tetapi fitur
+            batas personalisasi PERKENI dan penyimpanan jurnal
+            belum aktif.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <a href="{{ url_for('register') }}">
+
+        Daftar akun
+
+        <i class="fa-solid fa-arrow-right ms-1"></i>
+
+      </a>
+
+    </div>
+
+    {% endif %}
+
+
+
+    <!-- ====================================================
+         MAIN WORKSPACE
+         ==================================================== -->
+
+    <section class="scan-workspace">
+
+
+      <!-- ==================================================
+           LEFT
+           ================================================== -->
+
+      <div class="scan-panel scan-reveal">
+
+
+        <div class="scan-panel-header">
+
+          <div class="scan-panel-head-left">
+
+            <div class="scan-panel-icon">
+
+              <i class="fa-solid fa-camera"></i>
+
+            </div>
+
+
+            <div>
+
+              <h2 class="scan-panel-title">
+                Ambil Label Gizi
+              </h2>
+
+              <p class="scan-panel-subtitle">
+                Gunakan kamera atau pilih gambar dari perangkat.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="scan-step-badge">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            LANGKAH 01
+
+          </div>
+
+        </div>
+
+
+
+        <div class="scan-capture-body">
+
+
+          <!-- METHOD -->
+
+          <div
+            class="scan-methods"
+            id="methodSelection"
+          >
+
+            <button
+              type="button"
+              id="btnOpenCamera"
+              class="scan-method-btn camera"
+            >
+
+              <i class="fa-solid fa-camera me-1"></i>
+
+              Buka Kamera
+
+            </button>
+
+
+            <button
+              type="button"
+              id="btnSelectFile"
+              class="scan-method-btn"
+            >
+
+              <i class="fa-solid fa-image me-1"></i>
+
+              Pilih Gambar
+
+            </button>
+
+          </div>
+
+
+
+          <!-- CAMERA -->
+
+          <div
+            id="camera-container"
+            class="scan-camera-wrap scan-hidden"
+          >
+
+            <video
+              id="cameraStream"
+              autoplay
+              playsinline
+            ></video>
+
+
+            <div class="scan-camera-overlay"></div>
+
+
+            <div class="scan-camera-label">
+
+              <i class="fa-solid fa-expand"></i>
+
+              Arahkan ke tabel nilai gizi
+
+            </div>
+
+
+            <div class="scan-corner tl"></div>
+
+            <div class="scan-corner tr"></div>
+
+            <div class="scan-corner bl"></div>
+
+            <div class="scan-corner br"></div>
+
+
+            <div class="scan-camera-line"></div>
+
+
+            <div class="scan-camera-actions">
+
+              <button
+                type="button"
+                id="btnCapturePhoto"
+                class="scan-camera-btn capture"
+              >
+
+                <i class="fa-solid fa-camera-retro me-2"></i>
+
+                Ambil Foto
+
+              </button>
+
+
+              <button
+                type="button"
+                id="btnCloseCamera"
+                class="scan-camera-btn close"
+                title="Tutup kamera"
+              >
+
+                <i class="fa-solid fa-xmark"></i>
+
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <canvas
+            id="cameraCanvas"
+            class="scan-hidden"
+          ></canvas>
+
+
+
+          <!-- UPLOAD -->
+
+          <div
+            id="upload-zone"
+            class="scan-upload-zone"
+          >
+
+            <div class="scan-upload-icon">
+
+              <i class="fa-solid fa-arrow-up-from-bracket"></i>
+
+            </div>
+
+
+            <h4>
+              Pilih atau jatuhkan gambar
+            </h4>
+
+
+            <p>
+
+              Gunakan foto Tabel Informasi Nilai Gizi
+              yang terang, tidak terpotong, dan dapat
+              terbaca dengan jelas.
+
+            </p>
+
+
+            <div class="scan-upload-formats">
+
+              <span class="scan-format">
+                JPG
+              </span>
+
+              <span class="scan-format">
+                PNG
+              </span>
+
+              <span class="scan-format">
+                WEBP
+              </span>
+
+              <span class="scan-format">
+                IMAGE
+              </span>
+
+            </div>
+
+
+            <input
+              type="file"
+              id="imageInput"
+              class="scan-hidden"
+              accept="image/*"
+            >
+
+          </div>
+
+
+
+          <!-- PREVIEW -->
+
+          <div
+            id="preview-container"
+            class="scan-preview-wrap scan-hidden"
+          >
+
+            <div class="scan-preview-frame">
+
+              <img
+                id="imagePreview"
+                src=""
+                alt="Preview label informasi nilai gizi"
+              >
+
+
+              <div class="scan-preview-gradient"></div>
+
+
+              <div class="scan-preview-top">
+
+                <div class="scan-preview-ready">
+
+                  <span></span>
+
+                  Gambar siap dianalisis
+
+                </div>
+
+
+                <button
+                  type="button"
+                  id="btnExpandPreview"
+                  class="scan-expand-btn"
+                  title="Perbesar gambar"
+                >
+
+                  <i class="fa-solid fa-expand"></i>
+
+                </button>
+
+              </div>
+
+
+              <div class="scan-file-info">
+
+                <div class="scan-file-data">
+
+                  <strong id="previewFileName">
+                    gambar.jpg
+                  </strong>
+
+                  <small id="previewFileSize">
+                    Gambar siap diproses
+                  </small>
+
+                </div>
+
+
+                <button
+                  type="button"
+                  id="btnResetImage"
+                  class="scan-reset-btn"
+                >
+
+                  <i class="fa-solid fa-rotate-left me-1"></i>
+
+                  Ganti
+
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- OCR -->
+
+          <button
+            type="button"
+            id="btnScan"
+            class="scan-extract-btn scan-hidden"
+          >
+
+            <i class="fa-solid fa-wand-magic-sparkles me-2"></i>
+
+            Ekstrak Data dengan AI
+
+          </button>
+
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ==================================================
+           RIGHT
+           ================================================== -->
+
+      <div class="scan-panel scan-reveal">
+
+
+        <div class="scan-panel-header">
+
+          <div class="scan-panel-head-left">
+
+            <div class="scan-panel-icon">
+
+              <i class="fa-solid fa-file-waveform"></i>
+
+            </div>
+
+
+            <div>
+
+              <h2 class="scan-panel-title">
+                Verifikasi Data Gizi
+              </h2>
+
+              <p class="scan-panel-subtitle">
+                Periksa kembali hasil pembacaan sebelum dianalisis.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="scan-step-badge">
+
+            <i class="fa-solid fa-pen"></i>
+
+            DAPAT DIEDIT
+
+          </div>
+
+        </div>
+
+
+
+        <form
+          id="nutritionForm"
+          class="scan-form-body"
+        >
+
+
+          <!-- ================================================
+               PRODUK
+               ================================================ -->
+
+          <div class="scan-form-section">
+
+
+            <div class="scan-form-section-head">
+
+              <h3 class="scan-form-section-title">
+
+                <span>
+                  <i class="fa-solid fa-box"></i>
+                </span>
+
+                Informasi Produk
+
+              </h3>
+
+
+              <div class="scan-editable">
+
+                <i class="fa-solid fa-pen-to-square"></i>
+
+                Input manual tersedia
+
+              </div>
+
+            </div>
+
+
+            <div class="scan-field-grid">
+
+
+              <div class="scan-field full">
+
+                <label
+                  for="nama_produk"
+                  class="scan-label"
+                >
+
+                  Nama lengkap produk
+
+                  <span class="required">
+                    *
+                  </span>
+
+                </label>
+
+
+                <div class="scan-input">
+
+                  <input
+                    type="text"
+                    id="nama_produk"
+                    placeholder="Contoh: Biskuit Gandum"
+                    autocomplete="off"
+                  >
+
+                </div>
+
+              </div>
+
+
+
+              <div class="scan-field">
+
+                <label
+                  for="kategori"
+                  class="scan-label"
+                >
+                  Kategori Analisis
+                </label>
+
+
+                <div class="scan-input">
+
+                  <select id="kategori">
+
+                    <option value="makanan">
+                      Makanan (Padat)
+                    </option>
+
+                    <option value="minuman">
+                      Minuman (Cair)
+                    </option>
+
+                  </select>
+
+                </div>
+
+              </div>
+
+
+
+              <div class="scan-field">
+
+                <label
+                  for="takaran_saji"
+                  class="scan-label"
+                >
+                  Takaran Saji
+                </label>
+
+
+                <div class="scan-input">
+
+                  <input
+                    type="number"
+                    id="takaran_saji"
+                    step="0.1"
+                    value="0"
+                    min="0"
+                  >
+
+                  <span class="scan-unit">
+                    g/ml
+                  </span>
+
+                </div>
+
+              </div>
+
+
+            </div>
+
+          </div>
+
+
+
+          <!-- ================================================
+               NUTRISI UTAMA
+               ================================================ -->
+
+          <div class="scan-form-section">
+
+
+            <div class="scan-form-section-head">
+
+              <h3 class="scan-form-section-title">
+
+                <span>
+                  <i class="fa-solid fa-chart-simple"></i>
+                </span>
+
+                Kandungan Utama
+
+              </h3>
+
+            </div>
+
+
+            <div class="scan-field-grid three">
+
+
+              <div class="scan-field">
+
+                <label
+                  for="energi"
+                  class="scan-label"
+                >
+                  Energi Total
+                </label>
+
+
+                <div class="scan-input">
+
+                  <input
+                    type="number"
+                    id="energi"
+                    step="0.1"
+                    value="0"
+                    min="0"
+                  >
+
+                  <span class="scan-unit">
+                    kkal
+                  </span>
+
+                </div>
+
+              </div>
+
+
+
+              <div class="scan-field">
+
+                <label
+                  for="gula"
+                  class="scan-label"
+                >
+                  Gula Total
+                </label>
+
+
+                <div class="scan-input sugar">
+
+                  <input
+                    type="number"
+                    id="gula"
+                    step="0.1"
+                    value="0"
+                    min="0"
+                  >
+
+                  <span class="scan-unit">
+                    g
+                  </span>
+
+                </div>
+
+              </div>
+
+
+
+              <div class="scan-field">
+
+                <label
+                  for="garam"
+                  class="scan-label"
+                >
+                  Garam / Natrium
+                </label>
+
+
+                <div class="scan-input sodium">
+
+                  <input
+                    type="number"
+                    id="garam"
+                    step="0.1"
+                    value="0"
+                    min="0"
+                  >
+
+                  <span class="scan-unit">
+                    mg
+                  </span>
+
+                </div>
+
+              </div>
+
+
+            </div>
+
+
+            <div class="scan-nutrient-hints">
+
+
+              <div class="scan-hint">
+
+                <div class="scan-hint-icon">
+
+                  <i class="fa-solid fa-cubes-stacked"></i>
+
+                </div>
+
+                <strong>
+                  Gula
+                </strong>
+
+                <small>
+                  Digunakan pada evaluasi konsumsi.
+                </small>
+
+              </div>
+
+
+              <div class="scan-hint">
+
+                <div class="scan-hint-icon">
+
+                  <i class="fa-solid fa-droplet"></i>
+
+                </div>
+
+                <strong>
+                  Natrium
+                </strong>
+
+                <small>
+                  Menjadi parameter klasifikasi gizi.
+                </small>
+
+              </div>
+
+
+              <div class="scan-hint">
+
+                <div class="scan-hint-icon">
+
+                  <i class="fa-solid fa-bolt"></i>
+
+                </div>
+
+                <strong>
+                  Energi
+                </strong>
+
+                <small>
+                  Dibaca dari informasi nilai gizi.
+                </small>
+
+              </div>
+
+
+            </div>
+
+          </div>
+
+
+
+          <!-- ================================================
+               PARAMETER LAIN
+               ================================================ -->
+
+          <div class="scan-form-section">
+
+
+            <div class="scan-form-section-head">
+
+              <h3 class="scan-form-section-title">
+
+                <span>
+                  <i class="fa-solid fa-leaf"></i>
+                </span>
+
+                Parameter Tambahan
+
+              </h3>
+
+            </div>
+
+
+            <div class="scan-field-grid three">
+
+
+              <div class="scan-field">
+
+                <label
+                  for="lemak_jenuh"
+                  class="scan-label"
+                >
+                  Lemak Jenuh
+                </label>
+
+
+                <div class="scan-input fat">
+
+                  <input
+                    type="number"
+                    id="lemak_jenuh"
+                    step="0.1"
+                    value="0"
+                    min="0"
+                  >
+
+                  <span class="scan-unit">
+                    g
+                  </span>
+
+                </div>
+
+              </div>
+
+
+
+              <div class="scan-field">
+
+                <label
+                  for="protein"
+                  class="scan-label"
+                >
+                  Protein
+                </label>
+
+
+                <div class="scan-input positive">
+
+                  <input
+                    type="number"
+                    id="protein"
+                    step="0.1"
+                    value="0"
+                    min="0"
+                  >
+
+                  <span class="scan-unit">
+                    g
+                  </span>
+
+                </div>
+
+              </div>
+
+
+
+              <div class="scan-field">
+
+                <label
+                  for="serat"
+                  class="scan-label"
+                >
+                  Serat
+                </label>
+
+
+                <div class="scan-input positive">
+
+                  <input
+                    type="number"
+                    id="serat"
+                    step="0.1"
+                    value="0"
+                    min="0"
+                  >
+
+                  <span class="scan-unit">
+                    g
+                  </span>
+
+                </div>
+
+              </div>
+
+
+            </div>
+
+          </div>
+
+
+
+          <!-- ================================================
+               ANALYZE
+               ================================================ -->
+
+          <div class="scan-analyze-wrap">
+
+
+            <div class="scan-analyze-info">
+
+              <i class="fa-solid fa-circle-info"></i>
+
+              <p>
+
+                Pastikan angka hasil ekstraksi sudah sesuai
+                dengan label sebelum melakukan analisis.
+
+              </p>
+
+            </div>
+
+
+            <button
+              type="button"
+              id="btnAnalyze"
+              class="scan-analyze-btn"
+            >
+
+              <i class="fa-solid fa-chart-pie me-2"></i>
+
+              Analisis Nutri-Score
+
+            </button>
+
+
+          </div>
+
+
+        </form>
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- ====================================================
+         GUIDE
+         ==================================================== -->
+
+    <section class="scan-guide scan-reveal">
+
+
+      <div class="scan-guide-copy">
+
+        <div class="scan-overline">
+
+          <i class="fa-solid fa-lightbulb"></i>
+
+          HASIL LEBIH AKURAT
+
+        </div>
+
+
+        <h3>
+          Tips memotret label gizi
+        </h3>
+
+
+        <p>
+
+          Foto yang jelas membantu sistem membaca angka
+          pada tabel informasi nilai gizi dengan lebih baik.
+          Anda tetap dapat memperbaiki hasil pembacaan
+          secara manual sebelum analisis.
+
+        </p>
+
+      </div>
+
+
+      <div class="scan-guide-steps">
+
+
+        <div class="scan-guide-step">
+
+          <div class="scan-guide-number">
+            01
+          </div>
+
+          <strong>
+            Cahaya cukup
+          </strong>
+
+          <small>
+            Hindari bayangan yang menutupi tulisan.
+          </small>
+
+        </div>
+
+
+        <div class="scan-guide-step">
+
+          <div class="scan-guide-number">
+            02
+          </div>
+
+          <strong>
+            Label penuh
+          </strong>
+
+          <small>
+            Pastikan tabel nilai gizi tidak terpotong.
+          </small>
+
+        </div>
+
+
+        <div class="scan-guide-step">
+
+          <div class="scan-guide-number">
+            03
+          </div>
+
+          <strong>
+            Periksa kembali
+          </strong>
+
+          <small>
+            Verifikasi angka sebelum menjalankan analisis.
+          </small>
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+  </div>
+
+</div>
+
+
+
+<!-- ========================================================
+     PREVIEW POPUP
+     ======================================================== -->
+
+<div
+  class="modal fade"
+  id="previewModal"
+  tabindex="-1"
+  aria-hidden="true"
+>
+
+  <div
+    class="modal-dialog modal-dialog-centered"
+  >
+
+    <div class="modal-content">
+
+
+      <div class="preview-modal-header">
+
+
+        <div>
+
+          <div
+            class="preview-modal-title"
+          >
+
+            <i class="fa-solid fa-image me-2"></i>
+
+            Preview Label Gizi
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="preview-modal-close"
+          data-bs-dismiss="modal"
+          aria-label="Tutup"
+        >
+
+          <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+      </div>
+
+
+      <div class="preview-modal-image-wrap">
+
+        <img
+          id="previewModalImage"
+          src=""
+          alt="Preview besar label gizi"
+        >
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- ========================================================
+     RESULT MODAL
+     ======================================================== -->
+
+<div
+  class="modal fade"
+  id="resultModal"
+  tabindex="-1"
+  aria-hidden="true"
+  data-bs-backdrop="static"
+>
+
+  <div
+    class="modal-dialog modal-dialog-centered"
+  >
+
+    <div class="modal-content">
+
+
+      <!-- HEADER -->
+
+      <div class="result-modal-head">
+
+
+        <div>
+
+          <div class="result-modal-overline">
+
+            HASIL ANALISIS
+
+          </div>
+
+
+          <h4>
+            Laporan Nutri-Guard
+          </h4>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="result-close-btn"
+          data-bs-dismiss="modal"
+          aria-label="Tutup"
+        >
+
+          <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+      </div>
+
+
+
+      <!-- BODY -->
+
+      <div class="result-body">
+
+
+        <div class="result-grid">
+
+
+          <!-- NUTRI SCORE -->
+
+          <div class="result-grade-box">
+
+
+            <div class="ns-title">
+              NUTRI-SCORE
+            </div>
+
+
+            <div class="ns-bar">
+
+              <div
+                class="ns-segment ns-a"
+                id="ns-A"
+              >
+                A
+              </div>
+
+              <div
+                class="ns-segment ns-b"
+                id="ns-B"
+              >
+                B
+              </div>
+
+              <div
+                class="ns-segment ns-c"
+                id="ns-C"
+              >
+                C
+              </div>
+
+              <div
+                class="ns-segment ns-d"
+                id="ns-D"
+              >
+                D
+              </div>
+
+              <div
+                class="ns-segment ns-e"
+                id="ns-E"
+              >
+                E
+              </div>
+
+            </div>
+
+
+            <div class="result-quality">
+
+              <h5 id="resStatusKualitas">
+                Kualitas gizi
+              </h5>
+
+              <small>
+                Kualitas Gizi Produk
+              </small>
+
+            </div>
+
+
+          </div>
+
+
+
+          <!-- RESULT INFORMATION -->
+
+          <div>
+
+
+            <div class="result-product-label">
+              PRODUK YANG DIANALISIS
+            </div>
+
+
+            <h3 id="resName">
+              Nama Produk
+            </h3>
+
+
+            <div
+              id="resForwardChaining"
+              class="alert"
+              role="alert"
+            >
+
+
+              <h6 id="resStatusMedis">
+
+                <i class="fa-solid fa-stethoscope me-2"></i>
+
+                Evaluasi Gula
+
+              </h6>
+
+
+              <p id="resPesanMedis">
+
+                Informasi rekomendasi konsumsi.
+
+              </p>
+
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+
+      <!-- FOOTER -->
+
+      <div class="result-footer">
+
+
+        <button
+          type="button"
+          class="result-btn secondary"
+          data-bs-dismiss="modal"
+        >
+
+          <i class="fa-solid fa-xmark"></i>
+
+          Tutup
+
+        </button>
+
+
+        {% if 'user_id' in session %}
+
+        <button
+          type="button"
+          id="btnSaveResult"
+          class="result-btn primary"
+        >
+
+          <i class="fa-solid fa-bookmark"></i>
+
+          Simpan ke Jurnal
+
+        </button>
+
+        {% else %}
+
+        <a
+          href="{{ url_for('register') }}"
+          class="result-btn primary"
+        >
+
+          <i class="fa-solid fa-user-plus"></i>
+
+          Daftar untuk Simpan
+
+        </a>
+
+        {% endif %}
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<script>
+  /* =========================================================
+     STATE
+     ========================================================= */
+
+  let currentPayload = {};
+
+  let currentCameraStream = null;
+
+  let activeImageFile = null;
+
+
+
+  /* =========================================================
+     ELEMENT HELPER
+     ========================================================= */
+
+  const el = (id) =>
+    document.getElementById(id);
+
+
+  const methodSelection =
+    el("methodSelection");
+
+  const cameraContainer =
+    el("camera-container");
+
+  const uploadZone =
+    el("upload-zone");
+
+  const previewContainer =
+    el("preview-container");
+
+  const imageInput =
+    el("imageInput");
+
+  const imagePreview =
+    el("imagePreview");
+
+  const btnScan =
+    el("btnScan");
+
+
+
+  /* =========================================================
+     DISPLAY STATE
+     ========================================================= */
+
+  function show(element) {
+
+    if (element) {
+
+      element.classList.remove(
+        "scan-hidden"
+      );
+
+    }
+
+  }
+
+
+  function hide(element) {
+
+    if (element) {
+
+      element.classList.add(
+        "scan-hidden"
+      );
+
+    }
+
+  }
+
+
+
+  function showDefaultState() {
+
+    stopCamera();
+
+    show(methodSelection);
+
+    show(uploadZone);
+
+    hide(cameraContainer);
+
+    hide(previewContainer);
+
+    hide(btnScan);
+
+  }
+
+
+
+  function showCameraState() {
+
+    hide(methodSelection);
+
+    hide(uploadZone);
+
+    hide(previewContainer);
+
+    hide(btnScan);
+
+    show(cameraContainer);
+
+  }
+
+
+
+  function showPreviewState() {
+
+    hide(methodSelection);
+
+    hide(uploadZone);
+
+    hide(cameraContainer);
+
+    show(previewContainer);
+
+    show(btnScan);
+
+  }
+
+
+
+  /* =========================================================
+     FILE INFORMATION
+     ========================================================= */
+
+  function formatFileSize(bytes) {
+
+    if (!bytes) {
+      return "Foto dari kamera";
+    }
+
+
+    if (bytes < 1024) {
+
+      return bytes + " B";
+
+    }
+
+
+    if (bytes < 1024 * 1024) {
+
+      return (
+        bytes / 1024
+      ).toFixed(1) + " KB";
+
+    }
+
+
+    return (
+      bytes /
+      (
+        1024 *
+        1024
+      )
+    ).toFixed(1) + " MB";
+
+  }
+
+
+
+  function updateFileInformation(
+    file
+  ) {
+
+    if (!file) {
+      return;
+    }
+
+
+    el("previewFileName")
+      .textContent =
+        file.name ||
+        "foto_kamera.jpg";
+
+
+    el("previewFileSize")
+      .textContent =
+        formatFileSize(
+          file.size
+        ) +
+        " • siap diproses";
+
+  }
+
+
+
+  /* =========================================================
+     FILE HANDLER
+     ========================================================= */
+
+  function useImageFile(file) {
+
+    if (!file) {
+      return;
+    }
+
+
+    if (
+      !file.type ||
+      !file.type.startsWith(
+        "image/"
+      )
+    ) {
+
+      Swal.fire({
+        title:
+          "Format Tidak Didukung",
+        text:
+          "Silakan pilih file gambar.",
+        icon:
+          "warning",
+        confirmButtonText:
+          "Mengerti"
+      });
+
+      return;
+
+    }
+
+
+    activeImageFile =
+      file;
+
+
+    const reader =
+      new FileReader();
+
+
+    reader.onload =
+      function (event) {
+
+        imagePreview.src =
+          event.target.result;
+
+
+        el(
+          "previewModalImage"
+        ).src =
+          event.target.result;
+
+
+        updateFileInformation(
+          file
+        );
+
+
+        showPreviewState();
+
+      };
+
+
+    reader.readAsDataURL(
+      file
+    );
+
+  }
+
+
+
+  /* =========================================================
+     CAMERA OPEN
+     ========================================================= */
+
+  el(
+    "btnOpenCamera"
+  ).addEventListener(
+    "click",
+    async function () {
+
+      try {
+
+        if (
+          !navigator
+            .mediaDevices ||
+          !navigator
+            .mediaDevices
+            .getUserMedia
+        ) {
+
+          throw new Error(
+            "Camera API unavailable"
+          );
+
+        }
+
+
+        stopCamera();
+
+
+        currentCameraStream =
+          await navigator
+            .mediaDevices
+            .getUserMedia({
+
+              video: {
+                facingMode: {
+                  ideal:
+                    "environment"
+                }
+              },
+
+              audio: false
+
+            });
+
+
+        const video =
+          el("cameraStream");
+
+
+        video.srcObject =
+          currentCameraStream;
+
+
+        await video.play();
+
+
+        showCameraState();
+
+      } catch (error) {
+
+        Swal.fire({
+          title:
+            "Kamera Tidak Dapat Dibuka",
+          text:
+            "Pastikan browser memiliki izin kamera dan halaman dijalankan melalui HTTPS atau localhost.",
+          icon:
+            "error",
+          confirmButtonText:
+            "Mengerti"
+        });
+
+      }
+
+    }
+  );
+
+
+
+  /* =========================================================
+     STOP CAMERA
+     ========================================================= */
+
+  function stopCamera() {
+
+    if (
+      currentCameraStream
+    ) {
+
+      currentCameraStream
+        .getTracks()
+        .forEach(
+          function (track) {
+
+            track.stop();
+
+          }
+        );
+
+
+      currentCameraStream =
+        null;
+
+    }
+
+
+    const video =
+      el("cameraStream");
+
+
+    if (video) {
+
+      video.srcObject =
+        null;
+
+    }
+
+  }
+
+
+
+  /* =========================================================
+     CLOSE CAMERA
+     ========================================================= */
+
+  el(
+    "btnCloseCamera"
+  ).addEventListener(
+    "click",
+    function () {
+
+      stopCamera();
+
+      showDefaultState();
+
+    }
+  );
+
+
+
+  /* =========================================================
+     CAPTURE CAMERA
+     ========================================================= */
+
+  el(
+    "btnCapturePhoto"
+  ).addEventListener(
+    "click",
+    function () {
+
+      const video =
+        el("cameraStream");
+
+      const canvas =
+        el("cameraCanvas");
+
+
+      if (
+        !video.videoWidth ||
+        !video.videoHeight
+      ) {
+
+        Swal.fire({
+          title:
+            "Kamera Belum Siap",
+          text:
+            "Tunggu sebentar sampai tampilan kamera muncul.",
+          icon:
+            "info"
+        });
+
+        return;
+
+      }
+
+
+      canvas.width =
+        video.videoWidth;
+
+      canvas.height =
+        video.videoHeight;
+
+
+      const context =
+        canvas.getContext(
+          "2d"
+        );
+
+
+      context.drawImage(
+        video,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+
+      const dataURL =
+        canvas.toDataURL(
+          "image/jpeg",
+          0.92
+        );
+
+
+      imagePreview.src =
+        dataURL;
+
+
+      el(
+        "previewModalImage"
+      ).src =
+        dataURL;
+
+
+      canvas.toBlob(
+        function (blob) {
+
+          if (!blob) {
+            return;
+          }
+
+
+          activeImageFile =
+            new File(
+              [blob],
+              "foto_kamera.jpg",
+              {
+                type:
+                  "image/jpeg"
+              }
+            );
+
+
+          updateFileInformation(
+            activeImageFile
+          );
+
+        },
+
+        "image/jpeg",
+
+        0.92
+      );
+
+
+      stopCamera();
+
+      showPreviewState();
+
+    }
+  );
+
+
+
+  /* =========================================================
+     SELECT LOCAL FILE
+     ========================================================= */
+
+  el(
+    "btnSelectFile"
+  ).addEventListener(
+    "click",
+    function () {
+
+      imageInput.click();
+
+    }
+  );
+
+
+  uploadZone.addEventListener(
+    "click",
+    function () {
+
+      imageInput.click();
+
+    }
+  );
+
+
+  imageInput.addEventListener(
+    "change",
+    function () {
+
+      if (
+        this.files &&
+        this.files[0]
+      ) {
+
+        useImageFile(
+          this.files[0]
+        );
+
+      }
+
+    }
+  );
+
+
+
+  /* =========================================================
+     DRAG AND DROP
+     ========================================================= */
+
+  [
+    "dragenter",
+    "dragover"
+  ].forEach(
+    function (eventName) {
+
+      uploadZone
+        .addEventListener(
+          eventName,
+          function (event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            uploadZone
+              .classList
+              .add(
+                "drag-over"
+              );
+
+          }
+        );
+
+    }
+  );
+
+
+  [
+    "dragleave",
+    "drop"
+  ].forEach(
+    function (eventName) {
+
+      uploadZone
+        .addEventListener(
+          eventName,
+          function (event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            uploadZone
+              .classList
+              .remove(
+                "drag-over"
+              );
+
+          }
+        );
+
+    }
+  );
+
+
+  uploadZone.addEventListener(
+    "drop",
+    function (event) {
+
+      const files =
+        event.dataTransfer
+          .files;
+
+
+      if (
+        files &&
+        files[0]
+      ) {
+
+        useImageFile(
+          files[0]
+        );
+
+      }
+
+    }
+  );
+
+
+
+  /* =========================================================
+     RESET IMAGE
+     ========================================================= */
+
+  el(
+    "btnResetImage"
+  ).addEventListener(
+    "click",
+    function () {
+
+      imageInput.value =
+        "";
+
+      activeImageFile =
+        null;
+
+      imagePreview.src =
+        "";
+
+      el(
+        "previewModalImage"
+      ).src =
+        "";
+
+
+      showDefaultState();
+
+    }
+  );
+
+
+
+  /* =========================================================
+     PREVIEW POPUP
+     ========================================================= */
+
+  function openPreviewModal() {
+
+    if (
+      !imagePreview.src
+    ) {
+      return;
+    }
+
+
+    el(
+      "previewModalImage"
+    ).src =
+      imagePreview.src;
+
+
+    const modal =
+      new bootstrap.Modal(
+        el("previewModal")
+      );
+
+
+    modal.show();
+
+  }
+
+
+  el(
+    "btnExpandPreview"
+  ).addEventListener(
+    "click",
+    openPreviewModal
+  );
+
+
+  imagePreview.addEventListener(
+    "click",
+    openPreviewModal
+  );
+
+
+
+  /* =========================================================
+     OCR
+     ========================================================= */
+
+  el(
+    "btnScan"
+  ).addEventListener(
+    "click",
+    async function () {
+
+      if (
+        !activeImageFile
+      ) {
+
+        Swal.fire({
+          title:
+            "Belum Ada Gambar",
+          text:
+            "Ambil foto atau pilih gambar terlebih dahulu.",
+          icon:
+            "warning"
+        });
+
+        return;
+
+      }
+
+
+      const button =
+        this;
+
+
+      const defaultButton =
+        button.innerHTML;
+
+
+      button.innerHTML =
+        `
+        <span
+          class="spinner-border
+                 spinner-border-sm
+                 me-2"
+        ></span>
+        Membaca Label...
+        `;
+
+
+      button.disabled =
+        true;
+
+
+      const formData =
+        new FormData();
+
+
+      formData.append(
+        "file",
+        activeImageFile
+      );
+
+
+      try {
+
+        const response =
+          await fetch(
+            "/scan_ocr",
+            {
+              method:
+                "POST",
+
+              body:
+                formData
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (
+          data.status !==
+          "success"
+        ) {
+
+          Swal.fire(
+            "Gagal",
+            data.message ||
+              "Label tidak dapat dibaca.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        const nutrition =
+          data.data;
+
+
+        el(
+          "nama_produk"
+        ).value =
+          nutrition.nama_produk &&
+          nutrition.nama_produk !==
+            "Produk Scan"
+            ? nutrition.nama_produk
+            : "";
+
+
+        el(
+          "takaran_saji"
+        ).value =
+          nutrition.takaran_saji ||
+          0;
+
+
+        el(
+          "energi"
+        ).value =
+          nutrition.energi ||
+          0;
+
+
+        el(
+          "gula"
+        ).value =
+          nutrition.gula ||
+          0;
+
+
+        el(
+          "garam"
+        ).value =
+          nutrition.garam ||
+          0;
+
+
+        el(
+          "lemak_jenuh"
+        ).value =
+          nutrition.lemak_jenuh ||
+          0;
+
+
+        el(
+          "protein"
+        ).value =
+          nutrition.protein ||
+          0;
+
+
+        el(
+          "serat"
+        ).value =
+          nutrition.serat ||
+          0;
+
+
+        el(
+          "nama_produk"
+        ).focus();
+
+
+        /*
+         * CHECK GULA
+         */
+
+        const checkMissingSugar =
+          function () {
+
+            Swal.fire({
+              title:
+                "Parameter Gula Tidak Ditemukan",
+
+              text:
+                "Parameter kandungan gula tidak ditemukan pada hasil pembacaan. Pastikan kembali apakah label informasi nilai gizi mencantumkan kandungan gula. Jika memang tidak tercantum, sistem akan menggunakan nilai 0 gram sesuai informasi yang tersedia.",
+
+              icon:
+                "question",
+
+              showCancelButton:
+                true,
+
+              confirmButtonText:
+                "Ya, memang tidak ada",
+
+              cancelButtonText:
+                "Foto Ulang",
+
+              reverseButtons:
+                true
+
+            }).then(
+              function (result) {
+
+                if (
+                  result
+                    .isConfirmed
+                ) {
+
+                  Swal.fire({
+                    toast:
+                      true,
+
+                    position:
+                      "top-end",
+
+                    icon:
+                      "success",
+
+                    title:
+                      "Data berhasil diekstrak",
+
+                    showConfirmButton:
+                      false,
+
+                    timer:
+                      2500
+                  });
+
+                } else if (
+                  result.dismiss ===
+                  Swal
+                    .DismissReason
+                    .cancel
+                ) {
+
+                  el(
+                    "btnResetImage"
+                  ).click();
+
+                }
+
+              }
+            );
+
+          };
+
+
+        /*
+         * BLUR WARNING
+         */
+
+        if (
+          nutrition.gambar_blur
+        ) {
+
+          Swal.fire({
+            title:
+              "Gambar Kurang Jelas",
+
+            text:
+              "Sistem mendeteksi gambar blur, buram, gelap, atau sebagian label terpotong. Periksa kembali seluruh angka hasil ekstraksi sebelum melanjutkan.",
+
+            icon:
+              "warning",
+
+            confirmButtonText:
+              "Periksa Data"
+
+          }).then(
+            function () {
+
+              if (
+                nutrition
+                  .missing_gula
+              ) {
+
+                checkMissingSugar();
+
+              }
+
+            }
+          );
+
+        } else if (
+          nutrition.missing_gula
+        ) {
+
+          checkMissingSugar();
+
+        } else {
+
+          Swal.fire({
+            toast:
+              true,
+
+            position:
+              "top-end",
+
+            icon:
+              "success",
+
+            title:
+              "Label berhasil dibaca",
+
+            text:
+              "Periksa data sebelum analisis.",
+
+            showConfirmButton:
+              false,
+
+            timer:
+              2800
+          });
+
+        }
+
+      } catch (error) {
+
+        Swal.fire(
+          "Error",
+          "Gagal menghubungi mesin OCR.",
+          "error"
+        );
+
+      } finally {
+
+        button.innerHTML =
+          defaultButton;
+
+        button.disabled =
+          false;
+
+      }
+
+    }
+  );
+
+
+
+  /* =========================================================
+     ANALYZE
+     ========================================================= */
+
+  el(
+    "btnAnalyze"
+  ).addEventListener(
+    "click",
+    async function () {
+
+      const nama =
+        el(
+          "nama_produk"
+        ).value.trim();
+
+
+      if (!nama) {
+
+        Swal.fire({
+          title:
+            "Nama Produk Belum Diisi",
+
+          text:
+            "Masukkan nama produk sebelum melakukan analisis.",
+
+          icon:
+            "warning",
+
+          confirmButtonText:
+            "Mengerti"
+        });
+
+
+        el(
+          "nama_produk"
+        ).focus();
+
+
+        return;
+
+      }
+
+
+      const payload = {
+
+        nama_produk:
+          nama,
+
+        kategori:
+          el(
+            "kategori"
+          ).value,
+
+        takaran_saji:
+          el(
+            "takaran_saji"
+          ).value,
+
+        energi:
+          el(
+            "energi"
+          ).value,
+
+        gula:
+          el(
+            "gula"
+          ).value,
+
+        garam:
+          el(
+            "garam"
+          ).value,
+
+        lemak_jenuh:
+          el(
+            "lemak_jenuh"
+          ).value,
+
+        protein:
+          el(
+            "protein"
+          ).value,
+
+        serat:
+          el(
+            "serat"
+          ).value
+
+      };
+
+
+      const button =
+        this;
+
+
+      const defaultButton =
+        button.innerHTML;
+
+
+      button.innerHTML =
+        `
+        <span
+          class="spinner-border
+                 spinner-border-sm
+                 me-2"
+        ></span>
+        Menganalisis...
+        `;
+
+
+      button.disabled =
+        true;
+
+
+      try {
+
+        const response =
+          await fetch(
+            "/predict",
+            {
+              method:
+                "POST",
+
+              headers: {
+                "Content-Type":
+                  "application/json"
+              },
+
+              body:
+                JSON.stringify(
+                  payload
+                )
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (
+          data.status ===
+          "success"
+        ) {
+
+          currentPayload =
+            data.save_payload;
+
+
+          tampilkanModalHasil(
+            data
+          );
+
+        } else {
+
+          Swal.fire(
+            "Error",
+            data.message ||
+              "Analisis gagal.",
+            "error"
+          );
+
+        }
+
+      } catch (error) {
+
+        Swal.fire(
+          "Error",
+          "Koneksi ke sistem analisis gagal.",
+          "error"
+        );
+
+      } finally {
+
+        button.innerHTML =
+          defaultButton;
+
+        button.disabled =
+          false;
+
+      }
+
+    }
+  );
+
+
+
+  /* =========================================================
+     RESULT MODAL
+     ========================================================= */
+
+  function tampilkanModalHasil(
+    data
+  ) {
+
+    el(
+      "resName"
+    ).innerText =
+      data.product_name;
+
+
+    const segments = [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ];
+
+
+    segments.forEach(
+      function (segment) {
+
+        el(
+          "ns-" +
+          segment
+        ).classList.remove(
+          "active"
+        );
+
+      }
+    );
+
+
+    setTimeout(
+      function () {
+
+        const gradeElement =
+          el(
+            "ns-" +
+            data.grade
+          );
+
+
+        if (
+          gradeElement
+        ) {
+
+          gradeElement
+            .classList
+            .add(
+              "active"
+            );
+
+        }
+
+      },
+      300
+    );
+
+
+    const qualityText = {
+
+      A:
+        "Kualitas gizi sangat baik",
+
+      B:
+        "Kualitas gizi baik",
+
+      C:
+        "Kualitas gizi cukup",
+
+      D:
+        "Kualitas gizi kurang baik",
+
+      E:
+        "Kualitas gizi sangat kurang baik"
+
+    };
+
+
+    const textColors = {
+
+      A:
+        "#038141",
+
+      B:
+        "#65a30d",
+
+      C:
+        "#d97706",
+
+      D:
+        "#ea580c",
+
+      E:
+        "#dc2626"
+
+    };
+
+
+    const quality =
+      el(
+        "resStatusKualitas"
+      );
+
+
+    quality.innerText =
+      qualityText[
+        data.grade
+      ] ||
+      "Kualitas gizi";
+
+
+    quality.style.color =
+      textColors[
+        data.grade
+      ] ||
+      "#111827";
+
+
+    const fcBox =
+      el(
+        "resForwardChaining"
+      );
+
+
+    const fcStatus =
+      el(
+        "resStatusMedis"
+      );
+
+
+    const fcMessage =
+      el(
+        "resPesanMedis"
+      );
+
+
+    fcBox.className =
+      "alert";
+
+
+    fcMessage.innerText =
+      data
+        .forward_chaining
+        .pesan;
+
+
+    const status =
+      data
+        .forward_chaining
+        .status;
+
+
+    if (
+      status ===
+      "Bahaya"
+    ) {
+
+      fcBox.style.background =
+        "#fef2f2";
+
+      fcBox.style.border =
+        "1px solid #fee2e2";
+
+
+      fcStatus.innerHTML =
+        `
+        <i
+          class="fa-solid
+                 fa-triangle-exclamation
+                 me-2"
+          style="color:#dc2626"
+        ></i>
+
+        <span
+          style="color:#dc2626"
+        >
+          STATUS PERLU DIBATASI
+        </span>
+        `;
+
+    } else if (
+      status ===
+      "Waspada"
+    ) {
+
+      fcBox.style.background =
+        "#fffbeb";
+
+      fcBox.style.border =
+        "1px solid #fde68a";
+
+
+      fcStatus.innerHTML =
+        `
+        <i
+          class="fa-solid
+                 fa-circle-exclamation
+                 me-2"
+          style="color:#d97706"
+        ></i>
+
+        <span
+          style="color:#d97706"
+        >
+          STATUS WASPADA
+        </span>
+        `;
+
+    } else if (
+      status ===
+      "Info"
+    ) {
+
+      fcBox.style.background =
+        "#f8fafc";
+
+      fcBox.style.border =
+        "1px solid #e2e8f0";
+
+
+      fcStatus.innerHTML =
+        `
+        <i
+          class="fa-solid
+                 fa-circle-info
+                 me-2"
+          style="color:#64748b"
+        ></i>
+
+        <span
+          style="color:#475569"
+        >
+          INFO TAMU
+        </span>
+        `;
+
+    } else {
+
+      fcBox.style.background =
+        "#ecfdf5";
+
+      fcBox.style.border =
+        "1px solid #d1fae5";
+
+
+      fcStatus.innerHTML =
+        `
+        <i
+          class="fa-solid
+                 fa-circle-check
+                 me-2"
+          style="color:#047857"
+        ></i>
+
+        <span
+          style="color:#047857"
+        >
+          STATUS DALAM BATAS NORMAL
+        </span>
+        `;
+
+    }
+
+
+    const resultModal =
+      new bootstrap.Modal(
+        el("resultModal")
+      );
+
+
+    resultModal.show();
+
+  }
+
+
+
+  /* =========================================================
+     SAVE RESULT
+     ========================================================= */
+
+  const btnSaveResult =
+    el(
+      "btnSaveResult"
+    );
+
+
+  if (
+    btnSaveResult
+  ) {
+
+    btnSaveResult
+      .addEventListener(
+        "click",
+        async function () {
+
+          const button =
+            this;
+
+
+          const defaultButton =
+            button.innerHTML;
+
+
+          button.innerHTML =
+            `
+            <span
+              class="spinner-border
+                     spinner-border-sm"
+            ></span>
+            Menyimpan...
+            `;
+
+
+          button.disabled =
+            true;
+
+
+          try {
+
+            const response =
+              await fetch(
+                "/save_result",
+                {
+                  method:
+                    "POST",
+
+                  headers: {
+                    "Content-Type":
+                      "application/json"
+                  },
+
+                  body:
+                    JSON.stringify(
+                      currentPayload
+                    )
+                }
+              );
+
+
+            const data =
+              await response.json();
+
+
+            if (
+              data.status ===
+              "success"
+            ) {
+
+              Swal.fire({
+                icon:
+                  "success",
+
+                title:
+                  "Berhasil Disimpan",
+
+                text:
+                  "Hasil analisis telah ditambahkan ke jurnal.",
+
+                showConfirmButton:
+                  false,
+
+                timer:
+                  1500
+              });
+
+
+              setTimeout(
+                function () {
+
+                  window.location.href =
+                    "{{ url_for('dashboard') }}";
+
+                },
+                1500
+              );
+
+            } else {
+
+              throw new Error(
+                data.message ||
+                "Gagal menyimpan."
+              );
+
+            }
+
+          } catch (error) {
+
+            Swal.fire(
+              "Error",
+              "Gagal menyimpan hasil ke jurnal.",
+              "error"
+            );
+
+
+            button.innerHTML =
+              defaultButton;
+
+            button.disabled =
+              false;
+
+          }
+
+        }
+      );
+
+  }
+
+
+
+  /* =========================================================
+     PAGE CLEANUP
+     ========================================================= */
+
+  window.addEventListener(
+    "beforeunload",
+    function () {
+
+      stopCamera();
+
+    }
+  );
+
+
+  document.addEventListener(
+    "visibilitychange",
+    function () {
+
+      if (
+        document.hidden &&
+        currentCameraStream
+      ) {
+
+        /*
+         * Kamera sengaja tidak dimatikan di sini,
+         * agar pengguna tetap dapat kembali
+         * tanpa harus membuka kamera ulang.
+         */
+
+      }
+
+    }
+  );
+
+</script>
+
+{% endblock %}

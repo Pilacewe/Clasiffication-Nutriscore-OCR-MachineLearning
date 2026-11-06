@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{% block title %}Nutri-Guard AI{% endblock %}</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- FontAwesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+      :root {
+        --ng-primary: #10b981;
+        --ng-primary-dark: #059669;
+        --ng-dark: #0f172a;
+        --ng-muted: #64748b;
+        --ng-soft: #f8fafc;
+        --ng-line: #e2e8f0;
+        --ng-danger: #ef4444;
+        --ng-warning: #f59e0b;
+        --ng-info: #0ea5e9;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(16, 185, 129, 0.09),
+            transparent 32%
+          ),
+          radial-gradient(
+            circle at bottom right,
+            rgba(15, 23, 42, 0.06),
+            transparent 28%
+          ),
+          #f8fafc;
+        font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--ng-dark);
+      }
+
+      main {
+        flex: 1;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .page-content {
+        min-height: calc(100vh - 170px);
+      }
+
+      /* ==============================
+         FLASH MESSAGE
+      ============================== */
+      .flash-container {
+        position: relative;
+        z-index: 1080;
+      }
+
+      .alert-flash {
+        border: none;
+        border-radius: 18px;
+        padding: 14px 18px;
+        font-weight: 700;
+        animation: slideDown 0.45s ease-out;
+        box-shadow: 0 16px 42px rgba(15, 23, 42, 0.08);
+      }
+
+      .alert-success {
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      .alert-danger {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+
+      .alert-warning {
+        background: #fef3c7;
+        color: #92400e;
+      }
+
+      .alert-info {
+        background: #e0f2fe;
+        color: #0369a1;
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-18px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      /* ==============================
+         GLOBAL BUTTON HELPERS
+      ============================== */
+      .btn-ng-primary {
+        background: linear-gradient(135deg, var(--ng-primary), var(--ng-primary-dark));
+        color: #ffffff;
+        border: none;
+        border-radius: 999px;
+        font-weight: 800;
+        box-shadow: 0 14px 30px rgba(16, 185, 129, 0.22);
+        transition: all 0.25s ease;
+      }
+
+      .btn-ng-primary:hover {
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 18px 38px rgba(16, 185, 129, 0.3);
+      }
+
+      .btn-ng-soft {
+        background: #ffffff;
+        color: var(--ng-dark);
+        border: 1.5px solid var(--ng-line);
+        border-radius: 999px;
+        font-weight: 800;
+        transition: all 0.25s ease;
+      }
+
+      .btn-ng-soft:hover {
+        background: #f8fafc;
+        color: var(--ng-primary-dark);
+        border-color: rgba(16, 185, 129, 0.45);
+      }
+
+      /* ==============================
+         FOOTER
+      ============================== */
+      .app-footer {
+        background: rgba(255, 255, 255, 0.82);
+        border-top: 1px solid var(--ng-line);
+        color: #64748b;
+        font-size: 0.86rem;
+        backdrop-filter: blur(14px);
+      }
+
+      .footer-brand {
+        font-weight: 900;
+        color: var(--ng-dark);
+      }
+
+      .footer-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        display: inline-block;
+        background: var(--ng-primary);
+        margin: 0 8px;
+      }
+
+      /* ==============================
+         RESPONSIVE
+      ============================== */
+      @media (max-width: 991px) {
+        .app-footer {
+          padding-bottom: 95px !important; /* Menambah ruang di footer agar tidak tertutup bottom bar, dan menghilangkan white space body */
+        }
+      }
+
+      @media (max-width: 576px) {
+        .flash-container {
+          padding-left: 14px;
+          padding-right: 14px;
+        }
+      }
+
+      {% block extra_css %}{% endblock %}
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar dari file terpisah -->
+    {% include 'layout/navbar.html' %}
+
+    <main class="page-content">
+      <!-- Flash Messages -->
+      <div class="container flash-container mt-3">
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %}
+        <div
+          class="alert alert-{{ category }} alert-dismissible fade show alert-flash"
+          role="alert"
+        >
+          {% if category == 'success' %}
+          <i class="fa-solid fa-circle-check me-2"></i>
+          {% elif category == 'danger' %}
+          <i class="fa-solid fa-triangle-exclamation me-2"></i>
+          {% elif category == 'warning' %}
+          <i class="fa-solid fa-circle-exclamation me-2"></i>
+          {% else %}
+          <i class="fa-solid fa-circle-info me-2"></i>
+          {% endif %} {{ message }}
+
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+        {% endfor %} {% endif %} {% endwith %}
+      </div>
+
+      <!-- Konten halaman -->
+      {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer text-center py-3 mt-5">
+      <div class="container">
+        <span class="footer-brand">
+          <i class="fa-solid fa-leaf text-success me-1"></i>
+          Nutri-Guard AI
+        </span>
+        <span class="footer-dot"></span>
+        <span>© 2026 Skripsi by Fila</span>
+        <span class="footer-dot d-none d-sm-inline-block"></span>
+        <span class="d-none d-sm-inline">All rights reserved.</span>
+      </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Auto close flash message setelah beberapa detik
+      setTimeout(function () {
+        const alerts = document.querySelectorAll(".alert-flash");
+        alerts.forEach(function (alertEl) {
+          try {
+            const alert = bootstrap.Alert.getOrCreateInstance(alertEl);
+            alert.close();
+          } catch (e) {}
+        });
+      }, 4500);
+    </script>
+
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,442 @@
+{% extends "layout/base.html" %} {% block title %}Daftar Profil Medis -
+Nutri-Guard AI{% endblock %} {% block content %}
+<style>
+  /* Custom CSS Khusus Register untuk kesan Premium */
+  body {
+    background-color: #f8fafc;
+  }
+
+  .auth-wrapper {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+    padding: 2.5rem 0;
+  }
+
+  .auth-card {
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+    background: #ffffff;
+    border: 1px solid #f1f5f9;
+  }
+
+  .auth-sidebar {
+    background: linear-gradient(135deg, #0f172a 0%, #064e3b 100%);
+    color: white;
+    padding: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .auth-sidebar::after {
+    content: "";
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(
+      circle,
+      rgba(16, 185, 129, 0.15) 0%,
+      rgba(16, 185, 129, 0) 70%
+    );
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .form-floating > .form-control:focus ~ label::after,
+  .form-floating > .form-control:not(:placeholder-shown) ~ label::after,
+  .form-floating > .form-select ~ label::after {
+    background-color: transparent !important;
+  }
+
+  .custom-input,
+  .custom-select {
+    border-radius: 14px;
+    border: 1.5px solid #e2e8f0;
+    background-color: #f8fafc;
+    transition: all 0.2s;
+  }
+
+  .custom-input:focus,
+  .custom-select:focus {
+    border-color: #10b981;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+  }
+
+  .btn-register {
+    background-color: #10b981;
+    color: #ffffff;
+    border-radius: 14px;
+    padding: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-register:hover {
+    background-color: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.3);
+    color: #ffffff;
+  }
+
+  .section-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 2rem 0 1.5rem;
+  }
+
+  .section-divider::before,
+  .section-divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1.5px dashed #e2e8f0;
+  }
+
+  .section-divider::before {
+    margin-right: 1em;
+  }
+
+  .section-divider::after {
+    margin-left: 1em;
+  }
+
+  .age-preview {
+    display: none;
+    background-color: #ecfdf5;
+    border: 1px solid #bbf7d0;
+    color: #047857;
+    border-radius: 14px;
+    padding: 12px 14px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .age-preview i {
+    margin-right: 6px;
+  }
+
+  .form-note {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    margin-top: 6px;
+  }
+
+  @media (max-width: 576px) {
+    .auth-wrapper {
+      padding: 1rem 0;
+    }
+
+    .auth-card {
+      border-radius: 18px;
+    }
+
+    .col-mobile-full {
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="auth-wrapper">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-10 col-lg-11">
+        <div class="card auth-card">
+          <div class="row g-0 h-100">
+            <!-- KOLOM KIRI (Visual & Branding) -->
+            <div class="col-md-5 d-none d-md-flex auth-sidebar">
+              <div class="position-relative" style="z-index: 2">
+                <h4 class="fw-bold mb-0 d-flex align-items-center">
+                  <i class="fa-solid fa-leaf text-success me-2 fs-3"></i>
+                  Nutri-Guard
+                </h4>
+              </div>
+
+              <div class="position-relative" style="z-index: 2">
+                <div class="mb-4">
+                  <i
+                    class="fa-solid fa-stethoscope fa-3x text-success opacity-75 mb-3"
+                  ></i>
+                </div>
+
+                <h2 class="fw-bold mb-3 lh-sm">
+                  Satu Langkah<br />Menuju Sehat.
+                </h2>
+
+                <p class="mb-4 text-white-50 small" style="line-height: 1.8">
+                  Nutri-Guard menggunakan standar <b>PERKENI</b> untuk
+                  menghitung kebutuhan kalori dan batas konsumsi gula harian
+                  secara spesifik berdasarkan data tubuh Anda.
+                </p>
+
+                <div
+                  class="d-flex align-items-center text-white-50 small mt-4 pt-4 border-top border-secondary border-opacity-25"
+                >
+                  <i class="fa-solid fa-lock me-2"></i> Data medis Anda disimpan
+                  untuk kebutuhan perhitungan sistem.
+                </div>
+              </div>
+            </div>
+
+            <!-- KOLOM KANAN (Formulir Register) -->
+            <div class="col-md-7 p-4 p-md-5">
+              <div class="w-100 px-lg-3">
+                <div class="text-center text-md-start mb-4">
+                  <h3 class="fw-bold text-dark mb-1">Buat Profil Medis</h3>
+                  <p class="text-muted small">
+                    Lengkapi data untuk menghitung kebutuhan kalori dan batas
+                    gula harian secara otomatis.
+                  </p>
+                </div>
+
+                <form action="{{ url_for('register') }}" method="POST">
+                  <!-- ================= INFO AKUN ================= -->
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      name="nama"
+                      class="form-control custom-input"
+                      id="namaInput"
+                      placeholder="Nama Lengkap"
+                      required
+                    />
+                    <label for="namaInput" class="text-muted">
+                      <i class="fa-regular fa-user me-2"></i>Nama Lengkap
+                    </label>
+                  </div>
+
+                  <div class="row g-3 mb-3">
+                    <div class="col-sm-6">
+                      <div class="form-floating">
+                        <input
+                          type="email"
+                          name="email"
+                          class="form-control custom-input"
+                          id="emailInput"
+                          placeholder="name@example.com"
+                          required
+                        />
+                        <label for="emailInput" class="text-muted">
+                          <i class="fa-regular fa-envelope me-2"></i>Email
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                      <div class="form-floating">
+                        <input
+                          type="password"
+                          name="password"
+                          class="form-control custom-input"
+                          id="passwordInput"
+                          placeholder="Password"
+                          minlength="6"
+                          required
+                        />
+                        <label for="passwordInput" class="text-muted">
+                          <i class="fa-solid fa-lock me-2"></i>Kata Sandi
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="section-divider">Kalkulator Medis (PERKENI)</div>
+
+                  <!-- ================= DATA FISIK ================= -->
+                  <div class="row g-3 mb-3">
+                    <div class="col-sm-4 col-mobile-full">
+                      <div class="form-floating">
+                        <input
+                          type="number"
+                          step="0.1"
+                          min="1"
+                          name="berat"
+                          class="form-control custom-input"
+                          id="beratInput"
+                          placeholder="60"
+                          required
+                        />
+                        <label for="beratInput" class="text-muted">
+                          Berat (kg)
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4 col-mobile-full">
+                      <div class="form-floating">
+                        <input
+                          type="number"
+                          step="0.1"
+                          min="1"
+                          name="tinggi"
+                          class="form-control custom-input"
+                          id="tinggiInput"
+                          placeholder="165"
+                          required
+                        />
+                        <label for="tinggiInput" class="text-muted">
+                          Tinggi (cm)
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4 col-mobile-full">
+                      <div class="form-floating">
+                        <input
+                          type="date"
+                          name="tanggal_lahir"
+                          class="form-control custom-input"
+                          id="tanggalLahirInput"
+                          required
+                        />
+                        <label for="tanggalLahirInput" class="text-muted">
+                          Tanggal Lahir
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Preview Usia Otomatis -->
+                  <div class="age-preview" id="agePreview">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    Usia otomatis:
+                    <span id="usiaText">0</span> tahun
+                  </div>
+
+                  <div class="row g-3 mb-4">
+                    <div class="col-sm-5">
+                      <div class="form-floating">
+                        <select
+                          name="gender"
+                          class="form-select custom-select"
+                          id="genderInput"
+                          required
+                        >
+                          <option value="L">Laki-laki</option>
+                          <option value="P">Perempuan</option>
+                        </select>
+                        <label for="genderInput" class="text-muted">
+                          Gender
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-7">
+                      <div class="form-floating">
+                        <select
+                          name="aktivitas"
+                          class="form-select custom-select"
+                          id="aktivitasInput"
+                          required
+                        >
+                          <option value="istirahat">
+                            Istirahat (Sakit/Bed rest)
+                          </option>
+                          <option value="ringan">Ringan (Pegawai/IRT)</option>
+                          <option value="sedang" selected>
+                            Sedang (Mahasiswa/Pekerja)
+                          </option>
+                          <option value="berat">Berat (Buruh/Atlet)</option>
+                        </select>
+                        <label for="aktivitasInput" class="text-muted">
+                          Tingkat Aktivitas
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <p class="form-note mb-0">
+                    Usia akan dihitung otomatis oleh sistem berdasarkan tanggal
+                    lahir yang Anda masukkan.
+                  </p>
+
+                  <!-- Tombol Eksekusi -->
+                  <div class="d-grid mt-4">
+                    <button
+                      type="submit"
+                      class="btn btn-register border-0 d-flex justify-content-center align-items-center"
+                    >
+                      <i class="fa-solid fa-calculator me-2"></i>
+                      Proses & Hitung Batas Medis
+                    </button>
+                  </div>
+                </form>
+
+                <!-- Link Login -->
+                <div class="text-center mt-4 pt-3 border-top">
+                  <p class="text-muted small mb-0">
+                    Sudah melakukan perhitungan sebelumnya?
+                  </p>
+                  <a
+                    href="{{ url_for('login') }}"
+                    class="text-dark fw-bold text-decoration-none border-bottom border-dark pb-1 d-inline-block mt-2"
+                  >
+                    Masuk ke Dashboard
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- END KOLOM KANAN -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const tanggalLahirInput = document.getElementById("tanggalLahirInput");
+  const agePreview = document.getElementById("agePreview");
+  const usiaText = document.getElementById("usiaText");
+
+  function setMaxTanggalLahir() {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const dd = String(today.getDate()).padStart(2, "0");
+
+    tanggalLahirInput.setAttribute("max", `${yyyy}-${mm}-${dd}`);
+  }
+
+  function hitungUsiaClient(tanggalLahir) {
+    if (!tanggalLahir) return 0;
+
+    const birthDate = new Date(tanggalLahir);
+    const today = new Date();
+
+    let usia = today.getFullYear() - birthDate.getFullYear();
+    const bulan = today.getMonth() - birthDate.getMonth();
+
+    if (bulan < 0 || (bulan === 0 && today.getDate() < birthDate.getDate())) {
+      usia--;
+    }
+
+    return usia;
+  }
+
+  tanggalLahirInput.addEventListener("change", function () {
+    const usia = hitungUsiaClient(this.value);
+
+    if (usia > 0 && usia <= 120) {
+      usiaText.textContent = usia;
+      agePreview.style.display = "block";
+    } else {
+      usiaText.textContent = "0";
+      agePreview.style.display = "none";
+    }
+  });
+
+  setMaxTanggalLahir();
+</script>
+{% endblock %}

@@ -1,0 +1,516 @@
+<style>
+  /* =========================================
+       PREMIUM NAVBAR CSS (DESKTOP)
+    ========================================= */
+  .navbar-premium {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 25px -10px rgba(0, 0, 0, 0.05);
+    font-family:
+      "Inter",
+      system-ui,
+      -apple-system,
+      sans-serif;
+    transition: all 0.3s ease;
+  }
+
+  .navbar-brand-premium {
+    font-weight: 900;
+    font-size: 1.35rem;
+    color: #0f172a !important;
+    letter-spacing: -0.5px;
+  }
+
+  .nav-link-premium {
+    font-weight: 650;
+    color: #64748b !important;
+    padding: 0.5rem 1.15rem !important;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    margin: 0 4px;
+  }
+
+  .nav-link-premium:hover {
+    color: #59aa7c !important;
+    background-color: #f8fafc;
+  }
+
+  .nav-link-premium.active-nav {
+    color: #59aa7c !important;
+    background-color: #ecfdf5;
+  }
+
+  .btn-nav-action {
+    background: linear-gradient(135deg, #59aa7c, #4a8f67);
+    color: white !important;
+    font-weight: 750;
+    border: none;
+    padding: 0.65rem 1.5rem;
+    border-radius: 14px;
+    transition: all 0.2s;
+    box-shadow: 0 4px 15px rgba(89, 170, 124, 0.25);
+  }
+
+  .btn-nav-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(89, 170, 124, 0.35);
+  }
+
+  .dropdown-menu-custom {
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 12px;
+    min-width: 230px;
+  }
+
+  .dropdown-item-custom {
+    border-radius: 12px;
+    font-weight: 650;
+    color: #475569;
+    transition: all 0.2s;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+  }
+
+  .dropdown-item-custom i {
+    width: 26px;
+    font-size: 1.1rem;
+  }
+
+  .dropdown-item-custom:hover {
+    background-color: #f8fafc;
+    color: #59aa7c;
+  }
+
+  /* =========================================
+       MOBILE BOTTOM BAR CSS
+    ========================================= */
+  @media (max-width: 991px) {
+    .desktop-navbar {
+      display: none !important;
+    }
+
+    .mobile-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 22px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    }
+
+    .mobile-brand {
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: #0f172a;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .mobile-logout {
+      color: #ef4444;
+      font-size: 1.15rem;
+      text-decoration: none;
+      padding: 8px;
+      border-radius: 14px;
+      background: #fef2f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      transition: all 0.2s;
+    }
+
+    .mobile-logout:hover {
+      background: #fee2e2;
+    }
+
+    /* Hapus body padding-bottom dari sini, kita pindahkan ke footer di base.html agar background footer memanjang dengan rapi ke bawah */
+
+    .mobile-bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 75px;
+      background: #ffffff;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 9999;
+      box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.06);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+    }
+
+    .m-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #94a3b8; /* Warna abu-abu kebiruan untuk ikon tidak aktif */
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 750;
+      width: 20%;
+      height: 100%;
+      padding-top: 10px;
+      gap: 5px;
+      transition: color 0.2s ease;
+      position: relative;
+    }
+
+    .m-nav-item i {
+      font-size: 1.55rem;
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .m-nav-item.active {
+      color: #59aa7c; /* Warna hijau yang lebih kalem dan elegan */
+    }
+
+    .m-nav-item.active i {
+      transform: translateY(-3px);
+    }
+
+    .m-scan-wrapper {
+      position: relative;
+      width: 20%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 11px;
+    }
+
+    /* Outer Ring for Double Frame Effect (Bulge) */
+    .m-scan-btn-outer {
+      position: absolute;
+      top: -30px;
+      width: 80px;
+      height: 80px;
+      background: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.05);
+      z-index: 10000;
+    }
+
+    /* Menutupi bayangan di bagian bawah lingkarang agar menyatu dengan navbar */
+    .m-scan-btn-outer::after {
+      content: "";
+      position: absolute;
+      bottom: -15px;
+      left: -15px;
+      right: -15px;
+      height: 40px;
+      background: #ffffff;
+      z-index: -1;
+    }
+
+    /* Inner Scan Button */
+    .m-scan-btn {
+      width: 60px;
+      height: 60px;
+      background: #59aa7c;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff !important;
+      font-size: 1.6rem;
+      text-decoration: none;
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 15px rgba(89, 170, 124, 0.4);
+      z-index: 10001;
+    }
+
+    .m-scan-btn:active {
+      transform: scale(0.92);
+    }
+
+    .m-scan-label {
+      font-size: 0.75rem;
+      font-weight: 750;
+      color: #94a3b8;
+      z-index: 10002;
+      margin-top: 48px; /* Mendorong teks ke bawah tombol */
+    }
+
+    .m-scan-wrapper.active .m-scan-label {
+      color: #59aa7c;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .mobile-topbar,
+    .mobile-bottom-bar {
+      display: none !important;
+    }
+  }
+</style>
+
+<!-- ==========================================
+     DESKTOP NAVBAR
+=========================================== -->
+<nav
+  class="navbar navbar-expand-lg navbar-light sticky-top navbar-premium py-2 desktop-navbar"
+>
+  <div class="container-xl">
+    <!-- LOGO BRAND -->
+    <a
+      class="navbar-brand navbar-brand-premium d-flex align-items-center"
+      href="{{ url_for('index') }}"
+    >
+      <div
+        class="bg-success bg-opacity-10 text-success rounded-circle d-flex align-items-center justify-content-center me-2"
+        style="
+          width: 40px;
+          height: 40px;
+          color: #59aa7c !important;
+          background-color: rgba(89, 170, 124, 0.1) !important;
+        "
+      >
+        <i class="fa-solid fa-leaf fs-6"></i>
+      </div>
+      Nutri-Guard
+    </a>
+
+    <div class="collapse navbar-collapse d-flex" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center gap-1">
+        {% if 'user_id' in session %}
+
+        <li class="nav-item">
+          <a
+            class="nav-link nav-link-premium {% if request.endpoint == 'index' %}active-nav{% endif %}"
+            href="{{ url_for('index') }}"
+            >Beranda</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link nav-link-premium {% if request.endpoint == 'dashboard' %}active-nav{% endif %}"
+            href="{{ url_for('dashboard') }}"
+            >Dashboard</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link nav-link-premium {% if request.endpoint == 'scan_page' %}active-nav{% endif %}"
+            href="{{ url_for('scan_page') }}"
+            >Pindai Makanan</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link nav-link-premium {% if request.endpoint == 'riwayat' %}active-nav{% endif %}"
+            href="{{ url_for('riwayat') }}"
+            >Riwayat</a
+          >
+        </li>
+
+        <li class="nav-item dropdown ms-3">
+          <a
+            class="btn btn-nav-action d-flex align-items-center"
+            href="#"
+            id="userDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fa-regular fa-circle-user me-2 fs-5"></i>
+            {{ session.get('nama_lengkap', 'User').split()[0] }}
+            <i
+              class="fa-solid fa-chevron-down ms-2"
+              style="font-size: 0.8rem; opacity: 0.8"
+            ></i>
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-end dropdown-menu-custom mt-3"
+            aria-labelledby="userDropdown"
+          >
+            <li>
+              <a
+                class="dropdown-item dropdown-item-custom"
+                href="{{ url_for('profil') }}"
+              >
+                <i class="fa-solid fa-user-pen text-muted"></i> Pengaturan
+                Profil
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item dropdown-item-custom"
+                href="{{ url_for('riwayat') }}"
+              >
+                <i class="fa-solid fa-clock-rotate-left text-muted"></i> Riwayat
+                & Rekap
+              </a>
+            </li>
+            <li><hr class="dropdown-divider opacity-25 my-2" /></li>
+            <li>
+              <a
+                class="dropdown-item dropdown-item-custom text-danger"
+                href="{{ url_for('logout') }}"
+              >
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        {% else %}
+
+        <li class="nav-item">
+          <a
+            class="nav-link nav-link-premium {% if request.endpoint == 'index' %}active-nav{% endif %}"
+            href="{{ url_for('index') }}"
+            >Beranda</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link nav-link-premium {% if request.endpoint == 'scan_page' %}active-nav{% endif %}"
+            href="{{ url_for('scan_page') }}"
+            >Coba Pindai</a
+          >
+        </li>
+        <li class="nav-item ms-3">
+          <a class="btn btn-nav-action" href="{{ url_for('login') }}"
+            >Masuk Akun</a
+          >
+        </li>
+
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ==========================================
+     MOBILE TOP BAR (BRAND)
+=========================================== -->
+<div class="mobile-topbar">
+  <a class="mobile-brand" href="{{ url_for('index') }}">
+    <div
+      class="rounded-circle d-flex align-items-center justify-content-center"
+      style="
+        width: 38px;
+        height: 38px;
+        color: #59aa7c;
+        background-color: rgba(89, 170, 124, 0.1);
+      "
+    >
+      <i class="fa-solid fa-leaf fs-6"></i>
+    </div>
+    Nutri-Guard
+  </a>
+
+  {% if 'user_id' in session %}
+  <a href="{{ url_for('logout') }}" class="mobile-logout" title="Keluar">
+    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+  </a>
+  {% endif %}
+</div>
+
+<!-- ==========================================
+     MOBILE BOTTOM BAR
+=========================================== -->
+<div class="mobile-bottom-bar">
+  {% if 'user_id' in session %}
+  <a
+    href="{{ url_for('index') }}"
+    class="m-nav-item {% if request.endpoint == 'index' %}active{% endif %}"
+  >
+    <i class="fa-solid fa-house"></i>
+    <span>Beranda</span>
+  </a>
+
+  <a
+    href="{{ url_for('dashboard') }}"
+    class="m-nav-item {% if request.endpoint == 'dashboard' %}active{% endif %}"
+  >
+    <i class="fa-solid fa-chart-pie"></i>
+    <span>Dashboard</span>
+  </a>
+
+  <div
+    class="m-scan-wrapper {% if request.endpoint == 'scan_page' %}active{% endif %}"
+  >
+    <div class="m-scan-btn-outer">
+      <a href="{{ url_for('scan_page') }}" class="m-scan-btn">
+        <i class="fa-solid fa-camera"></i>
+      </a>
+    </div>
+    <span class="m-scan-label">Pindai</span>
+  </div>
+
+  <a
+    href="{{ url_for('riwayat') }}"
+    class="m-nav-item {% if request.endpoint == 'riwayat' %}active{% endif %}"
+  >
+    <i class="fa-solid fa-clock-rotate-left"></i>
+    <span>Riwayat</span>
+  </a>
+
+  <a
+    href="{{ url_for('profil') }}"
+    class="m-nav-item {% if request.endpoint == 'profil' %}active{% endif %}"
+  >
+    <i class="fa-solid fa-user"></i>
+    <span>Profil</span>
+  </a>
+
+  {% else %}
+
+  <a
+    href="{{ url_for('index') }}"
+    class="m-nav-item {% if request.endpoint == 'index' %}active{% endif %}"
+    style="width: 33.33%"
+  >
+    <i class="fa-solid fa-house"></i>
+    <span>Beranda</span>
+  </a>
+
+  <div
+    class="m-scan-wrapper {% if request.endpoint == 'scan_page' %}active{% endif %}"
+    style="width: 33.33%"
+  >
+    <div class="m-scan-btn-outer">
+      <a href="{{ url_for('scan_page') }}" class="m-scan-btn">
+        <i class="fa-solid fa-camera"></i>
+      </a>
+    </div>
+    <span class="m-scan-label">Pindai</span>
+  </div>
+
+  <a
+    href="{{ url_for('login') }}"
+    class="m-nav-item {% if request.endpoint == 'login' %}active{% endif %}"
+    style="width: 33.33%"
+  >
+    <i class="fa-solid fa-right-to-bracket"></i>
+    <span>Masuk</span>
+  </a>
+
+  {% endif %}
+</div>

@@ -1,0 +1,4749 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+Beranda - Nutri-Guard AI
+{% endblock %}
+
+{% block content %}
+
+<style>
+  /* =========================================================
+     NUTRI-GUARD AI
+     LANDING PAGE
+     ========================================================= */
+
+  :root {
+    --ng-primary: #10b981;
+    --ng-primary-dark: #059669;
+    --ng-primary-deep: #047857;
+
+    --ng-lime: #caff3d;
+    --ng-lime-2: #bbf657;
+    --ng-lime-3: #a7ea73;
+
+    --ng-dark: #080c16;
+    --ng-dark-2: #111827;
+
+    --ng-text: #0f172a;
+    --ng-muted: #64748b;
+
+    --ng-white: #ffffff;
+    --ng-soft: #f7f9f8;
+    --ng-soft-2: #f1f5f3;
+
+    --ng-border: #e5ebe8;
+
+    --ng-content: 1380px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .nutriguard-home,
+  .nutriguard-home * {
+    box-sizing: border-box;
+  }
+
+  .nutriguard-home {
+    position: relative;
+
+    width: 100vw;
+    max-width: 100vw;
+
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+
+    background: #ffffff;
+
+    color: var(--ng-text);
+
+    overflow: hidden;
+  }
+
+  .ng-content {
+    width: min(
+      var(--ng-content),
+      calc(100% - 80px)
+    );
+
+    margin: 0 auto;
+  }
+
+
+  /* =========================================================
+     BUTTON
+     ========================================================= */
+
+  .ng-btn {
+    min-height: 50px;
+
+    padding: 0 22px;
+
+    border-radius: 13px;
+
+    border: 1px solid transparent;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    text-decoration: none;
+
+    font-size: 0.9rem;
+    font-weight: 800;
+
+    transition:
+      transform 0.22s ease,
+      box-shadow 0.22s ease,
+      background 0.22s ease,
+      color 0.22s ease,
+      border-color 0.22s ease;
+  }
+
+  .ng-btn:hover {
+    text-decoration: none;
+
+    transform: translateY(-2px);
+  }
+
+  .ng-btn-dark {
+    color: #ffffff;
+
+    background: #080c16;
+
+    box-shadow:
+      0 16px 30px -17px
+      rgba(8, 12, 22, 0.85);
+  }
+
+  .ng-btn-dark:hover {
+    color: #ffffff;
+
+    background: #151b28;
+  }
+
+  .ng-btn-white {
+    color: #111827;
+
+    background: #ffffff;
+
+    border-color:
+      rgba(15, 23, 42, 0.12);
+  }
+
+  .ng-btn-white:hover {
+    color: var(--ng-primary-dark);
+
+    border-color:
+      rgba(5, 150, 105, 0.3);
+  }
+
+  .ng-btn-outline {
+    color: #111827;
+
+    background: transparent;
+
+    border-color: #d9e0dd;
+  }
+
+  .ng-btn-outline:hover {
+    color: var(--ng-primary-dark);
+
+    border-color: var(--ng-primary);
+  }
+
+
+  /* =========================================================
+     HERO
+     ========================================================= */
+
+  .ng-hero-shell {
+    width: 100%;
+
+    background: #ffffff;
+
+    padding:
+      28px
+      clamp(22px, 3.3vw, 58px)
+      0;
+  }
+
+  .ng-hero {
+    width: 100%;
+    max-width: 1510px;
+
+    min-height: 635px;
+
+    margin: 0 auto;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 36px;
+
+    background:
+      radial-gradient(
+        circle at 88% 5%,
+        rgba(255, 255, 255, 0.42),
+        transparent 27%
+      ),
+      linear-gradient(
+        125deg,
+        #ccff3f 0%,
+        #bbf956 48%,
+        #a0e978 100%
+      );
+
+    padding:
+      64px
+      clamp(45px, 5vw, 82px);
+
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 0.98fr)
+      minmax(500px, 1.02fr);
+
+    align-items: center;
+
+    gap: 55px;
+  }
+
+  .ng-hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 430px;
+    height: 430px;
+
+    right: -165px;
+    top: -185px;
+
+    border-radius: 50%;
+
+    background:
+      rgba(255, 255, 255, 0.16);
+  }
+
+  .ng-hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    left: 42%;
+    bottom: -205px;
+
+    border-radius: 50%;
+
+    border:
+      1px solid
+      rgba(15, 23, 42, 0.08);
+  }
+
+
+  /* =========================================================
+     HERO COPY
+     Badge Nutri-Guard AI dihapus
+     ========================================================= */
+
+  .ng-hero-copy {
+    position: relative;
+
+    z-index: 5;
+  }
+
+  .ng-hero-title {
+    max-width: 690px;
+
+    margin:
+      0
+      0
+      24px;
+
+    color: #080c16;
+
+    font-size:
+      clamp(
+        3.5rem,
+        5.1vw,
+        5.7rem
+      );
+
+    font-weight: 950;
+
+    line-height: 0.92;
+
+    letter-spacing: -4.8px;
+  }
+
+  .ng-hero-star {
+    display: inline-block;
+
+    margin-left: 3px;
+
+    font-size: 0.48em;
+
+    transform:
+      translateY(-18px);
+  }
+
+  .ng-hero-description {
+    max-width: 600px;
+
+    margin:
+      0
+      0
+      28px;
+
+    color:
+      rgba(15, 23, 42, 0.76);
+
+    font-size: 1rem;
+
+    line-height: 1.7;
+  }
+
+  .ng-hero-actions {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 11px;
+  }
+
+  .ng-hero-note {
+    max-width: 610px;
+
+    margin-top: 22px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 8px;
+
+    color:
+      rgba(15, 23, 42, 0.62);
+
+    font-size: 0.75rem;
+
+    line-height: 1.55;
+  }
+
+  .ng-hero-note i {
+    margin-top: 3px;
+
+    color: #3f6212;
+  }
+
+
+  /* =========================================================
+     HERO PHONE MOCKUP
+     ========================================================= */
+
+  .ng-hero-visual {
+    min-height: 510px;
+
+    position: relative;
+
+    z-index: 3;
+  }
+
+  .ng-phone {
+    position: absolute;
+
+    padding: 12px;
+
+    border-radius: 35px;
+
+    overflow: hidden;
+
+    box-shadow:
+      0 35px 75px -30px
+      rgba(15, 23, 42, 0.48);
+
+    will-change: transform;
+  }
+
+  .ng-phone-front {
+    width: 300px;
+
+    left: 45px;
+    top: 12px;
+
+    z-index: 5;
+
+    background: #ffffff;
+
+    transform:
+      rotate(-5deg);
+  }
+
+  .ng-phone-back {
+    width: 305px;
+
+    right: 0;
+    top: 95px;
+
+    z-index: 3;
+
+    background: #080a0e;
+
+    transform:
+      rotate(7deg);
+  }
+
+  .ng-phone-inner {
+    min-height: 445px;
+
+    overflow: hidden;
+
+    border-radius: 25px;
+
+    background: #f8fafc;
+  }
+
+  .ng-phone-back .ng-phone-inner {
+    background: #090b0f;
+  }
+
+  .ng-phone-top {
+    height: 43px;
+
+    padding:
+      0
+      14px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom:
+      1px solid #e9eef2;
+
+    color: #111827;
+
+    font-size: 0.7rem;
+
+    font-weight: 900;
+  }
+
+  .ng-phone-back .ng-phone-top {
+    color: #ffffff;
+
+    border-color:
+      rgba(255, 255, 255, 0.07);
+  }
+
+  .ng-online-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #10b981;
+  }
+
+
+  /* =========================================================
+     HERO SCAN MOCKUP
+     ========================================================= */
+
+  .ng-scan-area {
+    padding: 14px;
+  }
+
+  .ng-scan-title {
+    margin-bottom: 11px;
+
+    color: #111827;
+
+    font-size: 0.78rem;
+
+    font-weight: 900;
+  }
+
+  .ng-scan-box {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 14px;
+
+    border:
+      1px solid #e5ebef;
+
+    border-radius: 17px;
+
+    background: #ffffff;
+  }
+
+  .ng-scan-line {
+    position: absolute;
+
+    left: 10px;
+    right: 10px;
+
+    top: 13px;
+
+    height: 2px;
+
+    background:
+      linear-gradient(
+        90deg,
+        transparent,
+        #10b981,
+        transparent
+      );
+
+    box-shadow:
+      0 0 12px
+      rgba(16, 185, 129, 0.7);
+
+    animation:
+      ngScanning
+      2.6s
+      linear
+      infinite;
+  }
+
+  @keyframes ngScanning {
+    0% {
+      top: 13px;
+    }
+
+    100% {
+      top:
+        calc(100% - 13px);
+    }
+  }
+
+  .ng-nutrition-title {
+    margin-bottom: 9px;
+
+    color: #111827;
+
+    font-size: 0.6rem;
+
+    font-weight: 950;
+  }
+
+  .ng-nutrition-line {
+    height: 7px;
+
+    margin-bottom: 6px;
+
+    border-radius: 999px;
+
+    background: #e6ecef;
+  }
+
+  .ng-nutrition-line:nth-child(2) {
+    width: 94%;
+  }
+
+  .ng-nutrition-line:nth-child(3) {
+    width: 78%;
+  }
+
+  .ng-nutrition-line:nth-child(4) {
+    width: 88%;
+  }
+
+  .ng-nutrition-line:nth-child(5) {
+    width: 70%;
+  }
+
+  .ng-nutrition-line:nth-child(6) {
+    width: 91%;
+  }
+
+  .ng-ai-read {
+    margin-top: 13px;
+
+    padding:
+      10px
+      11px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    border-radius: 13px;
+
+    background: #f1fbf6;
+
+    color: #64748b;
+
+    font-size: 0.58rem;
+  }
+
+  .ng-ai-read strong {
+    color: #047857;
+  }
+
+  .ng-result {
+    margin-top: 11px;
+
+    padding: 11px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    border:
+      1px solid #e8edef;
+
+    border-radius: 15px;
+
+    background: #ffffff;
+  }
+
+  .ng-result-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #facc15;
+
+    color: #713f12;
+
+    font-size: 1.08rem;
+
+    font-weight: 950;
+  }
+
+  .ng-result-icon.safe {
+    background: #d1fae5;
+
+    color: #047857;
+  }
+
+  .ng-result-copy strong {
+    display: block;
+
+    color: #111827;
+
+    font-size: 0.67rem;
+  }
+
+  .ng-result-copy span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #64748b;
+
+    font-size: 0.55rem;
+  }
+
+
+  /* =========================================================
+     HERO DARK CHART
+     ========================================================= */
+
+  .ng-chart-area {
+    padding: 18px 14px;
+  }
+
+  .ng-chart-head {
+    margin-bottom: 17px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+  }
+
+  .ng-chart-head small {
+    color:
+      rgba(255, 255, 255, 0.45);
+  }
+
+  .ng-chart-head strong {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #ffffff;
+
+    font-size: 1.2rem;
+  }
+
+  .ng-chart-percent {
+    color: #7cff8e;
+
+    font-size: 0.72rem;
+
+    font-weight: 850;
+  }
+
+  .ng-chart-svg {
+    width: 100%;
+    height: 150px;
+  }
+
+  .ng-chart-days {
+    display: flex;
+
+    justify-content: space-between;
+
+    color:
+      rgba(255, 255, 255, 0.3);
+
+    font-size: 0.49rem;
+  }
+
+  .ng-chart-stats {
+    margin-top: 13px;
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(3, 1fr);
+
+    gap: 6px;
+  }
+
+  .ng-chart-stat {
+    padding: 8px 5px;
+
+    text-align: center;
+
+    border-radius: 10px;
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.06);
+
+    background:
+      rgba(255, 255, 255, 0.05);
+  }
+
+  .ng-chart-stat span {
+    display: block;
+
+    color:
+      rgba(255, 255, 255, 0.38);
+
+    font-size: 0.44rem;
+  }
+
+  .ng-chart-stat strong {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #ffffff;
+
+    font-size: 0.56rem;
+  }
+
+
+  /* =========================================================
+     GLOBAL SECTION
+     ========================================================= */
+
+  .ng-section {
+    width: 100%;
+
+    padding:
+      95px
+      0;
+
+    background: #ffffff;
+  }
+
+  .ng-section-soft {
+    background: #f7f9f8;
+  }
+
+  .ng-section-heading {
+    max-width: 810px;
+
+    margin-bottom: 45px;
+  }
+
+  .ng-eyebrow {
+    margin-bottom: 13px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: var(--ng-primary-dark);
+
+    font-size: 0.72rem;
+
+    font-weight: 900;
+
+    letter-spacing: 0.04em;
+  }
+
+  .ng-section-title {
+    margin: 0;
+
+    color: #080c16;
+
+    font-size:
+      clamp(
+        2.45rem,
+        4vw,
+        4rem
+      );
+
+    font-weight: 950;
+
+    line-height: 0.99;
+
+    letter-spacing: -3px;
+  }
+
+  .ng-section-desc {
+    max-width: 660px;
+
+    margin-top: 19px;
+
+    color: #64748b;
+
+    font-size: 0.92rem;
+
+    line-height: 1.75;
+  }
+
+
+  /* =========================================================
+     FEATURE CARDS
+     ========================================================= */
+
+  .ng-feature-grid {
+    display: grid;
+
+    grid-template-columns:
+      1fr
+      1fr;
+
+    gap: 18px;
+  }
+
+  .ng-feature-card {
+    min-height: 275px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 32px;
+
+    border-radius: 28px;
+
+    border:
+      1px solid #e7ece9;
+
+    background: #f7f9f8;
+
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .ng-feature-card:hover {
+    transform:
+      translateY(-4px);
+
+    box-shadow:
+      0 28px 55px -42px
+      rgba(15, 23, 42, 0.45);
+  }
+
+  .ng-feature-copy {
+    max-width: 58%;
+
+    position: relative;
+
+    z-index: 4;
+  }
+
+  .ng-feature-card h3 {
+    margin:
+      0
+      0
+      9px;
+
+    color: #111827;
+
+    font-size: 1.12rem;
+
+    font-weight: 900;
+  }
+
+  .ng-feature-card p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 0.85rem;
+
+    line-height: 1.65;
+  }
+
+  .ng-feature-link {
+    position: absolute;
+
+    left: 32px;
+    bottom: 28px;
+
+    z-index: 5;
+
+    color: #111827;
+
+    font-size: 0.75rem;
+
+    font-weight: 850;
+
+    text-decoration: none;
+  }
+
+  .ng-feature-link:hover {
+    color: var(--ng-primary-dark);
+  }
+
+  .ng-feature-shape {
+    width: 155px;
+    height: 155px;
+
+    position: absolute;
+
+    right: -28px;
+    bottom: -30px;
+
+    border-radius:
+      48px
+      48px
+      24px
+      48px;
+
+    transform:
+      rotate(14deg);
+
+    background:
+      linear-gradient(
+        135deg,
+        #caff3f,
+        #aeee62
+      );
+  }
+
+  .ng-feature-shape::after {
+    content: "";
+
+    width: 57px;
+    height: 57px;
+
+    position: absolute;
+
+    left: -26px;
+    bottom: 37px;
+
+    border:
+      8px solid #080c16;
+
+    border-radius: 50%;
+  }
+
+  .ng-circle-chart {
+    width: 145px;
+    height: 145px;
+
+    position: absolute;
+
+    right: 28px;
+    bottom: 27px;
+
+    border-radius: 50%;
+
+    background:
+      conic-gradient(
+        #080c16 0deg 82deg,
+        #caff3f 82deg 158deg,
+        #10b981 158deg 248deg,
+        #e3e8e6 248deg 360deg
+      );
+  }
+
+  .ng-circle-chart::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 19px;
+
+    border-radius: 50%;
+
+    background: #f7f9f8;
+  }
+
+  .ng-circle-chart::after {
+    content: "\f201";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+      translate(-50%, -50%);
+
+    font-family:
+      "Font Awesome 6 Free";
+
+    font-weight: 900;
+
+    color: #111827;
+
+    font-size: 1.8rem;
+  }
+
+
+  /* =========================================================
+     ADVANTAGES
+     ========================================================= */
+
+  .ng-advantages {
+    margin-top: 85px;
+
+    display: grid;
+
+    grid-template-columns:
+      0.75fr
+      1.25fr;
+
+    gap: 75px;
+  }
+
+  .ng-advantages-intro h2 {
+    margin:
+      0
+      0
+      15px;
+
+    color: #080c16;
+
+    font-size: 2.4rem;
+
+    font-weight: 950;
+
+    letter-spacing: -2px;
+  }
+
+  .ng-advantages-intro p {
+    max-width: 390px;
+
+    color: #64748b;
+
+    font-size: 0.88rem;
+
+    line-height: 1.7;
+  }
+
+  .ng-advantages-grid {
+    display: grid;
+
+    grid-template-columns:
+      1fr
+      1fr;
+  }
+
+  .ng-advantage {
+    min-height: 180px;
+
+    padding:
+      8px
+      28px
+      28px;
+
+    border-bottom:
+      1px solid #e6ebe9;
+  }
+
+  .ng-advantage:nth-child(odd) {
+    border-right:
+      1px solid #e6ebe9;
+  }
+
+  .ng-advantage:nth-child(3),
+  .ng-advantage:nth-child(4) {
+    padding-top: 28px;
+
+    border-bottom: none;
+  }
+
+  .ng-advantage-head {
+    margin-bottom: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+  }
+
+  .ng-advantage-icon {
+    width: 32px;
+    height: 32px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #caff3f;
+
+    color: #18200e;
+
+    font-size: 0.68rem;
+  }
+
+  .ng-advantage h4 {
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 0.91rem;
+
+    font-weight: 900;
+  }
+
+  .ng-advantage p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 0.78rem;
+
+    line-height: 1.58;
+  }
+
+
+  /* =========================================================
+     TECHNOLOGY
+     ========================================================= */
+
+  .ng-tech-section {
+    width: 100%;
+
+    padding:
+      75px
+      0;
+
+    background: #f7f9f8;
+
+    text-align: center;
+  }
+
+  .ng-tech-section h2 {
+    margin:
+      0
+      0
+      11px;
+
+    color: #080c16;
+
+    font-size: 2.35rem;
+
+    font-weight: 950;
+
+    letter-spacing: -1.8px;
+  }
+
+  .ng-tech-section p {
+    max-width: 580px;
+
+    margin:
+      0
+      auto
+      35px;
+
+    color: #64748b;
+
+    font-size: 0.86rem;
+
+    line-height: 1.65;
+  }
+
+  .ng-tech-list {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+  }
+
+  .ng-tech-item {
+    min-width: 185px;
+    min-height: 67px;
+
+    padding:
+      0
+      20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    border:
+      1px solid #e2e9e6;
+
+    border-radius: 999px;
+
+    background: #ffffff;
+
+    color: #334155;
+
+    font-size: 0.79rem;
+
+    font-weight: 850;
+
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .ng-tech-item:hover {
+    transform:
+      translateY(-3px);
+
+    box-shadow:
+      0 18px 30px -24px
+      rgba(15, 23, 42, 0.4);
+  }
+
+  .ng-tech-item:nth-child(1) i {
+    color: #059669;
+  }
+
+  .ng-tech-item:nth-child(2) i {
+    color: #d97706;
+  }
+
+  .ng-tech-item:nth-child(3) i {
+    color: #2563eb;
+  }
+
+  .ng-tech-item:nth-child(4) i {
+    color: #dc2626;
+  }
+
+
+  /* =========================================================
+     DARK BANNER
+     ========================================================= */
+
+  .ng-dark-section {
+    width: 100%;
+
+    padding:
+      85px
+      0;
+
+    background: #ffffff;
+  }
+
+  .ng-dark-banner {
+    min-height: 365px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    padding:
+      55px
+      60px;
+
+    border-radius: 30px;
+
+    background:
+      radial-gradient(
+        circle at 83% 0%,
+        rgba(16, 185, 129, 0.16),
+        transparent 34%
+      ),
+      linear-gradient(
+        120deg,
+        #080a0e,
+        #11171c
+      );
+  }
+
+  .ng-dark-banner::before {
+    content: "";
+
+    position: absolute;
+
+    width: 650px;
+    height: 260px;
+
+    left: -120px;
+    bottom: -210px;
+
+    border-radius: 50%;
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.07);
+  }
+
+  .ng-dark-copy {
+    max-width: 540px;
+
+    position: relative;
+
+    z-index: 4;
+  }
+
+  .ng-dark-copy h2 {
+    margin:
+      0
+      0
+      17px;
+
+    color: #ffffff;
+
+    font-size:
+      clamp(
+        2.35rem,
+        3.5vw,
+        3.6rem
+      );
+
+    font-weight: 950;
+
+    line-height: 0.99;
+
+    letter-spacing: -2.6px;
+  }
+
+  .ng-dark-copy p {
+    max-width: 500px;
+
+    margin:
+      0
+      0
+      25px;
+
+    color:
+      rgba(255, 255, 255, 0.6);
+
+    font-size: 0.84rem;
+
+    line-height: 1.7;
+  }
+
+  .ng-dashboard-visual {
+    width: 360px;
+    height: 310px;
+
+    position: absolute;
+
+    right: 60px;
+    top: 30px;
+  }
+
+  .ng-dashboard-card {
+    width: 245px;
+
+    position: absolute;
+
+    right: 0;
+    top: 15px;
+
+    padding: 17px;
+
+    border-radius: 23px;
+
+    background: #ffffff;
+
+    transform:
+      rotate(3deg);
+
+    box-shadow:
+      0 35px 65px -25px
+      rgba(0, 0, 0, 0.7);
+  }
+
+  .ng-dashboard-card small {
+    color: #94a3b8;
+
+    font-size: 0.57rem;
+  }
+
+  .ng-dashboard-value {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #111827;
+
+    font-size: 1.35rem;
+
+    font-weight: 950;
+  }
+
+  .ng-dashboard-status {
+    display: inline-flex;
+
+    margin-top: 8px;
+
+    padding:
+      5px
+      8px;
+
+    border-radius: 999px;
+
+    background: #ecfdf5;
+
+    color: #047857;
+
+    font-size: 0.52rem;
+
+    font-weight: 850;
+  }
+
+  .ng-dashboard-item {
+    padding:
+      9px
+      0;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    border-top:
+      1px solid #edf1f3;
+
+    font-size: 0.6rem;
+  }
+
+  .ng-dashboard-item span {
+    color: #64748b;
+  }
+
+  .ng-dashboard-item strong {
+    color: #111827;
+  }
+
+  .ng-floating-limit {
+    width: 180px;
+
+    position: absolute;
+
+    left: 5px;
+    top: 78px;
+
+    z-index: 6;
+
+    padding: 15px;
+
+    border-radius: 17px;
+
+    background: #ffffff;
+
+    transform:
+      rotate(-4deg);
+
+    box-shadow:
+      0 30px 55px -23px
+      rgba(0, 0, 0, 0.72);
+  }
+
+  .ng-floating-limit small {
+    color: #94a3b8;
+
+    font-size: 0.54rem;
+  }
+
+  .ng-floating-limit strong {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #111827;
+
+    font-size: 0.76rem;
+  }
+
+  .ng-progress {
+    height: 6px;
+
+    margin-top: 10px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: #e7edef;
+  }
+
+  .ng-progress span {
+    width: 55%;
+    height: 100%;
+
+    display: block;
+
+    border-radius: inherit;
+
+    background:
+      linear-gradient(
+        90deg,
+        #10b981,
+        #caff3f
+      );
+  }
+
+
+  /* =========================================================
+     SHOWCASE
+     ========================================================= */
+
+  .ng-showcase {
+    width: 100%;
+
+    padding:
+      75px
+      0
+      60px;
+
+    background: #ffffff;
+  }
+
+  .ng-showcase-row {
+    min-height: 430px;
+
+    display: grid;
+
+    grid-template-columns:
+      1fr
+      1fr;
+
+    align-items: center;
+
+    gap: 90px;
+  }
+
+  .ng-showcase-row + .ng-showcase-row {
+    margin-top: 60px;
+  }
+
+  .ng-showcase-label {
+    margin-bottom: 13px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: var(--ng-primary-dark);
+
+    font-size: 0.71rem;
+
+    font-weight: 900;
+  }
+
+  .ng-showcase-copy h2 {
+    margin:
+      0
+      0
+      18px;
+
+    color: #080c16;
+
+    font-size:
+      clamp(
+        2.4rem,
+        3.7vw,
+        3.7rem
+      );
+
+    font-weight: 950;
+
+    line-height: 0.99;
+
+    letter-spacing: -2.7px;
+  }
+
+  .ng-showcase-copy p {
+    max-width: 540px;
+
+    margin:
+      0
+      0
+      24px;
+
+    color: #64748b;
+
+    font-size: 0.88rem;
+
+    line-height: 1.78;
+  }
+
+
+  /* =========================================================
+     PERBAIKAN 1:
+     NUTRITION LABEL VISUAL
+
+     Sekarang menggunakan dua rectangle HTML nyata.
+     Tidak lagi pseudo-element.
+     Semua text pada lime menggunakan warna DARK.
+     ========================================================= */
+
+  .ng-label-visual {
+    min-height: 390px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+  }
+
+  .ng-label-stack {
+    width: 440px;
+    height: 330px;
+
+    max-width: 100%;
+
+    position: relative;
+  }
+
+  .ng-label-back {
+    width: 330px;
+    height: 275px;
+
+    position: absolute;
+
+    left: 94px;
+    top: 41px;
+
+    border-radius: 34px;
+
+    background:
+      linear-gradient(
+        145deg,
+        #080b10,
+        #11151b
+      );
+
+    transform:
+      rotate(-4deg);
+
+    box-shadow:
+      0 40px 75px -35px
+      rgba(15, 23, 42, 0.7);
+  }
+
+  .ng-label-back-decoration {
+    position: absolute;
+
+    right: 25px;
+    bottom: 27px;
+
+    width: 76px;
+    height: 76px;
+
+    border-radius: 50%;
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.07);
+  }
+
+  .ng-label-front {
+    width: 345px;
+    min-height: 285px;
+
+    position: absolute;
+
+    left: 25px;
+    top: 5px;
+
+    z-index: 5;
+
+    padding:
+      30px
+      30px;
+
+    border-radius: 38px;
+
+    background:
+      linear-gradient(
+        135deg,
+        #d0ff52,
+        #c5fa57
+      );
+
+    transform:
+      rotate(2deg);
+
+    box-shadow:
+      0 35px 60px -35px
+      rgba(73, 97, 34, 0.5);
+  }
+
+  .ng-label-front-title {
+    margin:
+      0
+      0
+      21px;
+
+    color: #142012;
+
+    font-size: 1rem;
+
+    font-weight: 950;
+
+    letter-spacing: -0.3px;
+  }
+
+  .ng-label-value {
+    padding:
+      10px
+      0;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    border-bottom:
+      1px solid
+      rgba(20, 32, 18, 0.1);
+
+    font-size: 0.76rem;
+  }
+
+  .ng-label-value:last-child {
+    border-bottom: none;
+  }
+
+  .ng-label-value span {
+    color:
+      rgba(20, 32, 18, 0.7);
+
+    font-weight: 600;
+  }
+
+  .ng-label-value strong {
+    color: #111827;
+
+    font-weight: 900;
+  }
+
+  .ng-label-corner {
+    position: absolute;
+
+    width: 42px;
+    height: 42px;
+
+    right: 22px;
+    top: 20px;
+
+    border:
+      1px solid
+      rgba(15, 23, 42, 0.12);
+
+    border-radius: 50%;
+  }
+
+
+  /* =========================================================
+     PERBAIKAN 2:
+     PERSONAL VISUAL
+
+     Circle dihapus.
+     Sekarang background berupa rounded rectangle.
+     Tiga card menempel / overlap ke rectangle.
+     ========================================================= */
+
+  .ng-personal-visual {
+    min-height: 390px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ng-personal-stage {
+    width: 500px;
+    height: 330px;
+
+    max-width: 100%;
+
+    position: relative;
+  }
+
+  .ng-personal-panel {
+    width: 360px;
+    height: 285px;
+
+    position: absolute;
+
+    right: 0;
+    top: 20px;
+
+    overflow: hidden;
+
+    border-radius: 48px;
+
+    background:
+      linear-gradient(
+        135deg,
+        #ceff4c 0%,
+        #b9f25e 55%,
+        #a8e96f 100%
+      );
+
+    box-shadow:
+      0 35px 65px -40px
+      rgba(68, 97, 30, 0.55);
+  }
+
+  .ng-personal-panel::before {
+    content: "";
+
+    width: 185px;
+    height: 185px;
+
+    position: absolute;
+
+    right: -60px;
+    top: -70px;
+
+    border-radius: 50%;
+
+    background:
+      rgba(255, 255, 255, 0.18);
+  }
+
+  .ng-personal-panel::after {
+    content: "";
+
+    width: 140px;
+    height: 140px;
+
+    position: absolute;
+
+    right: 45px;
+    bottom: -100px;
+
+    border-radius: 50%;
+
+    border:
+      1px solid
+      rgba(15, 23, 42, 0.1);
+  }
+
+  .ng-personal-panel-copy {
+    position: absolute;
+
+    right: 33px;
+    bottom: 30px;
+
+    color:
+      rgba(15, 23, 42, 0.64);
+
+    font-size: 0.65rem;
+
+    font-weight: 750;
+
+    letter-spacing: 0.02em;
+  }
+
+  .ng-personal-list {
+    width: 365px;
+
+    position: absolute;
+
+    left: 0;
+    top: 50%;
+
+    z-index: 5;
+
+    transform:
+      translateY(-50%);
+  }
+
+  .ng-personal-item {
+    min-height: 82px;
+
+    margin-bottom: 13px;
+
+    padding:
+      16px
+      19px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    border:
+      1px solid
+      rgba(226, 232, 240, 0.88);
+
+    border-radius: 20px;
+
+    background:
+      rgba(255, 255, 255, 0.97);
+
+    box-shadow:
+      0 22px 45px -34px
+      rgba(15, 23, 42, 0.5);
+
+    transition:
+      transform 0.22s ease,
+      box-shadow 0.22s ease;
+  }
+
+  .ng-personal-item:hover {
+    transform:
+      translateX(5px);
+
+    box-shadow:
+      0 25px 45px -31px
+      rgba(15, 23, 42, 0.56);
+  }
+
+  /*
+    Stagger tetapi masih berada / overlap
+    dalam rectangle hijau.
+  */
+
+  .ng-personal-item:nth-child(1) {
+    margin-left: 0;
+  }
+
+  .ng-personal-item:nth-child(2) {
+    margin-left: 40px;
+  }
+
+  .ng-personal-item:nth-child(3) {
+    margin-left: 80px;
+  }
+
+  .ng-personal-name {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+  }
+
+  .ng-personal-icon {
+    width: 43px;
+    height: 43px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: #eafaf2;
+
+    color: #247b61;
+
+    font-size: 0.9rem;
+  }
+
+  .ng-personal-item span {
+    color: #64748b;
+
+    font-size: 0.8rem;
+
+    font-weight: 600;
+  }
+
+  .ng-personal-item strong {
+    color: #0f172a;
+
+    font-size: 0.79rem;
+
+    font-weight: 900;
+  }
+
+
+  /* =========================================================
+     PROCESS
+     ========================================================= */
+
+  .ng-process {
+    width: 100%;
+
+    padding:
+      90px
+      0;
+
+    background: #f7f9f8;
+  }
+
+  .ng-process-head {
+    max-width: 700px;
+
+    margin:
+      0
+      auto
+      45px;
+
+    text-align: center;
+  }
+
+  .ng-process-head h2 {
+    margin:
+      0
+      0
+      13px;
+
+    color: #080c16;
+
+    font-size:
+      clamp(
+        2.4rem,
+        3.8vw,
+        3.7rem
+      );
+
+    font-weight: 950;
+
+    line-height: 1;
+
+    letter-spacing: -2.7px;
+  }
+
+  .ng-process-head p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 0.88rem;
+
+    line-height: 1.7;
+  }
+
+  .ng-process-grid {
+    display: grid;
+
+    grid-template-columns:
+      repeat(4, 1fr);
+
+    gap: 14px;
+  }
+
+  .ng-process-card {
+    min-height: 225px;
+
+    padding: 25px;
+
+    border:
+      1px solid #e5ebe8;
+
+    border-radius: 22px;
+
+    background: #ffffff;
+
+    transition:
+      transform 0.23s ease,
+      box-shadow 0.23s ease;
+  }
+
+  .ng-process-card:hover {
+    transform:
+      translateY(-4px);
+
+    box-shadow:
+      0 25px 45px -36px
+      rgba(15, 23, 42, 0.5);
+  }
+
+  .ng-process-number {
+    width: 41px;
+    height: 41px;
+
+    margin-bottom: 28px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #080c16;
+
+    color: #ffffff;
+
+    font-size: 0.73rem;
+
+    font-weight: 900;
+  }
+
+  .ng-process-card h4 {
+    margin:
+      0
+      0
+      9px;
+
+    color: #111827;
+
+    font-size: 0.94rem;
+
+    font-weight: 900;
+  }
+
+  .ng-process-card p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 0.76rem;
+
+    line-height: 1.6;
+  }
+
+
+  /* =========================================================
+     FOCUS
+     ========================================================= */
+
+  .ng-focus-section {
+    width: 100%;
+
+    padding:
+      70px
+      0;
+
+    background: #ffffff;
+  }
+
+  .ng-focus {
+    padding:
+      27px
+      28px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+    border:
+      1px solid
+      rgba(16, 185, 129, 0.2);
+
+    border-radius: 23px;
+
+    background:
+      linear-gradient(
+        135deg,
+        #ecfdf5,
+        #fbfffd
+      );
+  }
+
+  .ng-focus-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #d1fae5;
+
+    color: #047857;
+  }
+
+  .ng-focus h4 {
+    margin:
+      0
+      0
+      5px;
+
+    color: #111827;
+
+    font-size: 0.91rem;
+
+    font-weight: 900;
+  }
+
+  .ng-focus p {
+    max-width: 1050px;
+
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 0.77rem;
+
+    line-height: 1.65;
+  }
+
+
+  /* =========================================================
+     FINAL CTA
+     ========================================================= */
+
+  .ng-final {
+    width: 100%;
+
+    padding:
+      80px
+      25px
+      105px;
+
+    background: #ffffff;
+
+    text-align: center;
+  }
+
+  .ng-final-icon {
+    width: 55px;
+    height: 55px;
+
+    margin:
+      0
+      auto
+      20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 17px;
+
+    background: #caff3f;
+
+    color: #17200d;
+
+    transform:
+      rotate(-6deg);
+  }
+
+  .ng-final h2 {
+    max-width: 700px;
+
+    margin:
+      0
+      auto
+      16px;
+
+    color: #080c16;
+
+    font-size:
+      clamp(
+        2.8rem,
+        4.7vw,
+        4.7rem
+      );
+
+    font-weight: 950;
+
+    line-height: 0.95;
+
+    letter-spacing: -3.6px;
+  }
+
+  .ng-final p {
+    max-width: 600px;
+
+    margin:
+      0
+      auto
+      27px;
+
+    color: #64748b;
+
+    font-size: 0.88rem;
+
+    line-height: 1.7;
+  }
+
+  .ng-final-actions {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 11px;
+  }
+
+
+  /* =========================================================
+     REVEAL
+     ========================================================= */
+
+  .ng-reveal {
+    opacity: 0;
+
+    transform:
+      translateY(30px);
+
+    transition:
+      opacity 0.65s ease,
+      transform 0.65s ease;
+  }
+
+  .ng-reveal.ng-visible {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+
+  /* =========================================================
+     RESPONSIVE
+     ========================================================= */
+
+  @media (max-width: 1180px) {
+
+    .ng-content {
+      width:
+        calc(100% - 60px);
+    }
+
+    .ng-hero {
+      grid-template-columns:
+        0.92fr
+        1.08fr;
+
+      gap: 25px;
+
+      padding:
+        55px
+        48px;
+    }
+
+    .ng-phone-front {
+      left: 0;
+    }
+
+    .ng-phone-back {
+      right: -55px;
+    }
+
+    .ng-advantages {
+      grid-template-columns: 1fr;
+
+      gap: 40px;
+    }
+
+    .ng-advantages-intro p {
+      max-width: 650px;
+    }
+
+    .ng-dashboard-visual {
+      right: 15px;
+    }
+
+    .ng-showcase-row {
+      gap: 55px;
+    }
+
+    .ng-personal-stage {
+      transform:
+        scale(0.92);
+
+      transform-origin:
+        center center;
+    }
+
+  }
+
+
+  @media (max-width: 950px) {
+
+    .ng-content {
+      width:
+        calc(100% - 40px);
+    }
+
+    .ng-hero-shell {
+      padding:
+        20px
+        20px
+        0;
+    }
+
+    .ng-hero {
+      min-height: auto;
+
+      grid-template-columns: 1fr;
+
+      gap: 40px;
+
+      padding:
+        55px
+        42px
+        38px;
+    }
+
+    .ng-hero-title {
+      max-width: 750px;
+    }
+
+    .ng-hero-visual {
+      width: 620px;
+
+      max-width: 100%;
+
+      min-height: 490px;
+
+      margin: 0 auto;
+    }
+
+    .ng-phone-front {
+      left: 7%;
+    }
+
+    .ng-phone-back {
+      right: 3%;
+    }
+
+    .ng-feature-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .ng-dark-banner {
+      min-height: 660px;
+
+      align-items: flex-start;
+
+      padding:
+        48px
+        40px;
+    }
+
+    .ng-dark-copy {
+      max-width: 650px;
+    }
+
+    .ng-dashboard-visual {
+      left: 50%;
+      right: auto;
+
+      top: 320px;
+
+      transform:
+        translateX(-50%);
+    }
+
+    .ng-showcase-row {
+      grid-template-columns: 1fr;
+
+      gap: 30px;
+    }
+
+    .ng-showcase-row:nth-child(2)
+    .ng-showcase-copy {
+      order: 1;
+    }
+
+    .ng-showcase-row:nth-child(2)
+    .ng-personal-visual {
+      order: 2;
+    }
+
+    .ng-process-grid {
+      grid-template-columns:
+        1fr
+        1fr;
+    }
+
+  }
+
+
+  @media (max-width: 700px) {
+
+    .ng-content {
+      width:
+        calc(100% - 30px);
+    }
+
+    .ng-hero-shell {
+      padding:
+        14px
+        14px
+        0;
+    }
+
+    .ng-hero {
+      padding:
+        42px
+        22px
+        26px;
+
+      border-radius: 27px;
+    }
+
+    .ng-hero-title {
+      font-size:
+        clamp(
+          3rem,
+          14vw,
+          4.3rem
+        );
+
+      letter-spacing: -3.3px;
+    }
+
+    .ng-hero-description {
+      font-size: 0.9rem;
+    }
+
+    .ng-hero-actions {
+      display: grid;
+
+      grid-template-columns: 1fr;
+
+      width: 100%;
+    }
+
+    .ng-btn {
+      width: 100%;
+    }
+
+    .ng-hero-note {
+      font-size: 0.69rem;
+    }
+
+    .ng-hero-visual {
+      width: 580px;
+
+      max-width: none;
+
+      min-height: 390px;
+
+      margin-left:
+        calc(
+          (100% - 580px)
+          / 2
+        );
+
+      transform:
+        scale(0.82);
+
+      transform-origin:
+        top center;
+
+      margin-bottom: -65px;
+    }
+
+    .ng-section {
+      padding:
+        72px
+        0;
+    }
+
+    .ng-section-title {
+      font-size: 2.55rem;
+
+      letter-spacing: -2.2px;
+    }
+
+    .ng-feature-card {
+      min-height: 245px;
+
+      padding: 24px;
+    }
+
+    .ng-feature-copy {
+      max-width: 68%;
+    }
+
+    .ng-feature-link {
+      left: 24px;
+      bottom: 24px;
+    }
+
+    .ng-feature-shape {
+      width: 130px;
+      height: 130px;
+    }
+
+    .ng-circle-chart {
+      width: 115px;
+      height: 115px;
+
+      right: 18px;
+      bottom: 24px;
+    }
+
+    .ng-advantages {
+      margin-top: 65px;
+    }
+
+    .ng-advantages-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .ng-advantage {
+      min-height: auto;
+
+      padding:
+        22px
+        0 !important;
+
+      border-right:
+        none !important;
+
+      border-bottom:
+        1px solid #e6ebe9 !important;
+    }
+
+    .ng-advantage:last-child {
+      border-bottom:
+        none !important;
+    }
+
+    .ng-tech-section {
+      padding:
+        60px
+        0;
+    }
+
+    .ng-tech-list {
+      display: grid;
+
+      grid-template-columns:
+        1fr
+        1fr;
+
+      gap: 9px;
+    }
+
+    .ng-tech-item {
+      min-width: 0;
+
+      min-height: 60px;
+
+      padding:
+        0
+        12px;
+
+      font-size: 0.7rem;
+    }
+
+    .ng-dark-section {
+      padding:
+        65px
+        0;
+    }
+
+    .ng-dark-banner {
+      min-height: 620px;
+
+      padding:
+        38px
+        23px;
+
+      border-radius: 25px;
+    }
+
+    .ng-dark-copy h2 {
+      font-size: 2.4rem;
+    }
+
+    .ng-dashboard-visual {
+      top: 320px;
+
+      transform:
+        translateX(-50%)
+        scale(0.88);
+
+      transform-origin:
+        top center;
+    }
+
+    .ng-showcase {
+      padding:
+        55px
+        0;
+    }
+
+    .ng-showcase-row {
+      min-height: auto;
+    }
+
+    .ng-showcase-copy h2 {
+      font-size: 2.55rem;
+    }
+
+    .ng-label-visual {
+      min-height: 325px;
+    }
+
+    .ng-label-stack {
+      transform:
+        scale(0.82);
+
+      transform-origin:
+        center center;
+    }
+
+    .ng-personal-visual {
+      min-height: 330px;
+    }
+
+    .ng-personal-stage {
+      transform:
+        scale(0.76);
+
+      transform-origin:
+        center center;
+    }
+
+    .ng-process {
+      padding:
+        70px
+        0;
+    }
+
+    .ng-process-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .ng-process-head h2 {
+      font-size: 2.5rem;
+    }
+
+    .ng-focus-section {
+      padding:
+        55px
+        0;
+    }
+
+    .ng-focus {
+      flex-direction: column;
+
+      padding: 23px;
+    }
+
+    .ng-final {
+      padding:
+        70px
+        20px
+        90px;
+    }
+
+    .ng-final h2 {
+      font-size: 2.9rem;
+
+      letter-spacing: -2.8px;
+    }
+
+  }
+
+
+  @media (max-width: 470px) {
+
+    .ng-hero-visual {
+      transform:
+        scale(0.7);
+
+      margin-bottom: -125px;
+    }
+
+    .ng-feature-copy {
+      max-width: 73%;
+    }
+
+    .ng-tech-list {
+      grid-template-columns: 1fr;
+    }
+
+    .ng-dashboard-visual {
+      transform:
+        translateX(-50%)
+        scale(0.78);
+    }
+
+    .ng-label-visual {
+      min-height: 290px;
+    }
+
+    .ng-label-stack {
+      transform:
+        scale(0.7);
+    }
+
+    .ng-personal-visual {
+      min-height: 285px;
+    }
+
+    .ng-personal-stage {
+      transform:
+        scale(0.63);
+    }
+
+  }
+
+
+  @media (
+    prefers-reduced-motion:
+    reduce
+  ) {
+
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration:
+        0.01ms !important;
+
+      animation-iteration-count:
+        1 !important;
+
+      transition-duration:
+        0.01ms !important;
+    }
+
+    .ng-reveal {
+      opacity: 1;
+
+      transform: none;
+    }
+
+  }
+
+</style>
+
+
+<div class="nutriguard-home">
+
+
+  <!-- =====================================================
+       HERO
+       ===================================================== -->
+
+  <section class="ng-hero-shell">
+
+    <div class="ng-hero">
+
+
+      <div class="ng-hero-copy">
+
+
+        <h1 class="ng-hero-title">
+
+          Pahami
+          <br>
+
+          Label Gizi
+
+          <span class="ng-hero-star">
+            ✦
+          </span>
+
+          <br>
+
+          Lebih Cerdas
+
+        </h1>
+
+
+        <p class="ng-hero-description">
+
+          Pindai Tabel Informasi Nilai Gizi,
+          ketahui kualitas makanan melalui
+          Nutri-Score, dan dapatkan rekomendasi
+          konsumsi berdasarkan batas gula personal
+          Anda.
+
+        </p>
+
+
+        <div class="ng-hero-actions">
+
+
+          {% if 'user_id' in session %}
+
+
+          <a
+            href="{{ url_for('scan_page') }}"
+            class="ng-btn ng-btn-dark"
+          >
+
+            <i class="fa-solid fa-camera-viewfinder"></i>
+
+            Pindai Label Gizi
+
+          </a>
+
+
+          <a
+            href="{{ url_for('dashboard') }}"
+            class="ng-btn ng-btn-white"
+          >
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            Dashboard
+
+          </a>
+
+
+          {% else %}
+
+
+          <a
+            href="{{ url_for('login') }}"
+            class="ng-btn ng-btn-dark"
+          >
+
+            <i class="fa-solid fa-right-to-bracket"></i>
+
+            Mulai Sekarang
+
+          </a>
+
+
+          <a
+            href="#alur-sistem"
+            class="ng-btn ng-btn-white"
+          >
+
+            <i class="fa-solid fa-arrow-down"></i>
+
+            Cara Kerja
+
+          </a>
+
+
+          {% endif %}
+
+
+        </div>
+
+
+        <div class="ng-hero-note">
+
+          <i class="fa-solid fa-circle-info"></i>
+
+          <span>
+
+            Nutri-Guard AI digunakan sebagai
+            pendukung keputusan konsumsi dan
+            bukan alat diagnosis diabetes.
+
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+
+      <!-- HERO VISUAL -->
+
+      <div class="ng-hero-visual">
+
+
+        <!-- FRONT PHONE -->
+
+        <div class="ng-phone ng-phone-front">
+
+
+          <div class="ng-phone-inner">
+
+
+            <div class="ng-phone-top">
+
+              <span>
+                Nutri-Guard
+              </span>
+
+              <span class="ng-online-dot"></span>
+
+            </div>
+
+
+            <div class="ng-scan-area">
+
+
+              <div class="ng-scan-title">
+
+                Analisis Label Gizi
+
+              </div>
+
+
+              <div class="ng-scan-box">
+
+
+                <div class="ng-scan-line"></div>
+
+
+                <div class="ng-nutrition-title">
+
+                  INFORMASI NILAI GIZI
+
+                </div>
+
+
+                <div class="ng-nutrition-line"></div>
+
+                <div class="ng-nutrition-line"></div>
+
+                <div class="ng-nutrition-line"></div>
+
+                <div class="ng-nutrition-line"></div>
+
+                <div class="ng-nutrition-line"></div>
+
+
+                <div class="ng-ai-read">
+
+                  <span>
+                    Gemini AI
+                  </span>
+
+                  <strong>
+                    Berhasil dibaca
+                  </strong>
+
+                </div>
+
+
+              </div>
+
+
+              <div class="ng-result">
+
+
+                <div class="ng-result-icon">
+
+                  C
+
+                </div>
+
+
+                <div class="ng-result-copy">
+
+                  <strong>
+                    Nutri-Score C
+                  </strong>
+
+                  <span>
+                    Random Forest
+                  </span>
+
+                </div>
+
+
+              </div>
+
+
+              <div class="ng-result">
+
+
+                <div class="ng-result-icon safe">
+
+                  <i class="fa-solid fa-shield-heart"></i>
+
+                </div>
+
+
+                <div class="ng-result-copy">
+
+                  <strong>
+                    Status Waspada
+                  </strong>
+
+                  <span>
+                    Forward Chaining
+                  </span>
+
+                </div>
+
+
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- DARK PHONE -->
+
+        <div class="ng-phone ng-phone-back">
+
+
+          <div class="ng-phone-inner">
+
+
+            <div class="ng-phone-top">
+
+              <span>
+                Batas Gula
+              </span>
+
+              <i class="fa-solid fa-chart-line"></i>
+
+            </div>
+
+
+            <div class="ng-chart-area">
+
+
+              <div class="ng-chart-head">
+
+
+                <div>
+
+                  <small>
+                    Konsumsi hari ini
+                  </small>
+
+                  <strong>
+                    27.5 g
+                  </strong>
+
+                </div>
+
+
+                <div class="ng-chart-percent">
+
+                  55%
+
+                </div>
+
+
+              </div>
+
+
+              <svg
+                class="ng-chart-svg"
+                viewBox="0 0 280 145"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+
+                <line
+                  x1="0"
+                  y1="30"
+                  x2="280"
+                  y2="30"
+                  stroke="rgba(255,255,255,.08)"
+                />
+
+                <line
+                  x1="0"
+                  y1="72"
+                  x2="280"
+                  y2="72"
+                  stroke="rgba(255,255,255,.08)"
+                />
+
+                <line
+                  x1="0"
+                  y1="115"
+                  x2="280"
+                  y2="115"
+                  stroke="rgba(255,255,255,.08)"
+                />
+
+
+                <polyline
+                  points="
+                    0,112
+                    20,103
+                    38,109
+                    55,82
+                    72,91
+                    90,68
+                    108,77
+                    126,50
+                    144,59
+                    162,41
+                    180,55
+                    200,30
+                    219,40
+                    239,26
+                    258,35
+                    280,23
+                  "
+                  stroke="#d9ff45"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+
+              </svg>
+
+
+              <div class="ng-chart-days">
+
+                <span>Sen</span>
+                <span>Sel</span>
+                <span>Rab</span>
+                <span>Kam</span>
+                <span>Jum</span>
+
+              </div>
+
+
+              <div class="ng-chart-stats">
+
+
+                <div class="ng-chart-stat">
+
+                  <span>Batas</span>
+
+                  <strong>50 g</strong>
+
+                </div>
+
+
+                <div class="ng-chart-stat">
+
+                  <span>Terpakai</span>
+
+                  <strong>27.5 g</strong>
+
+                </div>
+
+
+                <div class="ng-chart-stat">
+
+                  <span>Sisa</span>
+
+                  <strong>22.5 g</strong>
+
+                </div>
+
+
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       FEATURES
+       ===================================================== -->
+
+  <section
+    class="ng-section"
+    id="fitur"
+  >
+
+    <div class="ng-content">
+
+
+      <div class="ng-section-heading ng-reveal">
+
+
+        <div class="ng-eyebrow">
+
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+          NUTRI-GUARD AI
+
+        </div>
+
+
+        <h2 class="ng-section-title">
+
+          Lebih Mudah Memahami
+          <br>
+
+          Apa yang Anda Konsumsi
+
+        </h2>
+
+
+        <p class="ng-section-desc">
+
+          Baca informasi nilai gizi, ketahui
+          klasifikasi Nutri-Score, dan lihat
+          rekomendasi konsumsi berdasarkan profil
+          pengguna dalam satu sistem.
+
+        </p>
+
+
+      </div>
+
+
+
+      <div class="ng-feature-grid">
+
+
+        <article class="ng-feature-card ng-reveal">
+
+
+          <div class="ng-feature-copy">
+
+
+            <h3>
+              Pindai Label Gizi
+            </h3>
+
+
+            <p>
+
+              Tidak perlu mencari nama atau merek
+              produk. Cukup unggah foto Tabel
+              Informasi Nilai Gizi.
+
+            </p>
+
+
+          </div>
+
+
+          {% if 'user_id' in session %}
+
+
+          <a
+            href="{{ url_for('scan_page') }}"
+            class="ng-feature-link"
+          >
+
+            Mulai Pindai
+
+            <i class="fa-solid fa-arrow-right ms-1"></i>
+
+          </a>
+
+
+          {% else %}
+
+
+          <a
+            href="{{ url_for('login') }}"
+            class="ng-feature-link"
+          >
+
+            Mulai Analisis
+
+            <i class="fa-solid fa-arrow-right ms-1"></i>
+
+          </a>
+
+
+          {% endif %}
+
+
+          <div class="ng-feature-shape"></div>
+
+
+        </article>
+
+
+
+        <article class="ng-feature-card ng-reveal">
+
+
+          <div class="ng-feature-copy">
+
+
+            <h3>
+              Analisis dalam Satu Tampilan
+            </h3>
+
+
+            <p>
+
+              Lihat Nutri-Score, parameter gizi,
+              batas gula personal, dan rekomendasi
+              konsumsi secara lebih ringkas.
+
+            </p>
+
+
+          </div>
+
+
+          <a
+            href="#alur-sistem"
+            class="ng-feature-link"
+          >
+
+            Lihat Alur
+
+            <i class="fa-solid fa-arrow-right ms-1"></i>
+
+          </a>
+
+
+          <div class="ng-circle-chart"></div>
+
+
+        </article>
+
+
+      </div>
+
+
+
+      <!-- ADVANTAGES -->
+
+      <div class="ng-advantages ng-reveal">
+
+
+        <div class="ng-advantages-intro">
+
+
+          <h2>
+            Keunggulan
+          </h2>
+
+
+          <p>
+
+            Nutri-Guard AI menggabungkan
+            pembacaan label berbasis AI,
+            machine learning, dan rule-based
+            system dalam satu proses analisis.
+
+          </p>
+
+
+        </div>
+
+
+
+        <div class="ng-advantages-grid">
+
+
+          <div class="ng-advantage">
+
+
+            <div class="ng-advantage-head">
+
+
+              <div class="ng-advantage-icon">
+
+                <i class="fa-solid fa-camera"></i>
+
+              </div>
+
+
+              <h4>
+                Smart Scan
+              </h4>
+
+
+            </div>
+
+
+            <p>
+
+              Gemini AI API membantu membaca
+              informasi nilai gizi dari gambar
+              label produk.
+
+            </p>
+
+
+          </div>
+
+
+
+          <div class="ng-advantage">
+
+
+            <div class="ng-advantage-head">
+
+
+              <div class="ng-advantage-icon">
+
+                <i class="fa-solid fa-ranking-star"></i>
+
+              </div>
+
+
+              <h4>
+                Nutri-Score
+              </h4>
+
+
+            </div>
+
+
+            <p>
+
+              Random Forest digunakan untuk
+              mengklasifikasikan kualitas nutrisi
+              ke grade A sampai E.
+
+            </p>
+
+
+          </div>
+
+
+
+          <div class="ng-advantage">
+
+
+            <div class="ng-advantage-head">
+
+
+              <div class="ng-advantage-icon">
+
+                <i class="fa-solid fa-user"></i>
+
+              </div>
+
+
+              <h4>
+                Analisis Personal
+              </h4>
+
+
+            </div>
+
+
+            <p>
+
+              Data profil digunakan untuk
+              membantu menentukan kebutuhan
+              dan batas konsumsi pengguna.
+
+            </p>
+
+
+          </div>
+
+
+
+          <div class="ng-advantage">
+
+
+            <div class="ng-advantage-head">
+
+
+              <div class="ng-advantage-icon">
+
+                <i class="fa-solid fa-shield-heart"></i>
+
+              </div>
+
+
+              <h4>
+                Rekomendasi Konsumsi
+              </h4>
+
+
+            </div>
+
+
+            <p>
+
+              Forward Chaining menghasilkan
+              rekomendasi dengan status Aman,
+              Waspada, atau Bahaya.
+
+            </p>
+
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       TECHNOLOGY
+       ===================================================== -->
+
+  <section class="ng-tech-section ng-reveal">
+
+
+    <div class="ng-content">
+
+
+      <h2>
+        Teknologi Utama
+      </h2>
+
+
+      <p>
+
+        Empat komponen utama mendukung proses
+        pembacaan, klasifikasi, perhitungan,
+        dan rekomendasi Nutri-Guard AI.
+
+      </p>
+
+
+      <div class="ng-tech-list">
+
+
+        <div class="ng-tech-item">
+
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+          Gemini AI API
+
+        </div>
+
+
+        <div class="ng-tech-item">
+
+          <i class="fa-solid fa-tree"></i>
+
+          Random Forest
+
+        </div>
+
+
+        <div class="ng-tech-item">
+
+          <i class="fa-solid fa-diagram-project"></i>
+
+          Forward Chaining
+
+        </div>
+
+
+        <div class="ng-tech-item">
+
+          <i class="fa-solid fa-book-medical"></i>
+
+          PERKENI
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- =====================================================
+       DASHBOARD BANNER
+       ===================================================== -->
+
+  <section class="ng-dark-section">
+
+
+    <div class="ng-content">
+
+
+      <div class="ng-dark-banner ng-reveal">
+
+
+        <div class="ng-dark-copy">
+
+
+          <h2>
+
+            Pantau Batas Gula
+            dalam Satu Dashboard
+
+          </h2>
+
+
+          <p>
+
+            Ringkasan hasil analisis membantu
+            pengguna melihat konsumsi dan batas
+            gula hariannya secara lebih mudah.
+
+          </p>
+
+
+          {% if 'user_id' in session %}
+
+
+          <a
+            href="{{ url_for('dashboard') }}"
+            class="ng-btn ng-btn-white"
+          >
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            Lihat Dashboard
+
+          </a>
+
+
+          {% else %}
+
+
+          <a
+            href="{{ url_for('login') }}"
+            class="ng-btn ng-btn-white"
+          >
+
+            <i class="fa-solid fa-right-to-bracket"></i>
+
+            Masuk Akun
+
+          </a>
+
+
+          {% endif %}
+
+
+        </div>
+
+
+
+        <div class="ng-dashboard-visual">
+
+
+          <div class="ng-floating-limit">
+
+
+            <small>
+              Batas gula harian
+            </small>
+
+
+            <strong>
+              27.5 g / 50 g
+            </strong>
+
+
+            <div class="ng-progress">
+
+              <span></span>
+
+            </div>
+
+
+          </div>
+
+
+
+          <div class="ng-dashboard-card">
+
+
+            <small>
+              Ringkasan konsumsi
+            </small>
+
+
+            <span class="ng-dashboard-value">
+
+              55%
+
+            </span>
+
+
+            <div class="ng-dashboard-status">
+
+              Masih dalam batas
+
+            </div>
+
+
+            <div
+              class="ng-dashboard-item"
+              style="margin-top:15px;"
+            >
+
+              <span>
+                Produk A
+              </span>
+
+              <strong>
+                8 g
+              </strong>
+
+            </div>
+
+
+            <div class="ng-dashboard-item">
+
+              <span>
+                Produk B
+              </span>
+
+              <strong>
+                12 g
+              </strong>
+
+            </div>
+
+
+            <div class="ng-dashboard-item">
+
+              <span>
+                Produk C
+              </span>
+
+              <strong>
+                7.5 g
+              </strong>
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- =====================================================
+       SHOWCASE
+       ===================================================== -->
+
+  <section class="ng-showcase">
+
+
+    <div class="ng-content">
+
+
+      <!-- ===================================================
+           SMART SCAN
+           Rectangle diperbaiki
+           =================================================== -->
+
+      <div class="ng-showcase-row ng-reveal">
+
+
+        <div class="ng-label-visual">
+
+
+          <div class="ng-label-stack">
+
+
+            <!-- DARK RECTANGLE BELAKANG -->
+
+            <div class="ng-label-back">
+
+              <div class="ng-label-back-decoration"></div>
+
+            </div>
+
+
+            <!-- LIME RECTANGLE DEPAN -->
+
+            <div class="ng-label-front">
+
+
+              <div class="ng-label-corner"></div>
+
+
+              <h4 class="ng-label-front-title">
+
+                Tabel Informasi Nilai Gizi
+
+              </h4>
+
+
+              <div class="ng-label-value">
+
+                <span>
+                  Energi
+                </span>
+
+                <strong>
+                  150 kkal
+                </strong>
+
+              </div>
+
+
+              <div class="ng-label-value">
+
+                <span>
+                  Gula
+                </span>
+
+                <strong>
+                  12 g
+                </strong>
+
+              </div>
+
+
+              <div class="ng-label-value">
+
+                <span>
+                  Lemak Jenuh
+                </span>
+
+                <strong>
+                  2.5 g
+                </strong>
+
+              </div>
+
+
+              <div class="ng-label-value">
+
+                <span>
+                  Natrium
+                </span>
+
+                <strong>
+                  120 mg
+                </strong>
+
+              </div>
+
+
+              <div class="ng-label-value">
+
+                <span>
+                  Protein
+                </span>
+
+                <strong>
+                  5 g
+                </strong>
+
+              </div>
+
+
+              <div class="ng-label-value">
+
+                <span>
+                  Serat
+                </span>
+
+                <strong>
+                  3 g
+                </strong>
+
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <div class="ng-showcase-copy">
+
+
+          <div class="ng-showcase-label">
+
+            <i class="fa-solid fa-camera-viewfinder"></i>
+
+            SMART SCAN
+
+          </div>
+
+
+          <h2>
+
+            Pindai Label,
+            Bukan Nama
+            Produknya
+
+          </h2>
+
+
+          <p>
+
+            Sistem Nutri-Guard AI didasarkan pada
+            parameter nutrisi yang terdapat pada
+            Tabel Informasi Nilai Gizi. Produk baru
+            tetap dapat dianalisis selama informasi
+            pada label dapat terbaca.
+
+          </p>
+
+
+          {% if 'user_id' in session %}
+
+
+          <a
+            href="{{ url_for('scan_page') }}"
+            class="ng-btn ng-btn-dark"
+          >
+
+            <i class="fa-solid fa-camera"></i>
+
+            Pindai Sekarang
+
+          </a>
+
+
+          {% else %}
+
+
+          <a
+            href="{{ url_for('login') }}"
+            class="ng-btn ng-btn-dark"
+          >
+
+            <i class="fa-solid fa-right-to-bracket"></i>
+
+            Mulai Analisis
+
+          </a>
+
+
+          {% endif %}
+
+
+        </div>
+
+
+      </div>
+
+
+
+      <!-- ===================================================
+           PERSONALISASI
+           Circle diganti rectangle
+           3 card sekarang overlap / menyatu
+           =================================================== -->
+
+      <div class="ng-showcase-row ng-reveal">
+
+
+        <div class="ng-showcase-copy">
+
+
+          <div class="ng-showcase-label">
+
+            <i class="fa-solid fa-user-check"></i>
+
+            PERSONALISASI
+
+          </div>
+
+
+          <h2>
+
+            Analisis yang
+            Lebih Personal
+
+          </h2>
+
+
+          <p>
+
+            Usia, tinggi badan, berat badan,
+            jenis kelamin, dan tingkat aktivitas
+            pengguna digunakan dalam proses
+            perhitungan kebutuhan serta batas
+            konsumsi yang diterapkan sistem.
+
+          </p>
+
+
+        </div>
+
+
+
+        <div class="ng-personal-visual">
+
+
+          <div class="ng-personal-stage">
+
+
+            <!-- RECTANGLE HIJAU BESAR -->
+
+            <div class="ng-personal-panel">
+
+              <div class="ng-personal-panel-copy">
+
+                ANALISIS PERSONAL
+
+              </div>
+
+            </div>
+
+
+            <!-- 3 RECTANGLE MENYATU / OVERLAP -->
+
+            <div class="ng-personal-list">
+
+
+              <div class="ng-personal-item">
+
+
+                <div class="ng-personal-name">
+
+
+                  <div class="ng-personal-icon">
+
+                    <i class="fa-solid fa-fire"></i>
+
+                  </div>
+
+
+                  <span>
+                    Kebutuhan Energi
+                  </span>
+
+
+                </div>
+
+
+                <strong>
+                  Personal
+                </strong>
+
+
+              </div>
+
+
+
+              <div class="ng-personal-item">
+
+
+                <div class="ng-personal-name">
+
+
+                  <div class="ng-personal-icon">
+
+                    <i class="fa-solid fa-cubes-stacked"></i>
+
+                  </div>
+
+
+                  <span>
+                    Batas Gula
+                  </span>
+
+
+                </div>
+
+
+                <strong>
+                  Harian
+                </strong>
+
+
+              </div>
+
+
+
+              <div class="ng-personal-item">
+
+
+                <div class="ng-personal-name">
+
+
+                  <div class="ng-personal-icon">
+
+                    <i class="fa-solid fa-shield-heart"></i>
+
+                  </div>
+
+
+                  <span>
+                    Rekomendasi
+                  </span>
+
+
+                </div>
+
+
+                <strong>
+                  Adaptif
+                </strong>
+
+
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- =====================================================
+       PROCESS
+       ===================================================== -->
+
+  <section
+    class="ng-process"
+    id="alur-sistem"
+  >
+
+
+    <div class="ng-content">
+
+
+      <div class="ng-process-head ng-reveal">
+
+
+        <h2>
+
+          Cara Kerja
+          Nutri-Guard AI
+
+        </h2>
+
+
+        <p>
+
+          Proses analisis dimulai dari profil
+          pengguna sampai sistem menghasilkan
+          Nutri-Score dan rekomendasi konsumsi.
+
+        </p>
+
+
+      </div>
+
+
+
+      <div class="ng-process-grid">
+
+
+        <div class="ng-process-card ng-reveal">
+
+
+          <div class="ng-process-number">
+            01
+          </div>
+
+
+          <h4>
+            Isi Profil
+          </h4>
+
+
+          <p>
+
+            Pengguna mengisi data fisik untuk
+            membantu menghitung kebutuhan dan
+            batas konsumsi personal.
+
+          </p>
+
+
+        </div>
+
+
+
+        <div class="ng-process-card ng-reveal">
+
+
+          <div class="ng-process-number">
+            02
+          </div>
+
+
+          <h4>
+            Pindai Label
+          </h4>
+
+
+          <p>
+
+            Foto Tabel Informasi Nilai Gizi
+            diproses menggunakan Gemini AI API
+            untuk membaca parameter nutrisi.
+
+          </p>
+
+
+        </div>
+
+
+
+        <div class="ng-process-card ng-reveal">
+
+
+          <div class="ng-process-number">
+            03
+          </div>
+
+
+          <h4>
+            Prediksi Nutri-Score
+          </h4>
+
+
+          <p>
+
+            Random Forest memproses parameter
+            nutrisi untuk mengklasifikasikan
+            produk ke grade A sampai E.
+
+          </p>
+
+
+        </div>
+
+
+
+        <div class="ng-process-card ng-reveal">
+
+
+          <div class="ng-process-number">
+            04
+          </div>
+
+
+          <h4>
+            Rekomendasi
+          </h4>
+
+
+          <p>
+
+            Forward Chaining mengevaluasi
+            gula, batas personal, dan Nutri-Score
+            untuk menghasilkan status konsumsi.
+
+          </p>
+
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- =====================================================
+       FOCUS
+       ===================================================== -->
+
+  <section class="ng-focus-section">
+
+
+    <div class="ng-content">
+
+
+      <div class="ng-focus ng-reveal">
+
+
+        <div class="ng-focus-icon">
+
+          <i class="fa-solid fa-circle-info"></i>
+
+        </div>
+
+
+        <div>
+
+
+          <h4>
+            Fokus Sistem
+          </h4>
+
+
+          <p>
+
+            Nutri-Guard AI tidak bergantung pada
+            database nama produk atau merek.
+            Proses utama sistem menggunakan
+            parameter yang terbaca dari Tabel
+            Informasi Nilai Gizi. Produk baru
+            tetap dapat dianalisis selama label
+            gizinya dapat terbaca dengan jelas.
+
+          </p>
+
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- =====================================================
+       FINAL CTA
+       ===================================================== -->
+
+  <section class="ng-final ng-reveal">
+
+
+    <div class="ng-final-icon">
+
+      <i class="fa-solid fa-bolt"></i>
+
+    </div>
+
+
+    <h2>
+
+      Mulai Pahami
+      Makanan Anda
+      Sekarang
+
+    </h2>
+
+
+    <p>
+
+      Pindai informasi nilai gizi dan gunakan
+      hasil analisis Nutri-Guard AI sebagai
+      pendukung dalam memahami konsumsi harian.
+
+    </p>
+
+
+    <div class="ng-final-actions">
+
+
+      {% if 'user_id' in session %}
+
+
+      <a
+        href="{{ url_for('scan_page') }}"
+        class="ng-btn ng-btn-dark"
+      >
+
+        <i class="fa-solid fa-camera-viewfinder"></i>
+
+        Mulai Pindai
+
+      </a>
+
+
+      <a
+        href="{{ url_for('dashboard') }}"
+        class="ng-btn ng-btn-outline"
+      >
+
+        <i class="fa-solid fa-chart-line"></i>
+
+        Dashboard
+
+      </a>
+
+
+      {% else %}
+
+
+      <a
+        href="{{ url_for('login') }}"
+        class="ng-btn ng-btn-dark"
+      >
+
+        <i class="fa-solid fa-right-to-bracket"></i>
+
+        Masuk untuk Memulai
+
+      </a>
+
+
+      <a
+        href="#alur-sistem"
+        class="ng-btn ng-btn-outline"
+      >
+
+        <i class="fa-solid fa-circle-info"></i>
+
+        Pelajari Sistem
+
+      </a>
+
+
+      {% endif %}
+
+
+    </div>
+
+
+  </section>
+
+
+</div>
+
+
+<script>
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+      /* =====================================================
+         REVEAL ANIMATION
+         ===================================================== */
+
+      const revealItems =
+        document.querySelectorAll(
+          ".ng-reveal"
+        );
+
+
+      if (
+        "IntersectionObserver"
+        in window
+      ) {
+
+        const observer =
+          new IntersectionObserver(
+            function (
+              entries,
+              currentObserver
+            ) {
+
+              entries.forEach(
+                function (entry) {
+
+                  if (
+                    entry.isIntersecting
+                  ) {
+
+                    entry.target
+                      .classList
+                      .add(
+                        "ng-visible"
+                      );
+
+
+                    currentObserver
+                      .unobserve(
+                        entry.target
+                      );
+
+                  }
+
+                }
+              );
+
+            },
+            {
+              threshold: 0.1,
+
+              rootMargin:
+                "0px 0px -30px 0px"
+            }
+          );
+
+
+        revealItems.forEach(
+          function (item) {
+
+            observer.observe(
+              item
+            );
+
+          }
+        );
+
+      } else {
+
+        revealItems.forEach(
+          function (item) {
+
+            item
+              .classList
+              .add(
+                "ng-visible"
+              );
+
+          }
+        );
+
+      }
+
+
+      /* =====================================================
+         SMOOTH INTERNAL SCROLL
+         ===================================================== */
+
+      document
+        .querySelectorAll(
+          'a[href^="#"]'
+        )
+        .forEach(
+          function (anchor) {
+
+            anchor.addEventListener(
+              "click",
+              function (event) {
+
+                const targetId =
+                  this.getAttribute(
+                    "href"
+                  );
+
+
+                if (
+                  !targetId ||
+                  targetId === "#"
+                ) {
+                  return;
+                }
+
+
+                const target =
+                  document.querySelector(
+                    targetId
+                  );
+
+
+                if (target) {
+
+                  event.preventDefault();
+
+
+                  target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+
+                }
+
+              }
+            );
+
+          }
+        );
+
+
+    }
+  );
+
+</script>
+
+{% endblock %}

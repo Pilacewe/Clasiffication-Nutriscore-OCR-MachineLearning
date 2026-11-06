@@ -1,0 +1,241 @@
+{% extends "layout/base.html" %} {% block title %}Masuk - Nutri-Guard AI{%
+endblock %} {% block content %}
+<style>
+  /* Custom CSS Khusus Login untuk kesan Premium */
+  body {
+    background-color: #f8fafc;
+  }
+
+  .login-wrapper {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+  }
+
+  .login-card {
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+    background: #ffffff;
+    border: 1px solid #f1f5f9;
+  }
+
+  .login-sidebar {
+    background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+    color: white;
+    padding: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .login-sidebar::after {
+    content: "";
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0) 70%
+    );
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .form-floating > .form-control:focus ~ label::after,
+  .form-floating > .form-control:not(:placeholder-shown) ~ label::after {
+    background-color: transparent !important;
+  }
+
+  .custom-input {
+    border-radius: 14px;
+    border: 1.5px solid #e2e8f0;
+    background-color: #f8fafc;
+    transition: all 0.2s;
+  }
+
+  .custom-input:focus {
+    border-color: #10b981;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+  }
+
+  .btn-login {
+    background-color: #0f172a;
+    color: #ffffff;
+    border-radius: 14px;
+    padding: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-login:hover {
+    background-color: #1e293b;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.2);
+    color: #ffffff;
+  }
+
+  .forgot-link {
+    color: #059669;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.2s ease;
+  }
+
+  .forgot-link:hover {
+    color: #047857;
+    text-decoration: underline;
+  }
+
+  .register-link {
+    color: #059669;
+    font-weight: 800;
+    text-decoration: none;
+    border-bottom: 1px solid #059669;
+    padding-bottom: 3px;
+    display: inline-block;
+    margin-top: 8px;
+  }
+
+  .register-link:hover {
+    color: #047857;
+    border-color: #047857;
+  }
+</style>
+
+<div class="login-wrapper py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-10 col-lg-11">
+        <div class="card login-card">
+          <div class="row g-0 h-100">
+            <!-- KOLOM KIRI (Visual & Branding) -->
+            <div class="col-md-5 d-none d-md-flex login-sidebar">
+              <div class="position-relative" style="z-index: 2">
+                <h4 class="fw-bold mb-0 d-flex align-items-center">
+                  <i class="fa-solid fa-leaf me-2 fs-3"></i> Nutri-Guard
+                </h4>
+                <span
+                  class="badge bg-white text-success rounded-pill mt-2 px-3"
+                >
+                  Sistem Analisis Medis
+                </span>
+              </div>
+
+              <div class="position-relative" style="z-index: 2">
+                <h2 class="fw-bold mb-3 lh-sm">
+                  Lanjutkan<br />Jurnal Kesehatan Anda.
+                </h2>
+                <p class="mb-0 text-white-50 small" style="line-height: 1.8">
+                  Akses kembali data nutrisi terpersonalisasi Anda. Pantau
+                  asupan kalori dan batas gula harian sesuai pedoman PERKENI.
+                </p>
+              </div>
+            </div>
+
+            <!-- KOLOM KANAN (Formulir Login) -->
+            <div class="col-md-7 p-4 p-md-5 d-flex align-items-center">
+              <div class="w-100 px-lg-4">
+                <div class="text-center text-md-start mb-5">
+                  <h2 class="fw-bold text-dark mb-1">Masuk</h2>
+                  <p class="text-muted small">
+                    Silakan masukkan email dan kata sandi akun Anda.
+                  </p>
+                </div>
+
+                <form action="{{ url_for('login') }}" method="POST">
+                  <!-- Input Email -->
+                  <div class="form-floating mb-4">
+                    <input
+                      type="email"
+                      name="email"
+                      class="form-control custom-input"
+                      id="emailInput"
+                      placeholder="name@example.com"
+                      required
+                    />
+                    <label for="emailInput" class="text-muted">
+                      <i class="fa-regular fa-envelope me-2"></i>Alamat Email
+                    </label>
+                  </div>
+
+                  <!-- Input Password -->
+                  <div class="form-floating mb-4">
+                    <input
+                      type="password"
+                      name="password"
+                      class="form-control custom-input"
+                      id="passwordInput"
+                      placeholder="Password"
+                      required
+                    />
+                    <label for="passwordInput" class="text-muted">
+                      <i class="fa-solid fa-lock me-2"></i>Kata Sandi
+                    </label>
+                  </div>
+
+                  <!-- Opsi Ekstra -->
+                  <div
+                    class="d-flex justify-content-between align-items-center mb-5 small"
+                  >
+                    <div class="form-check">
+                      <input
+                        class="form-check-input border-secondary shadow-none"
+                        type="checkbox"
+                        name="remember_me"
+                        id="rememberMe"
+                      />
+                      <label
+                        class="form-check-label text-muted"
+                        for="rememberMe"
+                      >
+                        Ingat sesi saya
+                      </label>
+                    </div>
+
+                    <a
+                      href="{{ url_for('forgot_password') }}"
+                      class="forgot-link"
+                    >
+                      Lupa sandi?
+                    </a>
+                  </div>
+
+                  <!-- Tombol Login -->
+                  <div class="d-grid mb-4">
+                    <button
+                      type="submit"
+                      class="btn btn-login border-0 d-flex justify-content-center align-items-center"
+                    >
+                      Masuk ke Dashboard
+                      <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </button>
+                  </div>
+                </form>
+
+                <!-- Link Pendaftaran -->
+                <div class="text-center mt-5 pt-3 border-top">
+                  <p class="text-muted small mb-0">
+                    Belum memiliki profil medis?
+                  </p>
+                  <a href="{{ url_for('register') }}" class="register-link">
+                    Buat Akun Gratis Sekarang
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- END KOLOM KANAN -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

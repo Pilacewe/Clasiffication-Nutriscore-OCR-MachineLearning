@@ -1,0 +1,3636 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+Riwayat & Rekap - Nutri-Guard AI
+{% endblock %}
+
+{% block content %}
+
+<style>
+  /* =========================================================
+     NUTRI-GUARD
+     RIWAYAT & REKAP BULANAN
+     ========================================================= */
+
+  :root {
+    --ng-lime: #caff3d;
+    --ng-lime-2: #bdf65b;
+    --ng-lime-soft: #f2ffc9;
+    --ng-lime-soft-2: #f8ffe8;
+
+    --ng-green: #10b981;
+    --ng-green-dark: #047857;
+    --ng-green-soft: #ecfdf5;
+
+    --ng-yellow: #f59e0b;
+    --ng-yellow-dark: #b45309;
+    --ng-yellow-soft: #fffbeb;
+
+    --ng-red: #ef4444;
+    --ng-red-dark: #b91c1c;
+    --ng-red-soft: #fef2f2;
+
+    --ng-blue: #2563eb;
+    --ng-blue-soft: #eff6ff;
+
+    --ng-dark: #080c16;
+    --ng-dark-2: #111827;
+
+    --ng-text: #111827;
+    --ng-muted: #64748b;
+    --ng-muted-light: #94a3b8;
+
+    --ng-white: #ffffff;
+    --ng-page: #f7f9f8;
+    --ng-soft: #f8faf9;
+    --ng-border: #e5ebe8;
+
+    --ng-frame: 1450px;
+  }
+
+
+  /* =========================================================
+     GLOBAL
+     ========================================================= */
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .ng-history-page,
+  .ng-history-page * {
+    box-sizing: border-box;
+  }
+
+  .ng-history-page {
+    width: 100vw;
+    max-width: 100vw;
+
+    position: relative;
+
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+
+    overflow-x: hidden;
+
+    color: var(--ng-text);
+
+    background:
+      linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #f7f9f8 36%,
+        #f7f9f8 82%,
+        #ffffff 100%
+      );
+
+    padding-bottom: 80px;
+  }
+
+
+  /* =========================================================
+     PAGE WIDTH
+     ========================================================= */
+
+  .ng-page-shell {
+    width: 100%;
+
+    padding-left:
+      clamp(
+        28px,
+        4vw,
+        72px
+      );
+
+    padding-right:
+      clamp(
+        28px,
+        4vw,
+        72px
+      );
+  }
+
+  .ng-page-frame {
+    width: 100%;
+    max-width: var(--ng-frame);
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  /* =========================================================
+     HERO
+     ========================================================= */
+
+  .ng-history-hero-shell {
+    padding-top: 28px;
+  }
+
+  .ng-history-hero {
+    min-height: 380px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+      50px
+      clamp(
+        36px,
+        4.5vw,
+        68px
+      );
+
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1.05fr)
+      minmax(370px, 0.75fr);
+
+    align-items: center;
+
+    gap: 60px;
+
+    border-radius: 34px;
+
+    background:
+      radial-gradient(
+        circle at 89% 0%,
+        rgba(255, 255, 255, 0.52),
+        transparent 31%
+      ),
+      linear-gradient(
+        125deg,
+        #ccff42 0%,
+        #bef65b 54%,
+        #a7e97a 100%
+      );
+  }
+
+  .ng-history-hero::before {
+    content: "";
+
+    width: 400px;
+    height: 400px;
+
+    position: absolute;
+
+    right: -145px;
+    top: -235px;
+
+    border-radius: 50%;
+
+    background:
+      rgba(255, 255, 255, 0.18);
+  }
+
+  .ng-history-hero::after {
+    content: "";
+
+    width: 265px;
+    height: 265px;
+
+    position: absolute;
+
+    left: 48%;
+    bottom: -215px;
+
+    border-radius: 50%;
+
+    border:
+      1px solid
+      rgba(15, 23, 42, 0.08);
+  }
+
+
+  /* =========================================================
+     HERO COPY
+     ========================================================= */
+
+  .ng-history-hero-copy {
+    position: relative;
+    z-index: 3;
+  }
+
+  .ng-eyebrow {
+    margin-bottom: 16px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #3f6212;
+
+    font-size: 0.68rem;
+
+    font-weight: 950;
+
+    letter-spacing: 0.055em;
+  }
+
+  .ng-history-title {
+    max-width: 760px;
+
+    margin:
+      0
+      0
+      18px;
+
+    color: #080c16;
+
+    font-size:
+      clamp(
+        3rem,
+        4.7vw,
+        5rem
+      );
+
+    line-height: 0.94;
+
+    letter-spacing: -4px;
+
+    font-weight: 950;
+  }
+
+  .ng-title-star {
+    display: inline-block;
+
+    margin-left: 3px;
+
+    font-size: 0.45em;
+
+    transform:
+      translateY(-14px);
+  }
+
+  .ng-history-description {
+    max-width: 630px;
+
+    margin: 0;
+
+    color:
+      rgba(15, 23, 42, 0.72);
+
+    font-size: 0.87rem;
+
+    line-height: 1.7;
+  }
+
+
+  /* =========================================================
+     HERO MONTH CARD
+     ========================================================= */
+
+  .ng-month-overview {
+    position: relative;
+
+    z-index: 3;
+  }
+
+  .ng-month-card {
+    width: 370px;
+
+    max-width: 100%;
+
+    margin-left: auto;
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 23px;
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.95);
+
+    border-radius: 26px;
+
+    background: #ffffff;
+
+    box-shadow:
+      0 35px 70px -34px
+      rgba(15, 23, 42, 0.55);
+
+    transform:
+      rotate(1.2deg);
+  }
+
+  .ng-month-card::before {
+    content: "";
+
+    width: 135px;
+    height: 135px;
+
+    position: absolute;
+
+    right: -55px;
+    top: -58px;
+
+    border-radius: 50%;
+
+    background:
+      rgba(202, 255, 61, 0.24);
+  }
+
+  .ng-month-card-head {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 14px;
+
+    margin-bottom: 24px;
+  }
+
+  .ng-month-card-head > span {
+    color: #64748b;
+
+    font-size: 0.57rem;
+
+    font-weight: 750;
+  }
+
+  .ng-month-chip {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding:
+      6px
+      9px;
+
+    border-radius: 999px;
+
+    color: #047857;
+
+    background: #ecfdf5;
+
+    font-size: 0.48rem;
+
+    font-weight: 900;
+  }
+
+  .ng-total-label {
+    position: relative;
+
+    z-index: 2;
+
+    color: #94a3b8;
+
+    font-size: 0.52rem;
+
+    font-weight: 700;
+  }
+
+  .ng-total-sugar {
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 5px;
+
+    color: #111827;
+
+    font-size: 3rem;
+
+    line-height: 1;
+
+    letter-spacing: -2px;
+
+    font-weight: 950;
+  }
+
+  .ng-total-sugar small {
+    margin-left: 4px;
+
+    color: #94a3b8;
+
+    font-size: 0.8rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0;
+  }
+
+  .ng-month-card-grid {
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 21px;
+
+    display: grid;
+
+    grid-template-columns:
+      1fr
+      1fr;
+
+    gap: 8px;
+  }
+
+  .ng-month-mini {
+    padding:
+      11px
+      12px;
+
+    border-radius: 13px;
+
+    background: #f7f9f8;
+  }
+
+  .ng-month-mini span {
+    display: block;
+
+    color: #94a3b8;
+
+    font-size: 0.46rem;
+  }
+
+  .ng-month-mini strong {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #111827;
+
+    font-size: 0.66rem;
+
+    font-weight: 950;
+  }
+
+
+  /* =========================================================
+     MAIN
+     ========================================================= */
+
+  .ng-history-main {
+    padding-top: 35px;
+  }
+
+  .ng-section {
+    margin-top: 38px;
+  }
+
+  .ng-section:first-child {
+    margin-top: 0;
+  }
+
+  .ng-section-head {
+    margin-bottom: 17px;
+
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 25px;
+  }
+
+  .ng-section-head h2 {
+    margin:
+      0
+      0
+      5px;
+
+    color: #111827;
+
+    font-size: 1.3rem;
+
+    font-weight: 950;
+
+    letter-spacing: -0.65px;
+  }
+
+  .ng-section-head p {
+    max-width: 650px;
+
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 0.7rem;
+
+    line-height: 1.55;
+  }
+
+
+  /* =========================================================
+     GENERIC PANEL
+     ========================================================= */
+
+  .ng-panel {
+    overflow: hidden;
+
+    border:
+      1px solid var(--ng-border);
+
+    border-radius: 24px;
+
+    background: #ffffff;
+
+    box-shadow:
+      0 24px 55px -48px
+      rgba(15, 23, 42, 0.38);
+  }
+
+
+  /* =========================================================
+     FILTER
+     ========================================================= */
+
+  .ng-filter-panel {
+    padding: 22px;
+  }
+
+  .ng-filter-layout {
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 30px;
+  }
+
+  .ng-filter-copy {
+    max-width: 500px;
+  }
+
+  .ng-filter-copy h3 {
+    margin:
+      0
+      0
+      5px;
+
+    color: #111827;
+
+    font-size: 0.92rem;
+
+    font-weight: 950;
+  }
+
+  .ng-filter-copy p {
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 0.59rem;
+
+    line-height: 1.5;
+  }
+
+  .ng-filter-form {
+    min-width: 430px;
+
+    display: grid;
+
+    grid-template-columns:
+      minmax(230px, 1fr)
+      auto;
+
+    align-items: end;
+
+    gap: 9px;
+  }
+
+  .ng-field {
+    min-width: 0;
+  }
+
+  .ng-field label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #64748b;
+
+    font-size: 0.55rem;
+
+    font-weight: 850;
+  }
+
+  .ng-month-input-wrap {
+    height: 48px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    border:
+      1px solid #e3e9e6;
+
+    border-radius: 13px;
+
+    background: #f7f9f8;
+
+    transition:
+      border-color 0.2s ease,
+      background 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .ng-month-input-wrap:focus-within {
+    border-color:
+      rgba(16, 185, 129, 0.45);
+
+    background: #ffffff;
+
+    box-shadow:
+      0 0 0 4px
+      rgba(16, 185, 129, 0.07);
+  }
+
+  .ng-month-input-wrap i {
+    margin-left: 15px;
+
+    color: #64748b;
+
+    font-size: 0.72rem;
+  }
+
+  .ng-month-input {
+    width: 100%;
+    height: 100%;
+
+    padding:
+      0
+      14px;
+
+    border: none;
+
+    outline: none;
+
+    color: #111827;
+
+    background: transparent;
+
+    font-size: 0.7rem;
+
+    font-weight: 850;
+
+    font-family: inherit;
+  }
+
+  .ng-filter-button {
+    height: 48px;
+
+    padding:
+      0
+      18px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    color: #ffffff;
+
+    background: #111827;
+
+    font-size: 0.65rem;
+
+    font-weight: 900;
+
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .ng-filter-button:hover {
+    background: #1f2937;
+
+    transform:
+      translateY(-1px);
+  }
+
+
+  /* =========================================================
+     PRIMARY STATISTICS
+     ========================================================= */
+
+  .ng-stats-grid {
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        4,
+        minmax(0, 1fr)
+      );
+
+    gap: 14px;
+  }
+
+  .ng-stat-card {
+    min-height: 160px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 20px;
+
+    border:
+      1px solid var(--ng-border);
+
+    border-radius: 21px;
+
+    background: #ffffff;
+
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .ng-stat-card:hover {
+    transform:
+      translateY(-3px);
+
+    box-shadow:
+      0 24px 45px -38px
+      rgba(15, 23, 42, 0.48);
+  }
+
+  .ng-stat-card::after {
+    content: "";
+
+    width: 88px;
+    height: 88px;
+
+    position: absolute;
+
+    right: -36px;
+    top: -37px;
+
+    border-radius: 50%;
+
+    background:
+      rgba(202, 255, 61, 0.14);
+  }
+
+  .ng-stat-icon {
+    width: 39px;
+    height: 39px;
+
+    position: relative;
+
+    z-index: 2;
+
+    margin-bottom: 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    color: #365314;
+
+    background: var(--ng-lime-soft);
+
+    font-size: 0.73rem;
+  }
+
+  .ng-stat-card:nth-child(2)
+  .ng-stat-icon {
+    color: #047857;
+
+    background: #ecfdf5;
+  }
+
+  .ng-stat-card:nth-child(3)
+  .ng-stat-icon {
+    color: #b45309;
+
+    background: #fffbeb;
+  }
+
+  .ng-stat-card:nth-child(4)
+  .ng-stat-icon {
+    color: #2563eb;
+
+    background: #eff6ff;
+  }
+
+  .ng-stat-label {
+    color: #64748b;
+
+    font-size: 0.61rem;
+
+    font-weight: 750;
+  }
+
+  .ng-stat-value {
+    margin-top: 5px;
+
+    color: #111827;
+
+    font-size: 1.55rem;
+
+    line-height: 1.05;
+
+    letter-spacing: -0.9px;
+
+    font-weight: 950;
+  }
+
+  .ng-stat-value small {
+    color: #94a3b8;
+
+    font-size: 0.63rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0;
+  }
+
+  .ng-stat-note {
+    margin:
+      6px
+      0
+      0;
+
+    color: #94a3b8;
+
+    font-size: 0.52rem;
+
+    line-height: 1.45;
+  }
+
+
+  /* =========================================================
+     STATUS SECTION
+     ========================================================= */
+
+  .ng-status-layout {
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1.2fr)
+      minmax(340px, 0.8fr);
+
+    gap: 15px;
+  }
+
+  .ng-status-card {
+    padding: 24px;
+  }
+
+  .ng-status-card-head {
+    margin-bottom: 24px;
+  }
+
+  .ng-status-card-head h3 {
+    margin:
+      0
+      0
+      5px;
+
+    color: #111827;
+
+    font-size: 0.9rem;
+
+    font-weight: 950;
+  }
+
+  .ng-status-card-head p {
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 0.58rem;
+  }
+
+
+  /* =========================================================
+     STATUS BAR
+
+     Width TIDAK lagi menggunakan Jinja di CSS.
+     JavaScript akan mengisi width dari data attributes.
+     ========================================================= */
+
+  .ng-status-bar {
+    width: 100%;
+    height: 13px;
+
+    display: flex;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: #edf1ef;
+  }
+
+  .ng-status-segment {
+    width: 0%;
+    height: 100%;
+
+    flex-shrink: 0;
+
+    transition:
+      width 0.6s ease;
+  }
+
+  .ng-status-segment.safe {
+    background: #10b981;
+  }
+
+  .ng-status-segment.warning {
+    background: #f59e0b;
+  }
+
+  .ng-status-segment.danger {
+    background: #ef4444;
+  }
+
+
+  /* =========================================================
+     STATUS LIST
+     ========================================================= */
+
+  .ng-status-list {
+    margin-top: 22px;
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        3,
+        1fr
+      );
+
+    gap: 9px;
+  }
+
+  .ng-status-box {
+    min-height: 92px;
+
+    padding: 13px;
+
+    border-radius: 15px;
+
+    background: #f8faf9;
+  }
+
+  .ng-status-dot {
+    width: 8px;
+    height: 8px;
+
+    margin-bottom: 12px;
+
+    border-radius: 50%;
+  }
+
+  .ng-status-dot.safe {
+    background: #10b981;
+  }
+
+  .ng-status-dot.warning {
+    background: #f59e0b;
+  }
+
+  .ng-status-dot.danger {
+    background: #ef4444;
+  }
+
+  .ng-status-box span {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 0.51rem;
+
+    font-weight: 700;
+  }
+
+  .ng-status-box strong {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #111827;
+
+    font-size: 1rem;
+
+    font-weight: 950;
+  }
+
+
+  /* =========================================================
+     MONTH SUMMARY
+     ========================================================= */
+
+  .ng-month-summary-card {
+    min-height: 100%;
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 25px;
+
+    border:
+      1px solid
+      rgba(132, 204, 22, 0.18);
+
+    border-radius: 24px;
+
+    background:
+      radial-gradient(
+        circle at 95% 0%,
+        rgba(255, 255, 255, 0.9),
+        transparent 33%
+      ),
+      linear-gradient(
+        135deg,
+        #efffbd,
+        #f8ffe8 54%,
+        #eefaf5
+      );
+  }
+
+  .ng-month-summary-card::after {
+    content: "";
+
+    width: 170px;
+    height: 170px;
+
+    position: absolute;
+
+    right: -80px;
+    bottom: -105px;
+
+    border-radius: 50%;
+
+    border:
+      1px solid
+      rgba(15, 23, 42, 0.07);
+  }
+
+  .ng-summary-kicker {
+    position: relative;
+
+    z-index: 2;
+
+    color: #4d7c0f;
+
+    font-size: 0.52rem;
+
+    font-weight: 900;
+
+    letter-spacing: 0.04em;
+  }
+
+  .ng-summary-month {
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 6px;
+
+    color: #111827;
+
+    font-size: 1.5rem;
+
+    line-height: 1.1;
+
+    letter-spacing: -0.8px;
+
+    font-weight: 950;
+  }
+
+  .ng-summary-description {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 330px;
+
+    margin:
+      11px
+      0
+      23px;
+
+    color: #64748b;
+
+    font-size: 0.6rem;
+
+    line-height: 1.55;
+  }
+
+  .ng-summary-stack {
+    position: relative;
+
+    z-index: 2;
+
+    display: grid;
+
+    gap: 8px;
+  }
+
+  .ng-summary-row {
+    min-height: 48px;
+
+    padding:
+      10px
+      12px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.9);
+
+    border-radius: 13px;
+
+    background:
+      rgba(255, 255, 255, 0.65);
+  }
+
+  .ng-summary-row span {
+    color: #64748b;
+
+    font-size: 0.54rem;
+
+    font-weight: 700;
+  }
+
+  .ng-summary-row strong {
+    color: #111827;
+
+    font-size: 0.67rem;
+
+    font-weight: 950;
+  }
+
+
+  /* =========================================================
+     TABLE PANEL
+     ========================================================= */
+
+  .ng-table-panel {
+    overflow: hidden;
+  }
+
+  .ng-table-header {
+    padding:
+      22px
+      24px;
+
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    border-bottom:
+      1px solid #edf1ef;
+  }
+
+  .ng-table-header h3 {
+    margin:
+      0
+      0
+      5px;
+
+    color: #111827;
+
+    font-size: 0.92rem;
+
+    font-weight: 950;
+  }
+
+  .ng-table-header p {
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 0.58rem;
+
+    line-height: 1.5;
+  }
+
+  .ng-table-month {
+    min-height: 34px;
+
+    padding:
+      0
+      11px;
+
+    flex-shrink: 0;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    border:
+      1px solid #e5ebe8;
+
+    border-radius: 10px;
+
+    color: #475569;
+
+    background: #f8faf9;
+
+    font-size: 0.52rem;
+
+    font-weight: 850;
+  }
+
+
+  /* =========================================================
+     TABLE
+     ========================================================= */
+
+  .ng-table-scroll {
+    width: 100%;
+
+    overflow-x: auto;
+  }
+
+  .ng-history-table {
+    width: 100%;
+
+    margin: 0;
+
+    border-collapse: collapse;
+  }
+
+  .ng-history-table th {
+    padding:
+      12px
+      16px;
+
+    background: #fafcfb;
+
+    border-bottom:
+      1px solid #edf1ef;
+
+    color: #94a3b8;
+
+    text-align: left;
+
+    font-size: 0.49rem;
+
+    font-weight: 950;
+
+    letter-spacing: 0.045em;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+  }
+
+  .ng-history-table td {
+    padding:
+      15px
+      16px;
+
+    border-bottom:
+      1px solid #f0f3f1;
+
+    color: #475569;
+
+    font-size: 0.61rem;
+
+    vertical-align: middle;
+  }
+
+  .ng-history-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .ng-history-table tbody tr {
+    transition:
+      background 0.15s ease;
+  }
+
+  .ng-history-table tbody tr:hover {
+    background: #fbfdfc;
+  }
+
+  .ng-date-cell {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+  }
+
+  .ng-date-icon {
+    width: 31px;
+    height: 31px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    color: #365314;
+
+    background: var(--ng-lime-soft);
+
+    font-size: 0.58rem;
+  }
+
+  .ng-date-cell strong {
+    color: #111827;
+
+    font-size: 0.62rem;
+
+    font-weight: 900;
+  }
+
+  .ng-table-value {
+    color: #111827;
+
+    font-weight: 850;
+  }
+
+  .ng-sugar-value-table {
+    color: #047857;
+
+    font-weight: 950;
+  }
+
+
+  /* =========================================================
+     STATUS BADGES
+     ========================================================= */
+
+  .ng-badge-status {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding:
+      6px
+      9px;
+
+    border-radius: 999px;
+
+    font-size: 0.5rem;
+
+    font-weight: 900;
+
+    white-space: nowrap;
+  }
+
+  .ng-badge-status.success {
+    color: #047857;
+
+    background: #ecfdf5;
+  }
+
+  .ng-badge-status.warning {
+    color: #b45309;
+
+    background: #fffbeb;
+  }
+
+  .ng-badge-status.danger {
+    color: #b91c1c;
+
+    background: #fef2f2;
+  }
+
+
+  /* =========================================================
+     EMPTY STATE
+     ========================================================= */
+
+  .ng-empty {
+    padding:
+      58px
+      20px;
+
+    text-align: center;
+  }
+
+  .ng-empty-icon {
+    width: 56px;
+    height: 56px;
+
+    margin:
+      0
+      auto
+      13px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 17px;
+
+    color: #94a3b8;
+
+    background: #f1f5f3;
+
+    font-size: 1rem;
+  }
+
+  .ng-empty h4 {
+    margin:
+      0
+      0
+      6px;
+
+    color: #111827;
+
+    font-size: 0.75rem;
+
+    font-weight: 950;
+  }
+
+  .ng-empty p {
+    max-width: 380px;
+
+    margin:
+      0
+      auto;
+
+    color: #94a3b8;
+
+    font-size: 0.58rem;
+
+    line-height: 1.5;
+  }
+
+
+  /* =========================================================
+     INFORMATION
+     ========================================================= */
+
+  .ng-info-strip {
+    margin-top: 14px;
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        3,
+        1fr
+      );
+
+    gap: 12px;
+  }
+
+  .ng-info-card {
+    min-height: 122px;
+
+    padding: 18px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    border:
+      1px solid var(--ng-border);
+
+    border-radius: 18px;
+
+    background: #ffffff;
+  }
+
+  .ng-info-icon {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    color: #365314;
+
+    background: var(--ng-lime-soft);
+
+    font-size: 0.65rem;
+  }
+
+  .ng-info-card:nth-child(2)
+  .ng-info-icon {
+    color: #047857;
+
+    background: #ecfdf5;
+  }
+
+  .ng-info-card:nth-child(3)
+  .ng-info-icon {
+    color: #2563eb;
+
+    background: #eff6ff;
+  }
+
+  .ng-info-card h4 {
+    margin:
+      1px
+      0
+      5px;
+
+    color: #111827;
+
+    font-size: 0.64rem;
+
+    font-weight: 950;
+  }
+
+  .ng-info-card p {
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 0.53rem;
+
+    line-height: 1.5;
+  }
+
+
+  /* =========================================================
+     MOBILE LIST
+     ========================================================= */
+
+  .ng-mobile-list {
+    display: none;
+  }
+
+
+  /* =========================================================
+     REVEAL
+     ========================================================= */
+
+  .ng-reveal {
+    opacity: 0;
+
+    transform:
+      translateY(18px);
+
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease;
+  }
+
+  .ng-reveal.visible {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+
+  /* =========================================================
+     <= 1100
+     ========================================================= */
+
+  @media (max-width: 1100px) {
+
+    .ng-page-shell {
+      padding-left: 38px;
+      padding-right: 38px;
+    }
+
+    .ng-history-hero {
+      grid-template-columns:
+        minmax(0, 1fr)
+        minmax(330px, 0.7fr);
+
+      gap: 35px;
+    }
+
+    .ng-stats-grid {
+      grid-template-columns:
+        1fr
+        1fr;
+    }
+
+    .ng-status-layout {
+      grid-template-columns:
+        minmax(0, 1fr)
+        330px;
+    }
+
+  }
+
+
+  /* =========================================================
+     TABLET
+     ========================================================= */
+
+  @media (max-width: 900px) {
+
+    .ng-page-shell {
+      padding-left: 28px;
+      padding-right: 28px;
+    }
+
+    .ng-history-hero-shell {
+      padding-top: 20px;
+    }
+
+    .ng-history-hero {
+      min-height: auto;
+
+      grid-template-columns: 1fr;
+
+      gap: 34px;
+
+      padding:
+        44px
+        38px
+        38px;
+    }
+
+    .ng-month-overview {
+      width: 540px;
+
+      max-width: 100%;
+
+      margin:
+        0
+        auto;
+    }
+
+    .ng-month-card {
+      width: 100%;
+
+      transform: none;
+    }
+
+    .ng-filter-layout {
+      align-items: stretch;
+
+      flex-direction: column;
+
+      gap: 18px;
+    }
+
+    .ng-filter-form {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .ng-status-layout {
+      grid-template-columns: 1fr;
+    }
+
+  }
+
+
+  /* =========================================================
+     MOBILE
+     ========================================================= */
+
+  @media (max-width: 680px) {
+
+    .ng-history-page {
+      padding-bottom: 55px;
+    }
+
+    .ng-page-shell {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .ng-history-hero-shell {
+      padding-top: 14px;
+    }
+
+    .ng-history-hero {
+      padding:
+        38px
+        22px
+        28px;
+
+      border-radius: 27px;
+    }
+
+    .ng-history-title {
+      font-size:
+        clamp(
+          2.8rem,
+          14vw,
+          4rem
+        );
+
+      letter-spacing: -3px;
+    }
+
+    .ng-history-description {
+      font-size: 0.8rem;
+    }
+
+    .ng-history-main {
+      padding-top: 28px;
+    }
+
+    .ng-section {
+      margin-top: 31px;
+    }
+
+    .ng-section-head {
+      align-items: flex-start;
+
+      flex-direction: column;
+
+      gap: 8px;
+    }
+
+    .ng-filter-panel {
+      padding: 18px;
+    }
+
+    .ng-filter-form {
+      grid-template-columns: 1fr;
+    }
+
+    .ng-filter-button {
+      width: 100%;
+    }
+
+    .ng-stats-grid {
+      grid-template-columns:
+        1fr
+        1fr;
+
+      gap: 9px;
+    }
+
+    .ng-stat-card {
+      min-height: 150px;
+
+      padding: 16px;
+    }
+
+    .ng-stat-icon {
+      margin-bottom: 15px;
+    }
+
+    .ng-stat-value {
+      font-size: 1.25rem;
+    }
+
+    .ng-status-card {
+      padding: 20px;
+    }
+
+    .ng-status-list {
+      grid-template-columns: 1fr;
+    }
+
+    .ng-status-box {
+      min-height: auto;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 10px;
+    }
+
+    .ng-status-dot {
+      margin-bottom: 0;
+    }
+
+    .ng-status-box span {
+      flex: 1;
+    }
+
+    .ng-status-box strong {
+      margin-top: 0;
+    }
+
+    .ng-table-scroll {
+      display: none;
+    }
+
+    .ng-mobile-list {
+      display: grid;
+
+      gap: 9px;
+
+      padding: 11px;
+    }
+
+    .ng-day-card {
+      padding: 15px;
+
+      border:
+        1px solid var(--ng-border);
+
+      border-radius: 16px;
+
+      background: #ffffff;
+    }
+
+    .ng-day-card-top {
+      margin-bottom: 13px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+    }
+
+    .ng-day-date {
+      display: flex;
+
+      align-items: center;
+
+      gap: 9px;
+    }
+
+    .ng-day-date-icon {
+      width: 32px;
+      height: 32px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 9px;
+
+      color: #365314;
+
+      background: var(--ng-lime-soft);
+
+      font-size: 0.57rem;
+    }
+
+    .ng-day-date strong {
+      color: #111827;
+
+      font-size: 0.62rem;
+
+      font-weight: 950;
+    }
+
+    .ng-day-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          3,
+          1fr
+        );
+
+      gap: 7px;
+    }
+
+    .ng-day-stat {
+      padding:
+        10px
+        9px;
+
+      border-radius: 11px;
+
+      background: #f8faf9;
+    }
+
+    .ng-day-stat span {
+      display: block;
+
+      color: #94a3b8;
+
+      font-size: 0.43rem;
+    }
+
+    .ng-day-stat strong {
+      display: block;
+
+      margin-top: 3px;
+
+      color: #111827;
+
+      font-size: 0.56rem;
+
+      font-weight: 900;
+    }
+
+    .ng-info-strip {
+      grid-template-columns: 1fr;
+    }
+
+    .ng-table-header {
+      flex-direction: column;
+
+      gap: 10px;
+    }
+
+  }
+
+
+  /* =========================================================
+     SMALL PHONE
+     ========================================================= */
+
+  @media (max-width: 440px) {
+
+    .ng-page-shell {
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+
+    .ng-stats-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .ng-stat-card {
+      min-height: 130px;
+    }
+
+    .ng-month-card-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .ng-day-grid {
+      grid-template-columns:
+        1fr
+        1fr;
+    }
+
+  }
+
+
+  /* =========================================================
+     REDUCED MOTION
+     ========================================================= */
+
+  @media (
+    prefers-reduced-motion:
+    reduce
+  ) {
+
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration:
+        0.01ms !important;
+
+      animation-iteration-count:
+        1 !important;
+
+      transition-duration:
+        0.01ms !important;
+    }
+
+    .ng-reveal {
+      opacity: 1;
+
+      transform: none;
+    }
+
+  }
+</style>
+
+
+
+<!-- =========================================================
+     JINJA DATA CALCULATION
+     ========================================================= -->
+
+{% set hari_aman = monthly_summary.hari_aman|default(0)|int %}
+{% set hari_waspada = monthly_summary.hari_waspada|default(0)|int %}
+{% set hari_melebihi = monthly_summary.hari_melebihi|default(0)|int %}
+
+{% set total_status = hari_aman + hari_waspada + hari_melebihi %}
+
+{% if total_status > 0 %}
+
+  {% set persen_aman = hari_aman * 100 / total_status %}
+  {% set persen_waspada = hari_waspada * 100 / total_status %}
+  {% set persen_melebihi = hari_melebihi * 100 / total_status %}
+
+{% else %}
+
+  {% set persen_aman = 0 %}
+  {% set persen_waspada = 0 %}
+  {% set persen_melebihi = 0 %}
+
+{% endif %}
+
+
+
+<!-- =========================================================
+     DATA BRIDGE
+
+     Persentase disimpan sebagai data HTML, bukan CSS.
+     ========================================================= -->
+
+<div
+  id="ngHistoryData"
+  hidden
+  data-safe-percent="{{ persen_aman }}"
+  data-warning-percent="{{ persen_waspada }}"
+  data-danger-percent="{{ persen_melebihi }}"
+></div>
+
+
+
+<div class="ng-history-page">
+
+
+  <!-- =======================================================
+       HERO
+       ======================================================= -->
+
+  <div class="ng-page-shell ng-history-hero-shell">
+
+
+    <div class="ng-page-frame">
+
+
+      <section class="ng-history-hero">
+
+
+        <!-- LEFT -->
+
+        <div class="ng-history-hero-copy">
+
+
+          <div class="ng-eyebrow">
+
+            <i class="fa-solid fa-calendar-days"></i>
+
+            REKAP KONSUMSI BULANAN
+
+          </div>
+
+
+          <h1 class="ng-history-title">
+
+            Lihat Pola
+            <br>
+
+            Konsumsi Anda
+
+            <span class="ng-title-star">
+              ✦
+            </span>
+
+          </h1>
+
+
+          <p class="ng-history-description">
+
+            Pantau ringkasan konsumsi setiap bulan,
+            lihat rata-rata gula dan kalori, serta
+            bandingkan jumlah hari aman, waspada,
+            dan hari yang melebihi batas.
+
+          </p>
+
+
+        </div>
+
+
+
+        <!-- RIGHT -->
+
+        <div class="ng-month-overview">
+
+
+          <div class="ng-month-card">
+
+
+            <div class="ng-month-card-head">
+
+
+              <span>
+                Rekap aktif
+              </span>
+
+
+              <div class="ng-month-chip">
+
+                <i class="fa-regular fa-calendar"></i>
+
+                {{ monthly_summary.bulan_display }}
+
+              </div>
+
+
+            </div>
+
+
+
+            <div class="ng-total-label">
+
+              Total gula bulan ini
+
+            </div>
+
+
+            <div class="ng-total-sugar">
+
+              {{ monthly_summary.total_gula }}
+
+              <small>
+                g
+              </small>
+
+            </div>
+
+
+
+            <div class="ng-month-card-grid">
+
+
+              <div class="ng-month-mini">
+
+
+                <span>
+                  Hari tercatat
+                </span>
+
+
+                <strong>
+
+                  {{ monthly_summary.hari_tercatat }}
+                  Hari
+
+                </strong>
+
+
+              </div>
+
+
+
+              <div class="ng-month-mini">
+
+
+                <span>
+                  Rata-rata / hari
+                </span>
+
+
+                <strong>
+
+                  {{ monthly_summary.rata_gula }}
+                  g
+
+                </strong>
+
+
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+
+      </section>
+
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- =======================================================
+       CONTENT
+       ======================================================= -->
+
+  <div class="ng-page-shell ng-history-main">
+
+
+    <div class="ng-page-frame">
+
+
+      <!-- ===================================================
+           FILTER
+           =================================================== -->
+
+      <section class="ng-section ng-reveal">
+
+
+        <div class="ng-panel ng-filter-panel">
+
+
+          <div class="ng-filter-layout">
+
+
+            <div class="ng-filter-copy">
+
+
+              <h3>
+                Pilih Periode Rekap
+              </h3>
+
+
+              <p>
+
+                Tentukan bulan untuk melihat ringkasan
+                dan rincian konsumsi pada periode tersebut.
+
+              </p>
+
+
+            </div>
+
+
+
+            <form
+              action="{{ url_for('riwayat') }}"
+              method="GET"
+              class="ng-filter-form"
+            >
+
+
+              <div class="ng-field">
+
+
+                <label for="monthFilter">
+
+                  Bulan rekap
+
+                </label>
+
+
+                <div class="ng-month-input-wrap">
+
+
+                  <i class="fa-regular fa-calendar"></i>
+
+
+                  <input
+                    id="monthFilter"
+                    type="month"
+                    name="bulan"
+                    value="{{ selected_month }}"
+                    class="ng-month-input"
+                  >
+
+
+                </div>
+
+
+              </div>
+
+
+
+              <button
+                type="submit"
+                class="ng-filter-button"
+              >
+
+                <i class="fa-solid fa-sliders"></i>
+
+                Tampilkan
+
+              </button>
+
+
+            </form>
+
+
+          </div>
+
+
+        </div>
+
+
+      </section>
+
+
+
+      <!-- ===================================================
+           MAIN STATISTICS
+           =================================================== -->
+
+      <section class="ng-section ng-reveal">
+
+
+        <div class="ng-section-head">
+
+
+          <div>
+
+
+            <h2>
+              Ringkasan Bulanan
+            </h2>
+
+
+            <p>
+
+              Statistik utama berdasarkan data
+              konsumsi pada bulan yang dipilih.
+
+            </p>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <div class="ng-stats-grid">
+
+
+          <!-- HARI TERCATAT -->
+
+          <article class="ng-stat-card">
+
+
+            <div class="ng-stat-icon">
+
+              <i class="fa-solid fa-calendar-check"></i>
+
+            </div>
+
+
+            <div class="ng-stat-label">
+
+              Hari Tercatat
+
+            </div>
+
+
+            <div class="ng-stat-value">
+
+              {{ monthly_summary.hari_tercatat }}
+
+              <small>
+                hari
+              </small>
+
+            </div>
+
+
+            <p class="ng-stat-note">
+
+              Hari yang memiliki data konsumsi.
+
+            </p>
+
+
+          </article>
+
+
+
+          <!-- GULA -->
+
+          <article class="ng-stat-card">
+
+
+            <div class="ng-stat-icon">
+
+              <i class="fa-solid fa-cubes-stacked"></i>
+
+            </div>
+
+
+            <div class="ng-stat-label">
+
+              Rata-rata Gula / Hari
+
+            </div>
+
+
+            <div class="ng-stat-value">
+
+              {{ monthly_summary.rata_gula }}
+
+              <small>
+                g
+              </small>
+
+            </div>
+
+
+            <p class="ng-stat-note">
+
+              Rata-rata gula dari hari tercatat.
+
+            </p>
+
+
+          </article>
+
+
+
+          <!-- KALORI -->
+
+          <article class="ng-stat-card">
+
+
+            <div class="ng-stat-icon">
+
+              <i class="fa-solid fa-fire-flame-curved"></i>
+
+            </div>
+
+
+            <div class="ng-stat-label">
+
+              Rata-rata Kalori / Hari
+
+            </div>
+
+
+            <div class="ng-stat-value">
+
+              {{ monthly_summary.rata_kalori }}
+
+              <small>
+                kkal
+              </small>
+
+            </div>
+
+
+            <p class="ng-stat-note">
+
+              Rata-rata energi yang tercatat.
+
+            </p>
+
+
+          </article>
+
+
+
+          <!-- TOTAL GULA -->
+
+          <article class="ng-stat-card">
+
+
+            <div class="ng-stat-icon">
+
+              <i class="fa-solid fa-chart-column"></i>
+
+            </div>
+
+
+            <div class="ng-stat-label">
+
+              Total Gula Bulan Ini
+
+            </div>
+
+
+            <div class="ng-stat-value">
+
+              {{ monthly_summary.total_gula }}
+
+              <small>
+                g
+              </small>
+
+            </div>
+
+
+            <p class="ng-stat-note">
+
+              Akumulasi gula pada periode aktif.
+
+            </p>
+
+
+          </article>
+
+
+        </div>
+
+
+      </section>
+
+
+
+      <!-- ===================================================
+           STATUS
+           =================================================== -->
+
+      <section class="ng-section ng-reveal">
+
+
+        <div class="ng-section-head">
+
+
+          <div>
+
+
+            <h2>
+              Status Konsumsi
+            </h2>
+
+
+            <p>
+
+              Perbandingan jumlah hari berdasarkan
+              status konsumsi selama periode rekap.
+
+            </p>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <div class="ng-status-layout">
+
+
+          <!-- DISTRIBUTION -->
+
+          <article class="ng-panel ng-status-card">
+
+
+            <div class="ng-status-card-head">
+
+
+              <h3>
+                Distribusi Status Bulanan
+              </h3>
+
+
+              <p>
+
+                Ringkasan hari aman, waspada,
+                dan hari yang melebihi batas.
+
+              </p>
+
+
+            </div>
+
+
+
+            <!--
+              Tidak ada lagi Jinja di atribut style.
+              Width diisi melalui JavaScript.
+            -->
+
+            <div class="ng-status-bar">
+
+
+              <div
+                class="ng-status-segment safe"
+                id="safeStatusSegment"
+              ></div>
+
+
+              <div
+                class="ng-status-segment warning"
+                id="warningStatusSegment"
+              ></div>
+
+
+              <div
+                class="ng-status-segment danger"
+                id="dangerStatusSegment"
+              ></div>
+
+
+            </div>
+
+
+
+            <div class="ng-status-list">
+
+
+              <div class="ng-status-box">
+
+
+                <div class="ng-status-dot safe"></div>
+
+
+                <span>
+                  Hari Aman
+                </span>
+
+
+                <strong>
+
+                  {{ monthly_summary.hari_aman }}
+
+                </strong>
+
+
+              </div>
+
+
+
+              <div class="ng-status-box">
+
+
+                <div class="ng-status-dot warning"></div>
+
+
+                <span>
+                  Hari Waspada
+                </span>
+
+
+                <strong>
+
+                  {{ monthly_summary.hari_waspada }}
+
+                </strong>
+
+
+              </div>
+
+
+
+              <div class="ng-status-box">
+
+
+                <div class="ng-status-dot danger"></div>
+
+
+                <span>
+                  Hari Melebihi
+                </span>
+
+
+                <strong>
+
+                  {{ monthly_summary.hari_melebihi }}
+
+                </strong>
+
+
+              </div>
+
+
+            </div>
+
+
+          </article>
+
+
+
+          <!-- ACTIVE MONTH -->
+
+          <aside class="ng-month-summary-card">
+
+
+            <div class="ng-summary-kicker">
+
+              PERIODE AKTIF
+
+            </div>
+
+
+            <div class="ng-summary-month">
+
+              {{ monthly_summary.bulan_display }}
+
+            </div>
+
+
+            <p class="ng-summary-description">
+
+              Seluruh statistik dan rincian pada halaman
+              ini mengikuti periode bulan yang sedang dipilih.
+
+            </p>
+
+
+
+            <div class="ng-summary-stack">
+
+
+              <div class="ng-summary-row">
+
+
+                <span>
+                  Hari tercatat
+                </span>
+
+
+                <strong>
+
+                  {{ monthly_summary.hari_tercatat }}
+                  Hari
+
+                </strong>
+
+
+              </div>
+
+
+
+              <div class="ng-summary-row">
+
+
+                <span>
+                  Rata-rata gula
+                </span>
+
+
+                <strong>
+
+                  {{ monthly_summary.rata_gula }}
+                  g
+
+                </strong>
+
+
+              </div>
+
+
+
+              <div class="ng-summary-row">
+
+
+                <span>
+                  Rata-rata kalori
+                </span>
+
+
+                <strong>
+
+                  {{ monthly_summary.rata_kalori }}
+                  kkal
+
+                </strong>
+
+
+              </div>
+
+
+            </div>
+
+
+          </aside>
+
+
+        </div>
+
+
+      </section>
+
+
+
+      <!-- ===================================================
+           DETAIL
+           =================================================== -->
+
+      <section class="ng-section ng-reveal">
+
+
+        <div class="ng-section-head">
+
+
+          <div>
+
+
+            <h2>
+              Rincian Hari per Hari
+            </h2>
+
+
+            <p>
+
+              Lihat total produk, kalori,
+              gula, dan status untuk setiap hari.
+
+            </p>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <article class="ng-panel ng-table-panel">
+
+
+          <div class="ng-table-header">
+
+
+            <div>
+
+
+              <h3>
+                Riwayat Bulanan
+              </h3>
+
+
+              <p>
+
+                Data konsumsi yang tercatat selama
+                {{ monthly_summary.bulan_display }}.
+
+              </p>
+
+
+            </div>
+
+
+
+            <div class="ng-table-month">
+
+
+              <i class="fa-regular fa-calendar"></i>
+
+              {{ monthly_summary.bulan_display }}
+
+
+            </div>
+
+
+          </div>
+
+
+
+          {% if monthly_rows %}
+
+
+          <!-- =================================================
+               DESKTOP TABLE
+               ================================================= -->
+
+          <div class="ng-table-scroll">
+
+
+            <table class="ng-history-table">
+
+
+              <thead>
+
+
+                <tr>
+
+                  <th>
+                    Tanggal
+                  </th>
+
+                  <th>
+                    Produk Dikonsumsi
+                  </th>
+
+                  <th>
+                    Total Kalori
+                  </th>
+
+                  <th>
+                    Total Gula
+                  </th>
+
+                  <th>
+                    Status
+                  </th>
+
+                </tr>
+
+
+              </thead>
+
+
+
+              <tbody>
+
+
+                {% for row in monthly_rows %}
+
+
+                <tr>
+
+
+                  <td>
+
+
+                    <div class="ng-date-cell">
+
+
+                      <div class="ng-date-icon">
+
+                        <i class="fa-regular fa-calendar-check"></i>
+
+                      </div>
+
+
+                      <strong>
+
+                        {{ row.tanggal_display }}
+
+                      </strong>
+
+
+                    </div>
+
+
+                  </td>
+
+
+
+                  <td>
+
+
+                    <span class="ng-table-value">
+
+                      {{ row.total_dikonsumsi }}
+                      Produk
+
+                    </span>
+
+
+                  </td>
+
+
+
+                  <td>
+
+
+                    <span class="ng-table-value">
+
+                      {{ row.kalori }}
+                      kkal
+
+                    </span>
+
+
+                  </td>
+
+
+
+                  <td>
+
+
+                    <span class="ng-sugar-value-table">
+
+                      {{ row.gula }}
+                      g
+
+                    </span>
+
+
+                  </td>
+
+
+
+                  <td>
+
+
+                    <span
+                      class="
+                        ng-badge-status
+                        {{ row.status.class }}
+                      "
+                    >
+
+
+                      <i
+                        class="
+                          fa-solid
+                          {{ row.status.icon }}
+                        "
+                      ></i>
+
+
+                      {{ row.status.label }}
+
+
+                    </span>
+
+
+                  </td>
+
+
+                </tr>
+
+
+                {% endfor %}
+
+
+              </tbody>
+
+
+            </table>
+
+
+          </div>
+
+
+
+          <!-- =================================================
+               MOBILE CARDS
+               ================================================= -->
+
+          <div class="ng-mobile-list">
+
+
+            {% for row in monthly_rows %}
+
+
+            <article class="ng-day-card">
+
+
+              <div class="ng-day-card-top">
+
+
+                <div class="ng-day-date">
+
+
+                  <div class="ng-day-date-icon">
+
+                    <i class="fa-regular fa-calendar"></i>
+
+                  </div>
+
+
+                  <strong>
+
+                    {{ row.tanggal_display }}
+
+                  </strong>
+
+
+                </div>
+
+
+
+                <span
+                  class="
+                    ng-badge-status
+                    {{ row.status.class }}
+                  "
+                >
+
+
+                  <i
+                    class="
+                      fa-solid
+                      {{ row.status.icon }}
+                    "
+                  ></i>
+
+
+                  {{ row.status.label }}
+
+
+                </span>
+
+
+              </div>
+
+
+
+              <div class="ng-day-grid">
+
+
+                <div class="ng-day-stat">
+
+
+                  <span>
+                    Produk
+                  </span>
+
+
+                  <strong>
+
+                    {{ row.total_dikonsumsi }}
+
+                  </strong>
+
+
+                </div>
+
+
+
+                <div class="ng-day-stat">
+
+
+                  <span>
+                    Kalori
+                  </span>
+
+
+                  <strong>
+
+                    {{ row.kalori }}
+                    kkal
+
+                  </strong>
+
+
+                </div>
+
+
+
+                <div class="ng-day-stat">
+
+
+                  <span>
+                    Gula
+                  </span>
+
+
+                  <strong>
+
+                    {{ row.gula }}
+                    g
+
+                  </strong>
+
+
+                </div>
+
+
+              </div>
+
+
+            </article>
+
+
+            {% endfor %}
+
+
+          </div>
+
+
+          {% else %}
+
+
+          <!-- =================================================
+               EMPTY
+               ================================================= -->
+
+          <div class="ng-empty">
+
+
+            <div class="ng-empty-icon">
+
+              <i class="fa-regular fa-calendar-xmark"></i>
+
+            </div>
+
+
+            <h4>
+              Belum ada rekap pada bulan ini
+            </h4>
+
+
+            <p>
+
+              Data bulanan akan ditampilkan setelah
+              terdapat produk yang tercatat atau dikonsumsi
+              pada periode yang dipilih.
+
+            </p>
+
+
+          </div>
+
+
+          {% endif %}
+
+
+        </article>
+
+
+
+        <!-- =================================================
+             INFO
+             ================================================= -->
+
+        <div class="ng-info-strip">
+
+
+          <article class="ng-info-card">
+
+
+            <div class="ng-info-icon">
+
+              <i class="fa-solid fa-calendar-check"></i>
+
+            </div>
+
+
+            <div>
+
+
+              <h4>
+                Rekap Per Bulan
+              </h4>
+
+
+              <p>
+
+                Pilih bulan untuk melihat data konsumsi
+                pada periode yang berbeda.
+
+              </p>
+
+
+            </div>
+
+
+          </article>
+
+
+
+          <article class="ng-info-card">
+
+
+            <div class="ng-info-icon">
+
+              <i class="fa-solid fa-chart-simple"></i>
+
+            </div>
+
+
+            <div>
+
+
+              <h4>
+                Ringkasan Konsumsi
+              </h4>
+
+
+              <p>
+
+                Statistik menampilkan hari tercatat,
+                rata-rata gula, kalori, dan total gula.
+
+              </p>
+
+
+            </div>
+
+
+          </article>
+
+
+
+          <article class="ng-info-card">
+
+
+            <div class="ng-info-icon">
+
+              <i class="fa-solid fa-shield-heart"></i>
+
+            </div>
+
+
+            <div>
+
+
+              <h4>
+                Status Harian
+              </h4>
+
+
+              <p>
+
+                Setiap hari ditampilkan dengan status
+                sesuai hasil pemantauan yang tersimpan.
+
+              </p>
+
+
+            </div>
+
+
+          </article>
+
+
+        </div>
+
+
+      </section>
+
+
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+
+<script>
+  /* =========================================================
+     HELPER
+     ========================================================= */
+
+  function toSafeNumber(value) {
+
+    const result =
+      Number.parseFloat(
+        String(
+          value ?? "0"
+        )
+      );
+
+
+    if (
+      Number.isFinite(
+        result
+      )
+    ) {
+
+      return result;
+
+    }
+
+
+    return 0;
+
+  }
+
+
+
+  function clampPercentage(value) {
+
+    return Math.min(
+      Math.max(
+        toSafeNumber(
+          value
+        ),
+        0
+      ),
+      100
+    );
+
+  }
+
+
+
+  /* =========================================================
+     STATUS BAR
+
+     Memperbaiki CSS diagnostic karena Jinja
+     tidak lagi ditulis di dalam style attribute.
+     ========================================================= */
+
+  function initializeStatusBar() {
+
+    const dataElement =
+      document.getElementById(
+        "ngHistoryData"
+      );
+
+
+    if (
+      !dataElement
+    ) {
+
+      return;
+
+    }
+
+
+    const safePercentage =
+      clampPercentage(
+        dataElement
+          .dataset
+          .safePercent
+      );
+
+
+    const warningPercentage =
+      clampPercentage(
+        dataElement
+          .dataset
+          .warningPercent
+      );
+
+
+    const dangerPercentage =
+      clampPercentage(
+        dataElement
+          .dataset
+          .dangerPercent
+      );
+
+
+    const safeSegment =
+      document.getElementById(
+        "safeStatusSegment"
+      );
+
+
+    const warningSegment =
+      document.getElementById(
+        "warningStatusSegment"
+      );
+
+
+    const dangerSegment =
+      document.getElementById(
+        "dangerStatusSegment"
+      );
+
+
+    if (
+      safeSegment
+    ) {
+
+      safeSegment.style.width =
+        safePercentage +
+        "%";
+
+    }
+
+
+    if (
+      warningSegment
+    ) {
+
+      warningSegment.style.width =
+        warningPercentage +
+        "%";
+
+    }
+
+
+    if (
+      dangerSegment
+    ) {
+
+      dangerSegment.style.width =
+        dangerPercentage +
+        "%";
+
+    }
+
+  }
+
+
+
+  /* =========================================================
+     REVEAL
+     ========================================================= */
+
+  function initializeRevealAnimation() {
+
+    const revealItems =
+      document.querySelectorAll(
+        ".ng-reveal"
+      );
+
+
+    if (
+      !(
+        "IntersectionObserver"
+        in window
+      )
+    ) {
+
+      revealItems.forEach(
+        function (
+          item
+        ) {
+
+          item
+            .classList
+            .add(
+              "visible"
+            );
+
+        }
+      );
+
+
+      return;
+
+    }
+
+
+    const observer =
+      new IntersectionObserver(
+        function (
+          entries,
+          activeObserver
+        ) {
+
+          entries.forEach(
+            function (
+              entry
+            ) {
+
+              if (
+                entry.isIntersecting
+              ) {
+
+                entry
+                  .target
+                  .classList
+                  .add(
+                    "visible"
+                  );
+
+
+                activeObserver
+                  .unobserve(
+                    entry.target
+                  );
+
+              }
+
+            }
+          );
+
+        },
+        {
+
+          threshold:
+            0.08,
+
+          rootMargin:
+            "0px 0px -24px 0px"
+
+        }
+      );
+
+
+    revealItems.forEach(
+      function (
+        item
+      ) {
+
+        observer.observe(
+          item
+        );
+
+      }
+    );
+
+  }
+
+
+
+  /* =========================================================
+     INIT
+     ========================================================= */
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+      initializeStatusBar();
+
+      initializeRevealAnimation();
+
+    }
+  );
+</script>
+
+{% endblock %}

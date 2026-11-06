@@ -1,0 +1,3844 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+Pengaturan Profil - Nutri-Guard AI
+{% endblock %}
+
+{% block content %}
+
+<style>
+  /* =========================================================
+     NUTRI-GUARD PROFILE
+     ========================================================= */
+
+  :root {
+    --ng-lime: #caff3d;
+    --ng-lime-2: #bdf65b;
+    --ng-lime-soft: #f2ffc9;
+    --ng-lime-soft-2: #f8ffe8;
+
+    --ng-green: #10b981;
+    --ng-green-dark: #047857;
+    --ng-green-soft: #ecfdf5;
+
+    --ng-blue: #2563eb;
+    --ng-blue-soft: #eff6ff;
+
+    --ng-yellow: #d97706;
+    --ng-yellow-soft: #fffbeb;
+
+    --ng-dark: #080c16;
+    --ng-dark-2: #111827;
+
+    --ng-text: #111827;
+    --ng-muted: #64748b;
+    --ng-muted-light: #94a3b8;
+
+    --ng-white: #ffffff;
+    --ng-page: #f7f9f8;
+    --ng-soft: #f8faf9;
+    --ng-border: #e5ebe8;
+
+    --ng-frame: 1450px;
+  }
+
+
+  /* =========================================================
+     GLOBAL
+     ========================================================= */
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .ng-profile-page,
+  .ng-profile-page * {
+    box-sizing: border-box;
+  }
+
+  .ng-profile-page {
+    width: 100vw;
+    max-width: 100vw;
+
+    position: relative;
+
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+
+    overflow-x: hidden;
+
+    color: var(--ng-text);
+
+    background:
+      linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #f7f9f8 42%,
+        #f7f9f8 84%,
+        #ffffff 100%
+      );
+
+    padding-bottom: 80px;
+  }
+
+
+  /* =========================================================
+     PAGE WIDTH
+     ========================================================= */
+
+  .ng-page-shell {
+    width: 100%;
+
+    padding-left:
+      clamp(
+        28px,
+        4vw,
+        72px
+      );
+
+    padding-right:
+      clamp(
+        28px,
+        4vw,
+        72px
+      );
+  }
+
+  .ng-page-frame {
+    width: 100%;
+    max-width: var(--ng-frame);
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  /* =========================================================
+     HERO
+     ========================================================= */
+
+  .ng-profile-hero-shell {
+    padding-top: 28px;
+  }
+
+  .ng-profile-hero {
+    min-height: 390px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+      50px
+      clamp(
+        36px,
+        4.5vw,
+        68px
+      );
+
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1.06fr)
+      minmax(380px, 0.72fr);
+
+    align-items: center;
+
+    gap: 58px;
+
+    border-radius: 34px;
+
+    background:
+      radial-gradient(
+        circle at 90% 0%,
+        rgba(255, 255, 255, 0.52),
+        transparent 30%
+      ),
+      linear-gradient(
+        125deg,
+        #ccff42 0%,
+        #bdf65b 53%,
+        #a6e978 100%
+      );
+  }
+
+  .ng-profile-hero::before {
+    content: "";
+
+    width: 400px;
+    height: 400px;
+
+    position: absolute;
+
+    right: -150px;
+    top: -230px;
+
+    border-radius: 50%;
+
+    background:
+      rgba(255, 255, 255, 0.18);
+  }
+
+  .ng-profile-hero::after {
+    content: "";
+
+    width: 260px;
+    height: 260px;
+
+    position: absolute;
+
+    left: 48%;
+    bottom: -205px;
+
+    border-radius: 50%;
+
+    border:
+      1px solid
+      rgba(15, 23, 42, 0.08);
+  }
+
+
+  /* =========================================================
+     HERO COPY
+     ========================================================= */
+
+  .ng-profile-hero-copy {
+    position: relative;
+
+    z-index: 3;
+  }
+
+  .ng-eyebrow {
+    margin-bottom: 16px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #3f6212;
+
+    font-size: 0.68rem;
+
+    font-weight: 950;
+
+    letter-spacing: 0.055em;
+  }
+
+  .ng-profile-title {
+    max-width: 760px;
+
+    margin:
+      0
+      0
+      18px;
+
+    color: #080c16;
+
+    font-size:
+      clamp(
+        3rem,
+        4.7vw,
+        5rem
+      );
+
+    line-height: 0.94;
+
+    letter-spacing: -4px;
+
+    font-weight: 950;
+  }
+
+  .ng-title-star {
+    display: inline-block;
+
+    margin-left: 4px;
+
+    font-size: 0.45em;
+
+    transform:
+      translateY(-14px);
+  }
+
+  .ng-profile-description {
+    max-width: 650px;
+
+    margin: 0;
+
+    color:
+      rgba(15, 23, 42, 0.72);
+
+    font-size: 0.87rem;
+
+    line-height: 1.7;
+  }
+
+
+  /* =========================================================
+     HERO PROFILE CARD
+     ========================================================= */
+
+  .ng-hero-profile-wrap {
+    position: relative;
+
+    z-index: 3;
+  }
+
+  .ng-hero-profile-card {
+    width: 370px;
+
+    max-width: 100%;
+
+    margin-left: auto;
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 23px;
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.95);
+
+    border-radius: 26px;
+
+    background: #ffffff;
+
+    box-shadow:
+      0 35px 70px -34px
+      rgba(15, 23, 42, 0.55);
+
+    transform:
+      rotate(1.3deg);
+  }
+
+  .ng-hero-profile-card::before {
+    content: "";
+
+    width: 140px;
+    height: 140px;
+
+    position: absolute;
+
+    right: -56px;
+    top: -64px;
+
+    border-radius: 50%;
+
+    background:
+      rgba(202, 255, 61, 0.25);
+  }
+
+  .ng-hero-user {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+  }
+
+  .ng-hero-avatar {
+    width: 60px;
+    height: 60px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    color: #17200d;
+
+    background:
+      linear-gradient(
+        135deg,
+        #caff3d,
+        #a9ea67
+      );
+
+    font-size: 1.35rem;
+  }
+
+  .ng-hero-user-info {
+    min-width: 0;
+  }
+
+  .ng-hero-user-info strong {
+    display: block;
+
+    overflow: hidden;
+
+    color: #111827;
+
+    font-size: 0.82rem;
+
+    font-weight: 950;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+  }
+
+  .ng-hero-user-info span {
+    display: block;
+
+    margin-top: 3px;
+
+    overflow: hidden;
+
+    color: #94a3b8;
+
+    font-size: 0.52rem;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+  }
+
+  .ng-profile-live {
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 20px;
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        3,
+        1fr
+      );
+
+    gap: 8px;
+  }
+
+  .ng-live-stat {
+    min-width: 0;
+
+    padding:
+      11px
+      10px;
+
+    border-radius: 13px;
+
+    background: #f7f9f8;
+  }
+
+  .ng-live-stat span {
+    display: block;
+
+    color: #94a3b8;
+
+    font-size: 0.43rem;
+  }
+
+  .ng-live-stat strong {
+    display: block;
+
+    margin-top: 4px;
+
+    overflow: hidden;
+
+    color: #111827;
+
+    font-size: 0.68rem;
+
+    font-weight: 950;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+  }
+
+  .ng-hero-tip {
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 12px;
+
+    padding:
+      11px
+      12px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    border-radius: 13px;
+
+    color: #047857;
+
+    background: #ecfdf5;
+
+    font-size: 0.49rem;
+
+    line-height: 1.5;
+  }
+
+  .ng-hero-tip i {
+    margin-top: 2px;
+
+    flex-shrink: 0;
+  }
+
+
+  /* =========================================================
+     MAIN
+     ========================================================= */
+
+  .ng-profile-main {
+    padding-top: 35px;
+  }
+
+  .ng-profile-layout {
+    display: grid;
+
+    grid-template-columns:
+      minmax(280px, 0.62fr)
+      minmax(0, 1.38fr);
+
+    align-items: start;
+
+    gap: 16px;
+  }
+
+
+  /* =========================================================
+     GENERIC CARD
+     ========================================================= */
+
+  .ng-card {
+    overflow: hidden;
+
+    border:
+      1px solid var(--ng-border);
+
+    border-radius: 24px;
+
+    background: #ffffff;
+
+    box-shadow:
+      0 24px 55px -48px
+      rgba(15, 23, 42, 0.40);
+  }
+
+
+  /* =========================================================
+     LEFT SUMMARY
+     ========================================================= */
+
+  .ng-profile-summary {
+    position: sticky;
+
+    top: 24px;
+  }
+
+  .ng-summary-head {
+    padding: 24px;
+
+    border-bottom:
+      1px solid #edf1ef;
+  }
+
+  .ng-summary-title-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+  }
+
+  .ng-summary-icon {
+    width: 39px;
+    height: 39px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    color: #365314;
+
+    background: var(--ng-lime-soft);
+
+    font-size: 0.7rem;
+  }
+
+  .ng-summary-head h3 {
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 0.86rem;
+
+    font-weight: 950;
+  }
+
+  .ng-summary-head p {
+    margin:
+      5px
+      0
+      0;
+
+    color: #94a3b8;
+
+    font-size: 0.55rem;
+
+    line-height: 1.5;
+  }
+
+  .ng-summary-body {
+    padding: 18px;
+  }
+
+  .ng-summary-user {
+    padding: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    border-radius: 16px;
+
+    background:
+      linear-gradient(
+        135deg,
+        #f5ffc9,
+        #f9ffeb
+      );
+  }
+
+  .ng-summary-avatar {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    color: #17200d;
+
+    background: var(--ng-lime);
+
+    font-size: 0.82rem;
+  }
+
+  .ng-summary-user-info {
+    min-width: 0;
+  }
+
+  .ng-summary-user-info strong {
+    display: block;
+
+    overflow: hidden;
+
+    color: #111827;
+
+    font-size: 0.64rem;
+
+    font-weight: 950;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+  }
+
+  .ng-summary-user-info span {
+    display: block;
+
+    margin-top: 3px;
+
+    overflow: hidden;
+
+    color: #64748b;
+
+    font-size: 0.48rem;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+  }
+
+  .ng-summary-stats {
+    margin-top: 12px;
+
+    display: grid;
+
+    gap: 8px;
+  }
+
+  .ng-summary-stat {
+    min-height: 57px;
+
+    padding:
+      10px
+      12px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 14px;
+
+    border-radius: 13px;
+
+    background: #f8faf9;
+  }
+
+  .ng-summary-stat-left {
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+  }
+
+  .ng-summary-stat-icon {
+    width: 31px;
+    height: 31px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    color: #047857;
+
+    background: #ecfdf5;
+
+    font-size: 0.56rem;
+  }
+
+  .ng-summary-stat:nth-child(2)
+  .ng-summary-stat-icon {
+    color: #2563eb;
+
+    background: #eff6ff;
+  }
+
+  .ng-summary-stat:nth-child(3)
+  .ng-summary-stat-icon {
+    color: #b45309;
+
+    background: #fffbeb;
+  }
+
+  .ng-summary-stat span {
+    color: #64748b;
+
+    font-size: 0.53rem;
+
+    font-weight: 700;
+  }
+
+  .ng-summary-stat strong {
+    flex-shrink: 0;
+
+    color: #111827;
+
+    font-size: 0.68rem;
+
+    font-weight: 950;
+  }
+
+  .ng-summary-note {
+    margin-top: 12px;
+
+    padding:
+      14px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    border:
+      1px solid
+      rgba(16, 185, 129, 0.12);
+
+    border-radius: 14px;
+
+    color: #047857;
+
+    background: #ecfdf5;
+
+    font-size: 0.52rem;
+
+    line-height: 1.55;
+  }
+
+  .ng-summary-note i {
+    margin-top: 2px;
+
+    flex-shrink: 0;
+  }
+
+
+  /* =========================================================
+     FORM CARD
+     ========================================================= */
+
+  .ng-form-card {
+    overflow: visible;
+  }
+
+  .ng-form-head {
+    padding:
+      23px
+      25px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    border-bottom:
+      1px solid #edf1ef;
+  }
+
+  .ng-form-head-main {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+  }
+
+  .ng-form-head-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    color: #365314;
+
+    background: var(--ng-lime-soft);
+
+    font-size: 0.76rem;
+  }
+
+  .ng-form-head h2 {
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 0.94rem;
+
+    font-weight: 950;
+  }
+
+  .ng-form-head p {
+    margin:
+      5px
+      0
+      0;
+
+    color: #94a3b8;
+
+    font-size: 0.56rem;
+
+    line-height: 1.5;
+  }
+
+  .ng-form-badge {
+    min-height: 30px;
+
+    padding:
+      0
+      10px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    flex-shrink: 0;
+
+    border-radius: 999px;
+
+    color: #047857;
+
+    background: #ecfdf5;
+
+    font-size: 0.48rem;
+
+    font-weight: 900;
+  }
+
+  .ng-form-body {
+    padding: 25px;
+  }
+
+
+  /* =========================================================
+     FORM SECTION
+     ========================================================= */
+
+  .ng-form-section {
+    margin-top: 27px;
+  }
+
+  .ng-form-section:first-child {
+    margin-top: 0;
+  }
+
+  .ng-form-section-head {
+    margin-bottom: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+  }
+
+  .ng-form-section-icon {
+    width: 33px;
+    height: 33px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    color: #047857;
+
+    background: #ecfdf5;
+
+    font-size: 0.6rem;
+  }
+
+  .ng-form-section-head h3 {
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 0.75rem;
+
+    font-weight: 950;
+  }
+
+  .ng-form-section-head p {
+    margin:
+      3px
+      0
+      0;
+
+    color: #94a3b8;
+
+    font-size: 0.49rem;
+  }
+
+
+  /* =========================================================
+     ACCOUNT INFO
+     ========================================================= */
+
+  .ng-account-grid {
+    display: grid;
+
+    grid-template-columns:
+      1fr
+      1fr;
+
+    gap: 10px;
+  }
+
+  .ng-readonly-card {
+    min-width: 0;
+
+    padding:
+      13px
+      14px;
+
+    border:
+      1px solid #e7ece9;
+
+    border-radius: 14px;
+
+    background: #f8faf9;
+  }
+
+  .ng-readonly-card span {
+    display: block;
+
+    color: #94a3b8;
+
+    font-size: 0.48rem;
+
+    font-weight: 700;
+  }
+
+  .ng-readonly-card strong {
+    display: block;
+
+    margin-top: 4px;
+
+    overflow: hidden;
+
+    color: #111827;
+
+    font-size: 0.62rem;
+
+    font-weight: 900;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+  }
+
+
+  /* =========================================================
+     FORM GRID
+     ========================================================= */
+
+  .ng-form-grid {
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        12,
+        minmax(
+          0,
+          1fr
+        )
+      );
+
+    gap: 11px;
+  }
+
+  .ng-col-4 {
+    grid-column: span 4;
+  }
+
+  .ng-col-5 {
+    grid-column: span 5;
+  }
+
+  .ng-col-6 {
+    grid-column: span 6;
+  }
+
+  .ng-col-7 {
+    grid-column: span 7;
+  }
+
+  .ng-col-12 {
+    grid-column: span 12;
+  }
+
+
+  /* =========================================================
+     FIELD
+     ========================================================= */
+
+  .ng-field {
+    min-width: 0;
+  }
+
+  .ng-field label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #64748b;
+
+    font-size: 0.54rem;
+
+    font-weight: 850;
+  }
+
+  .ng-input-wrap {
+    min-height: 54px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    border:
+      1px solid #e3e9e6;
+
+    border-radius: 14px;
+
+    background: #f8faf9;
+
+    transition:
+      border-color 0.2s ease,
+      background 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .ng-input-wrap:focus-within {
+    border-color:
+      rgba(16, 185, 129, 0.45);
+
+    background: #ffffff;
+
+    box-shadow:
+      0 0 0 4px
+      rgba(16, 185, 129, 0.07);
+  }
+
+  .ng-input-icon {
+    width: 43px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #94a3b8;
+
+    font-size: 0.66rem;
+  }
+
+  .ng-input,
+  .ng-select {
+    width: 100%;
+    height: 52px;
+
+    min-width: 0;
+
+    padding:
+      0
+      14px
+      0
+      0;
+
+    border: none;
+    outline: none;
+
+    color: #111827;
+
+    background: transparent;
+
+    font-family: inherit;
+
+    font-size: 0.67rem;
+
+    font-weight: 850;
+  }
+
+  .ng-select {
+    appearance: auto;
+
+    cursor: pointer;
+  }
+
+  .ng-input::placeholder {
+    color: #c3cbc7;
+  }
+
+  .ng-field-hint {
+    margin-top: 6px;
+
+    color: #94a3b8;
+
+    font-size: 0.46rem;
+
+    line-height: 1.45;
+  }
+
+
+  /* =========================================================
+     PREVIEW SECTION
+     ========================================================= */
+
+  .ng-live-preview {
+    margin-top: 24px;
+
+    padding: 17px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border:
+      1px solid
+      rgba(132, 204, 22, 0.16);
+
+    border-radius: 18px;
+
+    background:
+      radial-gradient(
+        circle at 95% 0%,
+        rgba(255, 255, 255, 0.90),
+        transparent 34%
+      ),
+      linear-gradient(
+        135deg,
+        #f0ffc1,
+        #f8ffe8 54%,
+        #effaf5
+      );
+  }
+
+  .ng-live-preview::after {
+    content: "";
+
+    width: 130px;
+    height: 130px;
+
+    position: absolute;
+
+    right: -70px;
+    bottom: -85px;
+
+    border-radius: 50%;
+
+    border:
+      1px solid
+      rgba(15, 23, 42, 0.06);
+  }
+
+  .ng-preview-head {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 13px;
+  }
+
+  .ng-preview-head h4 {
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 0.67rem;
+
+    font-weight: 950;
+  }
+
+  .ng-preview-head span {
+    color: #64748b;
+
+    font-size: 0.47rem;
+  }
+
+  .ng-preview-grid {
+    position: relative;
+
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        3,
+        1fr
+      );
+
+    gap: 8px;
+  }
+
+  .ng-preview-card {
+    min-height: 74px;
+
+    padding:
+      11px
+      12px;
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.9);
+
+    border-radius: 13px;
+
+    background:
+      rgba(255, 255, 255, 0.62);
+  }
+
+  .ng-preview-card span {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 0.47rem;
+
+    font-weight: 700;
+  }
+
+  .ng-preview-card strong {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #111827;
+
+    font-size: 0.78rem;
+
+    font-weight: 950;
+  }
+
+
+  /* =========================================================
+     INFO ALERT
+     ========================================================= */
+
+  .ng-system-note {
+    margin-top: 23px;
+
+    padding:
+      15px
+      16px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    border:
+      1px solid #bfdbfe;
+
+    border-radius: 15px;
+
+    color: #1d4ed8;
+
+    background: #eff6ff;
+
+    font-size: 0.55rem;
+
+    line-height: 1.6;
+  }
+
+  .ng-system-note i {
+    margin-top: 2px;
+
+    flex-shrink: 0;
+  }
+
+  .ng-system-note strong {
+    font-weight: 950;
+  }
+
+
+  /* =========================================================
+     FORM ACTIONS
+     ========================================================= */
+
+  .ng-form-actions {
+    margin-top: 24px;
+
+    padding-top: 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 9px;
+
+    border-top:
+      1px solid #edf1ef;
+  }
+
+  .ng-btn {
+    min-height: 46px;
+
+    padding:
+      0
+      18px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    border:
+      1px solid transparent;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-size: 0.61rem;
+
+    font-weight: 900;
+
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      background 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .ng-btn:hover {
+    text-decoration: none;
+
+    transform:
+      translateY(-1px);
+  }
+
+  .ng-btn-secondary {
+    color: #475569;
+
+    background: #ffffff;
+
+    border-color: #e3e9e6;
+  }
+
+  .ng-btn-secondary:hover {
+    color: #111827;
+
+    border-color: #cbd5e1;
+  }
+
+  .ng-btn-save {
+    color: #17200d;
+
+    background: var(--ng-lime);
+
+    box-shadow:
+      0 15px 25px -20px
+      rgba(101, 163, 13, 0.75);
+  }
+
+  .ng-btn-save:hover {
+    color: #17200d;
+
+    background: #d7ff68;
+  }
+
+
+  /* =========================================================
+     BOTTOM INFO CARDS
+     ========================================================= */
+
+  .ng-profile-info {
+    margin-top: 16px;
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        3,
+        1fr
+      );
+
+    gap: 12px;
+  }
+
+  .ng-info-card {
+    min-height: 120px;
+
+    padding: 18px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    border:
+      1px solid var(--ng-border);
+
+    border-radius: 18px;
+
+    background: #ffffff;
+  }
+
+  .ng-info-icon {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    color: #365314;
+
+    background: var(--ng-lime-soft);
+
+    font-size: 0.65rem;
+  }
+
+  .ng-info-card:nth-child(2)
+  .ng-info-icon {
+    color: #047857;
+
+    background: #ecfdf5;
+  }
+
+  .ng-info-card:nth-child(3)
+  .ng-info-icon {
+    color: #2563eb;
+
+    background: #eff6ff;
+  }
+
+  .ng-info-card h4 {
+    margin:
+      1px
+      0
+      5px;
+
+    color: #111827;
+
+    font-size: 0.64rem;
+
+    font-weight: 950;
+  }
+
+  .ng-info-card p {
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 0.53rem;
+
+    line-height: 1.5;
+  }
+
+
+  /* =========================================================
+     REVEAL
+     ========================================================= */
+
+  .ng-reveal {
+    opacity: 0;
+
+    transform:
+      translateY(18px);
+
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease;
+  }
+
+  .ng-reveal.visible {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+
+  /* =========================================================
+     <= 1100
+     ========================================================= */
+
+  @media (max-width: 1100px) {
+
+    .ng-page-shell {
+      padding-left: 38px;
+      padding-right: 38px;
+    }
+
+    .ng-profile-hero {
+      grid-template-columns:
+        minmax(0, 1fr)
+        minmax(330px, 0.72fr);
+
+      gap: 35px;
+    }
+
+    .ng-profile-layout {
+      grid-template-columns:
+        290px
+        minmax(0, 1fr);
+    }
+
+  }
+
+
+  /* =========================================================
+     TABLET
+     ========================================================= */
+
+  @media (max-width: 900px) {
+
+    .ng-page-shell {
+      padding-left: 28px;
+      padding-right: 28px;
+    }
+
+    .ng-profile-hero-shell {
+      padding-top: 20px;
+    }
+
+    .ng-profile-hero {
+      min-height: auto;
+
+      grid-template-columns: 1fr;
+
+      gap: 34px;
+
+      padding:
+        44px
+        38px
+        38px;
+    }
+
+    .ng-hero-profile-wrap {
+      width: 540px;
+
+      max-width: 100%;
+
+      margin:
+        0
+        auto;
+    }
+
+    .ng-hero-profile-card {
+      width: 100%;
+
+      transform: none;
+    }
+
+    .ng-profile-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .ng-profile-summary {
+      position: static;
+    }
+
+    .ng-summary-stats {
+      grid-template-columns:
+        repeat(
+          3,
+          1fr
+        );
+    }
+
+    .ng-summary-stat {
+      min-height: 90px;
+
+      display: block;
+    }
+
+    .ng-summary-stat-left {
+      display: block;
+    }
+
+    .ng-summary-stat-icon {
+      margin-bottom: 9px;
+    }
+
+    .ng-summary-stat strong {
+      display: block;
+
+      margin-top: 5px;
+    }
+
+  }
+
+
+  /* =========================================================
+     MOBILE
+     ========================================================= */
+
+  @media (max-width: 680px) {
+
+    .ng-profile-page {
+      padding-bottom: 55px;
+    }
+
+    .ng-page-shell {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .ng-profile-hero-shell {
+      padding-top: 14px;
+    }
+
+    .ng-profile-hero {
+      padding:
+        38px
+        22px
+        28px;
+
+      border-radius: 27px;
+    }
+
+    .ng-profile-title {
+      font-size:
+        clamp(
+          2.8rem,
+          14vw,
+          4rem
+        );
+
+      letter-spacing: -3px;
+    }
+
+    .ng-profile-description {
+      font-size: 0.8rem;
+    }
+
+    .ng-profile-live {
+      grid-template-columns:
+        1fr
+        1fr
+        1fr;
+    }
+
+    .ng-profile-main {
+      padding-top: 28px;
+    }
+
+    .ng-summary-stats {
+      grid-template-columns: 1fr;
+    }
+
+    .ng-summary-stat {
+      min-height: 55px;
+
+      display: flex;
+    }
+
+    .ng-summary-stat-left {
+      display: flex;
+    }
+
+    .ng-summary-stat-icon {
+      margin-bottom: 0;
+    }
+
+    .ng-summary-stat strong {
+      display: block;
+
+      margin-top: 0;
+    }
+
+    .ng-form-head {
+      align-items: flex-start;
+
+      flex-direction: column;
+    }
+
+    .ng-form-body {
+      padding: 19px;
+    }
+
+    .ng-account-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .ng-col-4,
+    .ng-col-5,
+    .ng-col-6,
+    .ng-col-7 {
+      grid-column: span 12;
+    }
+
+    .ng-preview-grid {
+      grid-template-columns:
+        1fr
+        1fr
+        1fr;
+    }
+
+    .ng-form-actions {
+      display: grid;
+
+      grid-template-columns:
+        1fr
+        1fr;
+    }
+
+    .ng-btn {
+      width: 100%;
+    }
+
+    .ng-profile-info {
+      grid-template-columns: 1fr;
+    }
+
+  }
+
+
+  /* =========================================================
+     SMALL PHONE
+     ========================================================= */
+
+  @media (max-width: 440px) {
+
+    .ng-page-shell {
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+
+    .ng-profile-live {
+      grid-template-columns: 1fr;
+    }
+
+    .ng-preview-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .ng-form-actions {
+      grid-template-columns: 1fr;
+    }
+
+  }
+
+
+  /* =========================================================
+     REDUCED MOTION
+     ========================================================= */
+
+  @media (
+    prefers-reduced-motion:
+    reduce
+  ) {
+
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration:
+        0.01ms !important;
+
+      animation-iteration-count:
+        1 !important;
+
+      transition-duration:
+        0.01ms !important;
+    }
+
+    .ng-reveal {
+      opacity: 1;
+
+      transform: none;
+    }
+
+  }
+</style>
+
+
+
+<div class="ng-profile-page">
+
+
+  <!-- =======================================================
+       HERO
+       ======================================================= -->
+
+  <div class="ng-page-shell ng-profile-hero-shell">
+
+
+    <div class="ng-page-frame">
+
+
+      <section class="ng-profile-hero">
+
+
+        <!-- LEFT -->
+
+        <div class="ng-profile-hero-copy">
+
+
+          <div class="ng-eyebrow">
+
+            <i class="fa-solid fa-user-gear"></i>
+
+            PERSONAL HEALTH PROFILE
+
+          </div>
+
+
+          <h1 class="ng-profile-title">
+
+            Profil Anda,
+            <br>
+
+            Perhitungan Lebih Personal
+
+            <span class="ng-title-star">
+              ✦
+            </span>
+
+          </h1>
+
+
+          <p class="ng-profile-description">
+
+            Perbarui data fisik dan aktivitas Anda agar
+            Nutri-Guard dapat menghitung ulang usia,
+            IMT, berat badan ideal, kebutuhan energi,
+            dan batas konsumsi secara lebih personal.
+
+          </p>
+
+
+        </div>
+
+
+
+        <!-- RIGHT -->
+
+        <div class="ng-hero-profile-wrap">
+
+
+          <div class="ng-hero-profile-card">
+
+
+            <div class="ng-hero-user">
+
+
+              <div class="ng-hero-avatar">
+
+                <i class="fa-solid fa-user"></i>
+
+              </div>
+
+
+              <div class="ng-hero-user-info">
+
+
+                <strong>
+
+                  {{ user[0] }}
+
+                </strong>
+
+
+                <span>
+
+                  {{ user[1] }}
+
+                </span>
+
+
+              </div>
+
+
+            </div>
+
+
+
+            <div class="ng-profile-live">
+
+
+              <div class="ng-live-stat">
+
+
+                <span>
+                  Usia
+                </span>
+
+
+                <strong>
+
+                  <span id="heroAge">
+
+                    {{ user[2] }}
+
+                  </span>
+
+                  thn
+
+                </strong>
+
+
+              </div>
+
+
+
+              <div class="ng-live-stat">
+
+
+                <span>
+                  IMT
+                </span>
+
+
+                <strong id="heroBMI">
+
+                  -
+
+                </strong>
+
+
+              </div>
+
+
+
+              <div class="ng-live-stat">
+
+
+                <span>
+                  BBI
+                </span>
+
+
+                <strong id="heroBBI">
+
+                  -
+
+                </strong>
+
+
+              </div>
+
+
+            </div>
+
+
+
+            <div class="ng-hero-tip">
+
+
+              <i class="fa-solid fa-circle-info"></i>
+
+
+              <span>
+
+                Preview berubah otomatis saat data fisik
+                di formulir diperbarui.
+
+              </span>
+
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+
+      </section>
+
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- =======================================================
+       MAIN
+       ======================================================= -->
+
+  <div class="ng-page-shell ng-profile-main">
+
+
+    <div class="ng-page-frame">
+
+
+      <div class="ng-profile-layout">
+
+
+        <!-- =================================================
+             LEFT SUMMARY
+             ================================================= -->
+
+        <aside class="ng-card ng-profile-summary ng-reveal">
+
+
+          <div class="ng-summary-head">
+
+
+            <div class="ng-summary-title-row">
+
+
+              <div class="ng-summary-icon">
+
+                <i class="fa-solid fa-chart-simple"></i>
+
+              </div>
+
+
+              <div>
+
+
+                <h3>
+                  Ringkasan Profil
+                </h3>
+
+
+                <p>
+
+                  Preview berdasarkan data
+                  yang sedang diisi.
+
+                </p>
+
+
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+
+
+          <div class="ng-summary-body">
+
+
+            <div class="ng-summary-user">
+
+
+              <div class="ng-summary-avatar">
+
+                <i class="fa-solid fa-user"></i>
+
+              </div>
+
+
+              <div class="ng-summary-user-info">
+
+
+                <strong>
+
+                  {{ user[0] }}
+
+                </strong>
+
+
+                <span>
+
+                  {{ user[1] }}
+
+                </span>
+
+
+              </div>
+
+
+            </div>
+
+
+
+            <div class="ng-summary-stats">
+
+
+              <div class="ng-summary-stat">
+
+
+                <div class="ng-summary-stat-left">
+
+
+                  <div class="ng-summary-stat-icon">
+
+                    <i class="fa-solid fa-cake-candles"></i>
+
+                  </div>
+
+
+                  <span>
+                    Usia
+                  </span>
+
+
+                </div>
+
+
+                <strong id="previewAge">
+
+                  {{ user[2] }} tahun
+
+                </strong>
+
+
+              </div>
+
+
+
+              <div class="ng-summary-stat">
+
+
+                <div class="ng-summary-stat-left">
+
+
+                  <div class="ng-summary-stat-icon">
+
+                    <i class="fa-solid fa-weight-scale"></i>
+
+                  </div>
+
+
+                  <span>
+                    Preview IMT
+                  </span>
+
+
+                </div>
+
+
+                <strong id="previewBMI">
+
+                  -
+
+                </strong>
+
+
+              </div>
+
+
+
+              <div class="ng-summary-stat">
+
+
+                <div class="ng-summary-stat-left">
+
+
+                  <div class="ng-summary-stat-icon">
+
+                    <i class="fa-solid fa-ruler-vertical"></i>
+
+                  </div>
+
+
+                  <span>
+                    Preview BBI
+                  </span>
+
+
+                </div>
+
+
+                <strong id="previewBBI">
+
+                  -
+
+                </strong>
+
+
+              </div>
+
+
+            </div>
+
+
+
+            <div class="ng-summary-note">
+
+
+              <i class="fa-solid fa-shield-heart"></i>
+
+
+              <span>
+
+                Data yang disimpan akan digunakan
+                sistem untuk memperbarui perhitungan
+                personal Anda.
+
+              </span>
+
+
+            </div>
+
+
+          </div>
+
+
+        </aside>
+
+
+
+        <!-- =================================================
+             RIGHT FORM
+             ================================================= -->
+
+        <section class="ng-card ng-form-card ng-reveal">
+
+
+          <div class="ng-form-head">
+
+
+            <div class="ng-form-head-main">
+
+
+              <div class="ng-form-head-icon">
+
+                <i class="fa-solid fa-heart-pulse"></i>
+
+              </div>
+
+
+              <div>
+
+
+                <h2>
+                  Data Profil Pengguna
+                </h2>
+
+
+                <p>
+
+                  Perbarui data fisik dan tingkat
+                  aktivitas Anda.
+
+                </p>
+
+
+              </div>
+
+
+            </div>
+
+
+
+            <div class="ng-form-badge">
+
+              <i class="fa-solid fa-lock"></i>
+
+              Data Personal
+
+            </div>
+
+
+          </div>
+
+
+
+          <div class="ng-form-body">
+
+
+            <form
+              action="{{ url_for('profil') }}"
+              method="POST"
+              id="profileForm"
+            >
+
+
+              <!-- ===========================================
+                   ACCOUNT
+                   =========================================== -->
+
+              <section class="ng-form-section">
+
+
+                <div class="ng-form-section-head">
+
+
+                  <div class="ng-form-section-icon">
+
+                    <i class="fa-solid fa-id-card"></i>
+
+                  </div>
+
+
+                  <div>
+
+
+                    <h3>
+                      Informasi Akun
+                    </h3>
+
+
+                    <p>
+
+                      Informasi identitas akun Anda.
+
+                    </p>
+
+
+                  </div>
+
+
+                </div>
+
+
+
+                <div class="ng-account-grid">
+
+
+                  <div class="ng-readonly-card">
+
+
+                    <span>
+                      Nama Lengkap
+                    </span>
+
+
+                    <strong>
+
+                      {{ user[0] }}
+
+                    </strong>
+
+
+                  </div>
+
+
+
+                  <div class="ng-readonly-card">
+
+
+                    <span>
+                      Email Pengguna
+                    </span>
+
+
+                    <strong>
+
+                      {{ user[1] }}
+
+                    </strong>
+
+
+                  </div>
+
+
+                </div>
+
+
+              </section>
+
+
+
+              <!-- ===========================================
+                   PHYSICAL
+                   =========================================== -->
+
+              <section class="ng-form-section">
+
+
+                <div class="ng-form-section-head">
+
+
+                  <div class="ng-form-section-icon">
+
+                    <i class="fa-solid fa-ruler-combined"></i>
+
+                  </div>
+
+
+                  <div>
+
+
+                    <h3>
+                      Data Fisik
+                    </h3>
+
+
+                    <p>
+
+                      Digunakan dalam perhitungan
+                      IMT dan berat badan ideal.
+
+                    </p>
+
+
+                  </div>
+
+
+                </div>
+
+
+
+                <div class="ng-form-grid">
+
+
+                  <!-- WEIGHT -->
+
+                  <div class="ng-field ng-col-4">
+
+
+                    <label for="profileWeight">
+
+                      Berat Badan
+
+                    </label>
+
+
+                    <div class="ng-input-wrap">
+
+
+                      <div class="ng-input-icon">
+
+                        <i class="fa-solid fa-weight-scale"></i>
+
+                      </div>
+
+
+                      <input
+                        type="number"
+                        step="0.1"
+                        min="1"
+                        name="berat"
+                        id="profileWeight"
+                        class="ng-input"
+                        value="{{ user[3] }}"
+                        placeholder="Contoh: 60"
+                        required
+                      >
+
+
+                    </div>
+
+
+                    <div class="ng-field-hint">
+
+                      Masukkan berat badan dalam kilogram.
+
+                    </div>
+
+
+                  </div>
+
+
+
+                  <!-- HEIGHT -->
+
+                  <div class="ng-field ng-col-4">
+
+
+                    <label for="profileHeight">
+
+                      Tinggi Badan
+
+                    </label>
+
+
+                    <div class="ng-input-wrap">
+
+
+                      <div class="ng-input-icon">
+
+                        <i class="fa-solid fa-ruler-vertical"></i>
+
+                      </div>
+
+
+                      <input
+                        type="number"
+                        step="0.1"
+                        min="1"
+                        name="tinggi"
+                        id="profileHeight"
+                        class="ng-input"
+                        value="{{ user[4] }}"
+                        placeholder="Contoh: 170"
+                        required
+                      >
+
+
+                    </div>
+
+
+                    <div class="ng-field-hint">
+
+                      Masukkan tinggi badan dalam sentimeter.
+
+                    </div>
+
+
+                  </div>
+
+
+
+                  <!-- BIRTH DATE -->
+
+                  <div class="ng-field ng-col-4">
+
+
+                    <label for="profileBirthDate">
+
+                      Tanggal Lahir
+
+                    </label>
+
+
+                    <div class="ng-input-wrap">
+
+
+                      <div class="ng-input-icon">
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                      </div>
+
+
+                      <input
+                        type="date"
+                        name="tanggal_lahir"
+                        id="profileBirthDate"
+                        class="ng-input"
+                        value="{{ user[7] if user[7] else '' }}"
+                        required
+                      >
+
+
+                    </div>
+
+
+                    <div class="ng-field-hint">
+
+                      Usia dihitung otomatis dari tanggal lahir.
+
+                    </div>
+
+
+                  </div>
+
+
+                </div>
+
+
+              </section>
+
+
+
+              <!-- ===========================================
+                   PERSONAL PARAMETERS
+                   =========================================== -->
+
+              <section class="ng-form-section">
+
+
+                <div class="ng-form-section-head">
+
+
+                  <div class="ng-form-section-icon">
+
+                    <i class="fa-solid fa-sliders"></i>
+
+                  </div>
+
+
+                  <div>
+
+
+                    <h3>
+                      Parameter Personal
+                    </h3>
+
+
+                    <p>
+
+                      Pilih gender dan tingkat aktivitas
+                      yang sesuai.
+
+                    </p>
+
+
+                  </div>
+
+
+                </div>
+
+
+
+                <div class="ng-form-grid">
+
+
+                  <!-- GENDER -->
+
+                  <div class="ng-field ng-col-5">
+
+
+                    <label for="profileGender">
+
+                      Jenis Kelamin
+
+                    </label>
+
+
+                    <div class="ng-input-wrap">
+
+
+                      <div class="ng-input-icon">
+
+                        <i class="fa-solid fa-venus-mars"></i>
+
+                      </div>
+
+
+                      <select
+                        name="gender"
+                        id="profileGender"
+                        class="ng-select"
+                        required
+                      >
+
+
+                        <option
+                          value="L"
+                          {{ 'selected' if user[5] == 'L' else '' }}
+                        >
+
+                          Laki-laki
+
+                        </option>
+
+
+                        <option
+                          value="P"
+                          {{ 'selected' if user[5] == 'P' else '' }}
+                        >
+
+                          Perempuan
+
+                        </option>
+
+
+                      </select>
+
+
+                    </div>
+
+
+                  </div>
+
+
+
+                  <!-- ACTIVITY -->
+
+                  <div class="ng-field ng-col-7">
+
+
+                    <label for="profileActivity">
+
+                      Tingkat Aktivitas
+
+                    </label>
+
+
+                    <div class="ng-input-wrap">
+
+
+                      <div class="ng-input-icon">
+
+                        <i class="fa-solid fa-person-walking"></i>
+
+                      </div>
+
+
+                      <select
+                        name="aktivitas"
+                        id="profileActivity"
+                        class="ng-select"
+                        required
+                      >
+
+
+                        <option
+                          value="istirahat"
+                          {{ 'selected' if user[6] == 'istirahat' else '' }}
+                        >
+
+                          Istirahat (Sakit / Bed rest)
+
+                        </option>
+
+
+                        <option
+                          value="ringan"
+                          {{ 'selected' if user[6] == 'ringan' else '' }}
+                        >
+
+                          Ringan (Pegawai / IRT)
+
+                        </option>
+
+
+                        <option
+                          value="sedang"
+                          {{ 'selected' if user[6] == 'sedang' else '' }}
+                        >
+
+                          Sedang (Mahasiswa / Pekerja)
+
+                        </option>
+
+
+                        <option
+                          value="berat"
+                          {{ 'selected' if user[6] == 'berat' else '' }}
+                        >
+
+                          Berat (Buruh / Atlet)
+
+                        </option>
+
+
+                      </select>
+
+
+                    </div>
+
+
+                  </div>
+
+
+                </div>
+
+
+              </section>
+
+
+
+              <!-- ===========================================
+                   LIVE PREVIEW
+                   =========================================== -->
+
+              <div class="ng-live-preview">
+
+
+                <div class="ng-preview-head">
+
+
+                  <div>
+
+
+                    <h4>
+                      Preview Perhitungan
+                    </h4>
+
+
+                    <span>
+
+                      Diperbarui secara langsung dari
+                      form di atas.
+
+                    </span>
+
+
+                  </div>
+
+
+                  <i class="fa-solid fa-chart-line"></i>
+
+
+                </div>
+
+
+
+                <div class="ng-preview-grid">
+
+
+                  <div class="ng-preview-card">
+
+
+                    <span>
+                      Usia
+                    </span>
+
+
+                    <strong id="formPreviewAge">
+
+                      {{ user[2] }} tahun
+
+                    </strong>
+
+
+                  </div>
+
+
+
+                  <div class="ng-preview-card">
+
+
+                    <span>
+                      IMT
+                    </span>
+
+
+                    <strong id="formPreviewBMI">
+
+                      -
+
+                    </strong>
+
+
+                  </div>
+
+
+
+                  <div class="ng-preview-card">
+
+
+                    <span>
+                      BBI
+                    </span>
+
+
+                    <strong id="formPreviewBBI">
+
+                      -
+
+                    </strong>
+
+
+                  </div>
+
+
+                </div>
+
+
+              </div>
+
+
+
+              <!-- ===========================================
+                   NOTE
+                   =========================================== -->
+
+              <div class="ng-system-note">
+
+
+                <i class="fa-solid fa-stethoscope"></i>
+
+
+                <div>
+
+
+                  <strong>
+                    Catatan Sistem:
+                  </strong>
+
+
+                  setelah profil disimpan, sistem akan
+                  menghitung ulang usia, IMT, BBI,
+                  kebutuhan kalori, dan batas gula harian
+                  berdasarkan data profil terbaru.
+
+
+                </div>
+
+
+              </div>
+
+
+
+              <!-- ===========================================
+                   ACTION
+                   =========================================== -->
+
+              <div class="ng-form-actions">
+
+
+                <a
+                  href="{{ url_for('dashboard') }}"
+                  class="ng-btn ng-btn-secondary"
+                >
+
+                  <i class="fa-solid fa-arrow-left"></i>
+
+                  Batal
+
+                </a>
+
+
+                <button
+                  type="submit"
+                  class="ng-btn ng-btn-save"
+                  id="saveProfileButton"
+                >
+
+                  <i class="fa-solid fa-floppy-disk"></i>
+
+                  Simpan Profil
+
+                </button>
+
+
+              </div>
+
+
+            </form>
+
+
+          </div>
+
+
+        </section>
+
+
+      </div>
+
+
+
+      <!-- ===================================================
+           INFORMATION
+           =================================================== -->
+
+      <div class="ng-profile-info ng-reveal">
+
+
+        <article class="ng-info-card">
+
+
+          <div class="ng-info-icon">
+
+            <i class="fa-solid fa-calculator"></i>
+
+          </div>
+
+
+          <div>
+
+
+            <h4>
+              Perhitungan Otomatis
+            </h4>
+
+
+            <p>
+
+              Usia, IMT, dan BBI dapat dipreview
+              langsung sebelum profil disimpan.
+
+            </p>
+
+
+          </div>
+
+
+        </article>
+
+
+
+        <article class="ng-info-card">
+
+
+          <div class="ng-info-icon">
+
+            <i class="fa-solid fa-user-check"></i>
+
+          </div>
+
+
+          <div>
+
+
+            <h4>
+              Data Personal
+            </h4>
+
+
+            <p>
+
+              Berat, tinggi, gender, dan aktivitas
+              digunakan untuk menyesuaikan hasil sistem.
+
+            </p>
+
+
+          </div>
+
+
+        </article>
+
+
+
+        <article class="ng-info-card">
+
+
+          <div class="ng-info-icon">
+
+            <i class="fa-solid fa-rotate"></i>
+
+          </div>
+
+
+          <div>
+
+
+            <h4>
+              Perbarui Kapan Saja
+            </h4>
+
+
+            <p>
+
+              Profil dapat diperbarui apabila berat badan
+              atau pola aktivitas Anda berubah.
+
+            </p>
+
+
+          </div>
+
+
+        </article>
+
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+
+<script>
+  /* =========================================================
+     ELEMENTS
+     ========================================================= */
+
+  const profileWeight =
+    document.getElementById(
+      "profileWeight"
+    );
+
+
+  const profileHeight =
+    document.getElementById(
+      "profileHeight"
+    );
+
+
+  const profileBirthDate =
+    document.getElementById(
+      "profileBirthDate"
+    );
+
+
+  const profileGender =
+    document.getElementById(
+      "profileGender"
+    );
+
+
+  const profileForm =
+    document.getElementById(
+      "profileForm"
+    );
+
+
+  const saveProfileButton =
+    document.getElementById(
+      "saveProfileButton"
+    );
+
+
+
+  /* =========================================================
+     HELPERS
+     ========================================================= */
+
+  function setText(
+    id,
+    value
+  ) {
+
+    const element =
+      document.getElementById(
+        id
+      );
+
+
+    if (
+      element
+    ) {
+
+      element.textContent =
+        value;
+
+    }
+
+  }
+
+
+
+  function parseNumericValue(
+    value
+  ) {
+
+    const parsed =
+      Number.parseFloat(
+        value
+      );
+
+
+    if (
+      Number.isFinite(
+        parsed
+      )
+    ) {
+
+      return parsed;
+
+    }
+
+
+    return 0;
+
+  }
+
+
+
+  function formatNumber(
+    value,
+    digits = 2
+  ) {
+
+    const numericValue =
+      Number(
+        value
+      );
+
+
+    if (
+      !Number.isFinite(
+        numericValue
+      ) ||
+      numericValue <= 0
+    ) {
+
+      return "-";
+
+    }
+
+
+    return numericValue
+      .toFixed(
+        digits
+      )
+      .replace(
+        ".",
+        ","
+      );
+
+  }
+
+
+
+  /* =========================================================
+     AGE
+     Fungsi tetap mengikuti logika template lama.
+     ========================================================= */
+
+  function calculateAge(
+    birthDateValue
+  ) {
+
+    if (
+      !birthDateValue
+    ) {
+
+      return 0;
+
+    }
+
+
+    const birthDate =
+      new Date(
+        birthDateValue
+      );
+
+
+    if (
+      Number.isNaN(
+        birthDate.getTime()
+      )
+    ) {
+
+      return 0;
+
+    }
+
+
+    const today =
+      new Date();
+
+
+    let age =
+      today.getFullYear() -
+      birthDate.getFullYear();
+
+
+    const monthDifference =
+      today.getMonth() -
+      birthDate.getMonth();
+
+
+    if (
+      monthDifference < 0 ||
+      (
+        monthDifference === 0 &&
+        today.getDate() <
+          birthDate.getDate()
+      )
+    ) {
+
+      age--;
+
+    }
+
+
+    return age > 0
+      ? age
+      : 0;
+
+  }
+
+
+
+  /* =========================================================
+     BMI / IMT
+     ========================================================= */
+
+  function calculateBMI(
+    weight,
+    heightCm
+  ) {
+
+    if (
+      !weight ||
+      !heightCm
+    ) {
+
+      return 0;
+
+    }
+
+
+    const heightMeter =
+      heightCm /
+      100;
+
+
+    if (
+      heightMeter <= 0
+    ) {
+
+      return 0;
+
+    }
+
+
+    return (
+      weight /
+      (
+        heightMeter *
+        heightMeter
+      )
+    );
+
+  }
+
+
+
+  /* =========================================================
+     BBI
+     Logika dipertahankan dari template sebelumnya.
+     ========================================================= */
+
+  function calculateIdealWeight(
+    heightCm,
+    gender
+  ) {
+
+    if (
+      !heightCm
+    ) {
+
+      return 0;
+
+    }
+
+
+    const height =
+      Number(
+        heightCm
+      );
+
+
+    const threshold =
+      gender === "P"
+        ? 150
+        : 160;
+
+
+    if (
+      height <
+      threshold
+    ) {
+
+      return (
+        height -
+        100
+      );
+
+    }
+
+
+    return (
+      (
+        height -
+        100
+      ) *
+      0.9
+    );
+
+  }
+
+
+
+  /* =========================================================
+     PREVIEW
+     ========================================================= */
+
+  function updateProfilePreview() {
+
+    if (
+      !profileWeight ||
+      !profileHeight ||
+      !profileBirthDate ||
+      !profileGender
+    ) {
+
+      return;
+
+    }
+
+
+    const weight =
+      parseNumericValue(
+        profileWeight.value
+      );
+
+
+    const height =
+      parseNumericValue(
+        profileHeight.value
+      );
+
+
+    const gender =
+      profileGender.value;
+
+
+    const age =
+      calculateAge(
+        profileBirthDate.value
+      );
+
+
+    const bmi =
+      calculateBMI(
+        weight,
+        height
+      );
+
+
+    const idealWeight =
+      calculateIdealWeight(
+        height,
+        gender
+      );
+
+
+
+    /* AGE */
+
+    const ageText =
+      age > 0
+        ? age +
+          " tahun"
+        : "-";
+
+
+    setText(
+      "previewAge",
+      ageText
+    );
+
+
+    setText(
+      "formPreviewAge",
+      ageText
+    );
+
+
+    setText(
+      "heroAge",
+      age > 0
+        ? age
+        : "-"
+    );
+
+
+
+    /* BMI */
+
+    const bmiText =
+      bmi > 0
+        ? formatNumber(
+            bmi,
+            2
+          )
+        : "-";
+
+
+    setText(
+      "previewBMI",
+      bmiText
+    );
+
+
+    setText(
+      "formPreviewBMI",
+      bmiText
+    );
+
+
+    setText(
+      "heroBMI",
+      bmiText
+    );
+
+
+
+    /* BBI */
+
+    const idealWeightText =
+      idealWeight > 0
+        ? formatNumber(
+            idealWeight,
+            2
+          ) +
+          " kg"
+        : "-";
+
+
+    setText(
+      "previewBBI",
+      idealWeightText
+    );
+
+
+    setText(
+      "formPreviewBBI",
+      idealWeightText
+    );
+
+
+    setText(
+      "heroBBI",
+      idealWeightText
+    );
+
+  }
+
+
+
+  /* =========================================================
+     MAXIMUM BIRTH DATE
+     ========================================================= */
+
+  function setMaximumBirthDate() {
+
+    if (
+      !profileBirthDate
+    ) {
+
+      return;
+
+    }
+
+
+    const today =
+      new Date();
+
+
+    const year =
+      today
+        .getFullYear();
+
+
+    const month =
+      String(
+        today.getMonth() +
+        1
+      ).padStart(
+        2,
+        "0"
+      );
+
+
+    const day =
+      String(
+        today.getDate()
+      ).padStart(
+        2,
+        "0"
+      );
+
+
+    const maximumDate =
+      year +
+      "-" +
+      month +
+      "-" +
+      day;
+
+
+    profileBirthDate.setAttribute(
+      "max",
+      maximumDate
+    );
+
+  }
+
+
+
+  /* =========================================================
+     EVENTS
+     ========================================================= */
+
+  [
+    profileWeight,
+    profileHeight,
+    profileBirthDate,
+    profileGender
+  ].forEach(
+    function (
+      element
+    ) {
+
+      if (
+        !element
+      ) {
+
+        return;
+
+      }
+
+
+      element.addEventListener(
+        "input",
+        updateProfilePreview
+      );
+
+
+      element.addEventListener(
+        "change",
+        updateProfilePreview
+      );
+
+    }
+  );
+
+
+
+  /* =========================================================
+     FORM SUBMIT STATE
+     ========================================================= */
+
+  if (
+    profileForm &&
+    saveProfileButton
+  ) {
+
+    profileForm.addEventListener(
+      "submit",
+      function () {
+
+        saveProfileButton.disabled =
+          true;
+
+
+        saveProfileButton.innerHTML =
+          `
+            <span
+              class="
+                spinner-border
+                spinner-border-sm
+              "
+            ></span>
+
+            Menyimpan...
+          `;
+
+      }
+    );
+
+  }
+
+
+
+  /* =========================================================
+     REVEAL ANIMATION
+     ========================================================= */
+
+  function initializeReveal() {
+
+    const items =
+      document.querySelectorAll(
+        ".ng-reveal"
+      );
+
+
+    if (
+      !(
+        "IntersectionObserver"
+        in window
+      )
+    ) {
+
+      items.forEach(
+        function (
+          item
+        ) {
+
+          item.classList.add(
+            "visible"
+          );
+
+        }
+      );
+
+
+      return;
+
+    }
+
+
+    const observer =
+      new IntersectionObserver(
+        function (
+          entries,
+          activeObserver
+        ) {
+
+          entries.forEach(
+            function (
+              entry
+            ) {
+
+              if (
+                entry.isIntersecting
+              ) {
+
+                entry
+                  .target
+                  .classList
+                  .add(
+                    "visible"
+                  );
+
+
+                activeObserver
+                  .unobserve(
+                    entry.target
+                  );
+
+              }
+
+            }
+          );
+
+        },
+        {
+
+          threshold:
+            0.08,
+
+          rootMargin:
+            "0px 0px -25px 0px"
+
+        }
+      );
+
+
+    items.forEach(
+      function (
+        item
+      ) {
+
+        observer.observe(
+          item
+        );
+
+      }
+    );
+
+  }
+
+
+
+  /* =========================================================
+     INITIALIZE
+     ========================================================= */
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+      setMaximumBirthDate();
+
+      updateProfilePreview();
+
+      initializeReveal();
+
+    }
+  );
+</script>
+
+{% endblock %}

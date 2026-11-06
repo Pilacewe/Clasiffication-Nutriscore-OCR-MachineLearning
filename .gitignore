@@ -1,0 +1,17 @@
+# File Rahasia
+.env
+
+# Virtual Environment & Cache
+.venv/
+__pycache__/
+*/__pycache__/
+.vscode/
+
+# Folder Dataset & Model (SANGAT BERAT, JANGAN DI-UPLOAD)
+dataset/
+dataset_citra_200/
+model/
+notebooks/
+
+# File Laporan Output
+*.xlsx

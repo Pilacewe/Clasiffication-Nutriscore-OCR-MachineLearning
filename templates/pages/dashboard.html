@@ -1,0 +1,5723 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+Dashboard - Nutri-Guard
+{% endblock %}
+
+{% block content %}
+
+<style>
+  /* =========================================================
+     NUTRI-GUARD DASHBOARD
+     ========================================================= */
+
+  :root {
+    --ng-lime: #caff3d;
+    --ng-lime-2: #bdf65b;
+    --ng-lime-soft: #efffc2;
+    --ng-lime-soft-2: #f7ffe5;
+
+    --ng-green: #10b981;
+    --ng-green-dark: #047857;
+    --ng-green-soft: #ecfdf5;
+
+    --ng-dark: #080c16;
+    --ng-dark-2: #111722;
+
+    --ng-text: #111827;
+    --ng-muted: #64748b;
+    --ng-muted-light: #94a3b8;
+
+    --ng-white: #ffffff;
+    --ng-page: #f7f9f8;
+    --ng-soft: #f8faf9;
+    --ng-border: #e5ebe8;
+
+    --ng-danger: #dc2626;
+    --ng-warning: #d97706;
+    --ng-blue: #2563eb;
+
+    /*
+     * HERO DAN CONTENT MENGGUNAKAN
+     * LEBAR MAKSIMUM YANG SAMA.
+     */
+    --ng-frame: 1510px;
+  }
+
+
+  /* =========================================================
+     GLOBAL
+     ========================================================= */
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .nutriguard-dashboard,
+  .nutriguard-dashboard * {
+    box-sizing: border-box;
+  }
+
+  .nutriguard-dashboard {
+    width: 100vw;
+    max-width: 100vw;
+
+    position: relative;
+
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+
+    overflow-x: hidden;
+
+    color: var(--ng-text);
+
+    background:
+      linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #f7f9f8 42%,
+        #f7f9f8 82%,
+        #ffffff 100%
+      );
+
+    padding-bottom: 80px;
+  }
+
+
+  /* =========================================================
+     PAGE SHELL
+
+     INI BAGIAN PENTING.
+
+     Hero dan isi dashboard menggunakan shell
+     dengan padding kanan-kiri yang sama.
+     ========================================================= */
+
+  .ng-page-shell {
+    width: 100%;
+
+    padding-left:
+      clamp(
+        20px,
+        3vw,
+        54px
+      );
+
+    padding-right:
+      clamp(
+        20px,
+        3vw,
+        54px
+      );
+  }
+
+  .ng-page-frame {
+    width: 100%;
+    max-width: var(--ng-frame);
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  /* =========================================================
+     BUTTON
+     ========================================================= */
+
+  .ng-btn {
+    min-height: 47px;
+
+    padding:
+      0
+      19px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    border:
+      1px solid transparent;
+
+    border-radius: 13px;
+
+    text-decoration: none;
+
+    font-size: 0.75rem;
+    font-weight: 900;
+
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .ng-btn:hover {
+    text-decoration: none;
+
+    transform:
+      translateY(-2px);
+  }
+
+  .ng-btn-dark {
+    color: #ffffff;
+
+    background: var(--ng-dark);
+
+    box-shadow:
+      0 16px 28px -18px
+      rgba(8, 12, 22, 0.8);
+  }
+
+  .ng-btn-dark:hover {
+    color: #ffffff;
+
+    background: #171d29;
+  }
+
+  .ng-btn-white {
+    color: #111827;
+
+    background: #ffffff;
+
+    border-color:
+      rgba(15, 23, 42, 0.1);
+  }
+
+  .ng-btn-white:hover {
+    color: var(--ng-green-dark);
+
+    border-color:
+      rgba(16, 185, 129, 0.3);
+  }
+
+
+  /* =========================================================
+     HERO
+     ========================================================= */
+
+  .ng-hero-shell {
+    padding-top: 28px;
+  }
+
+  .ng-hero {
+    min-height: 365px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+      48px
+      clamp(
+        36px,
+        4.7vw,
+        70px
+      );
+
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1.08fr)
+      minmax(380px, 0.92fr);
+
+    align-items: center;
+
+    gap: 48px;
+
+    border-radius: 34px;
+
+    background:
+      radial-gradient(
+        circle at 88% 0%,
+        rgba(255, 255, 255, 0.48),
+        transparent 29%
+      ),
+      linear-gradient(
+        125deg,
+        #ccff42 0%,
+        #bdf65b 52%,
+        #a6e978 100%
+      );
+  }
+
+  .ng-hero::before {
+    content: "";
+
+    width: 390px;
+    height: 390px;
+
+    position: absolute;
+
+    right: -135px;
+    top: -220px;
+
+    border-radius: 50%;
+
+    background:
+      rgba(255, 255, 255, 0.18);
+  }
+
+  .ng-hero::after {
+    content: "";
+
+    width: 250px;
+    height: 250px;
+
+    position: absolute;
+
+    left: 46%;
+    bottom: -195px;
+
+    border-radius: 50%;
+
+    border:
+      1px solid
+      rgba(15, 23, 42, 0.08);
+  }
+
+
+  /* =========================================================
+     HERO COPY
+     ========================================================= */
+
+  .ng-hero-copy {
+    position: relative;
+
+    z-index: 4;
+  }
+
+  .ng-hero-overline {
+    margin-bottom: 15px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #3f6212;
+
+    font-size: 0.68rem;
+
+    font-weight: 950;
+
+    letter-spacing: 0.055em;
+  }
+
+  .ng-hero-title {
+    max-width: 710px;
+
+    margin:
+      0
+      0
+      17px;
+
+    color: #080c16;
+
+    font-size:
+      clamp(
+        3rem,
+        4.5vw,
+        4.9rem
+      );
+
+    line-height: 0.94;
+
+    letter-spacing: -4px;
+
+    font-weight: 950;
+  }
+
+  .ng-hero-star {
+    display: inline-block;
+
+    margin-left: 3px;
+
+    font-size: 0.46em;
+
+    transform:
+      translateY(-14px);
+  }
+
+  .ng-hero-description {
+    max-width: 610px;
+
+    margin:
+      0
+      0
+      23px;
+
+    color:
+      rgba(15, 23, 42, 0.72);
+
+    font-size: 0.87rem;
+
+    line-height: 1.7;
+  }
+
+  .ng-hero-actions {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+  }
+
+
+  /* =========================================================
+     HERO VISUAL
+     ========================================================= */
+
+  .ng-hero-visual {
+    min-height: 270px;
+
+    position: relative;
+
+    z-index: 4;
+  }
+
+  .ng-hero-card {
+    width: 365px;
+
+    max-width: 100%;
+
+    position: absolute;
+
+    right: 0;
+    top: 50%;
+
+    transform:
+      translateY(-50%)
+      rotate(1.5deg);
+
+    padding: 21px;
+
+    overflow: hidden;
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.92);
+
+    border-radius: 26px;
+
+    background: #ffffff;
+
+    box-shadow:
+      0 35px 70px -35px
+      rgba(15, 23, 42, 0.55);
+  }
+
+  .ng-hero-card::before {
+    content: "";
+
+    width: 135px;
+    height: 135px;
+
+    position: absolute;
+
+    right: -55px;
+    top: -60px;
+
+    border-radius: 50%;
+
+    background:
+      rgba(202, 255, 61, 0.25);
+  }
+
+  .ng-hero-card-head {
+    position: relative;
+
+    z-index: 2;
+
+    margin-bottom: 18px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+  }
+
+  .ng-hero-card-head strong {
+    color: #111827;
+
+    font-size: 0.72rem;
+
+    font-weight: 950;
+  }
+
+  .ng-live {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding:
+      5px
+      8px;
+
+    border-radius: 999px;
+
+    color: #047857;
+
+    background: #ecfdf5;
+
+    font-size: 0.48rem;
+
+    font-weight: 900;
+  }
+
+  .ng-live::before {
+    content: "";
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #10b981;
+  }
+
+  .ng-hero-card-main {
+    position: relative;
+
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      105px;
+
+    align-items: center;
+
+    gap: 17px;
+  }
+
+  .ng-hero-card-label {
+    color: #94a3b8;
+
+    font-size: 0.52rem;
+
+    font-weight: 750;
+  }
+
+  .ng-hero-card-value {
+    margin-top: 4px;
+
+    color: #111827;
+
+    font-size: 2.3rem;
+
+    line-height: 1;
+
+    letter-spacing: -1.7px;
+
+    font-weight: 950;
+  }
+
+  .ng-hero-card-value small {
+    margin-left: 3px;
+
+    color: #94a3b8;
+
+    font-size: 0.66rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0;
+  }
+
+
+  /* =========================================================
+     HERO RING
+     ========================================================= */
+
+  .ng-ring {
+    --ring-angle: 0deg;
+
+    width: 100px;
+    height: 100px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+      conic-gradient(
+        #111827
+        var(--ring-angle),
+
+        #edf1ef
+        0deg
+      );
+  }
+
+  .ng-ring::before {
+    content: "";
+
+    width: 76px;
+    height: 76px;
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+  }
+
+  .ng-ring-content {
+    position: relative;
+
+    z-index: 2;
+
+    text-align: center;
+  }
+
+  .ng-ring-content strong {
+    display: block;
+
+    color: #111827;
+
+    font-size: 1rem;
+
+    font-weight: 950;
+  }
+
+  .ng-ring-content span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #94a3b8;
+
+    font-size: 0.42rem;
+  }
+
+  .ng-hero-progress {
+    height: 6px;
+
+    margin-top: 18px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: #edf1ef;
+  }
+
+  .ng-hero-progress-fill {
+    width: 0%;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+      linear-gradient(
+        90deg,
+        #10b981,
+        #caff3d
+      );
+
+    transition:
+      width 0.45s ease;
+  }
+
+  .ng-hero-card-footer {
+    margin-top: 15px;
+
+    display: grid;
+
+    grid-template-columns:
+      1fr
+      1fr;
+
+    gap: 8px;
+  }
+
+  .ng-hero-mini-stat {
+    padding:
+      10px
+      11px;
+
+    border-radius: 12px;
+
+    background: #f7f9f8;
+  }
+
+  .ng-hero-mini-stat span {
+    display: block;
+
+    color: #94a3b8;
+
+    font-size: 0.45rem;
+  }
+
+  .ng-hero-mini-stat strong {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #111827;
+
+    font-size: 0.62rem;
+
+    font-weight: 900;
+  }
+
+  .ng-floating-history {
+    width: 150px;
+
+    position: absolute;
+
+    left: -8px;
+    bottom: -3px;
+
+    z-index: 7;
+
+    padding:
+      12px
+      13px;
+
+    border-radius: 16px;
+
+    background: #080c16;
+
+    transform:
+      rotate(-4deg);
+
+    box-shadow:
+      0 25px 50px -30px
+      rgba(15, 23, 42, 0.72);
+  }
+
+  .ng-floating-history span {
+    display: block;
+
+    color:
+      rgba(255, 255, 255, 0.45);
+
+    font-size: 0.46rem;
+  }
+
+  .ng-floating-history strong {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 4px;
+
+    color: #ffffff;
+
+    font-size: 0.62rem;
+
+    font-weight: 900;
+  }
+
+  .ng-floating-history i {
+    color: var(--ng-lime);
+  }
+
+
+  /* =========================================================
+     MAIN CONTENT
+
+     CONTENT SEKARANG OTOMATIS SEJAJAR HERO.
+     ========================================================= */
+
+  .ng-main-content {
+    padding-top: 36px;
+  }
+
+  .ng-section {
+    margin-top: 38px;
+  }
+
+  .ng-section:first-child {
+    margin-top: 0;
+  }
+
+  .ng-section-head {
+    margin-bottom: 17px;
+  }
+
+  .ng-section-head h2 {
+    margin:
+      0
+      0
+      5px;
+
+    color: #111827;
+
+    font-size: 1.3rem;
+
+    font-weight: 950;
+
+    letter-spacing: -0.65px;
+  }
+
+  .ng-section-head p {
+    max-width: 650px;
+
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 0.7rem;
+
+    line-height: 1.55;
+  }
+
+
+  /* =========================================================
+     PROFILE
+
+     Agar tidak terasa sangat melebar,
+     card diberi struktur yang lebih padat.
+     ========================================================= */
+
+  .ng-profile-grid {
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        4,
+        minmax(
+          0,
+          1fr
+        )
+      );
+
+    gap: 14px;
+  }
+
+  .ng-profile-card {
+    min-height: 170px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 20px;
+
+    border:
+      1px solid var(--ng-border);
+
+    border-radius: 21px;
+
+    background: #ffffff;
+
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .ng-profile-card:hover {
+    transform:
+      translateY(-3px);
+
+    box-shadow:
+      0 23px 45px -36px
+      rgba(15, 23, 42, 0.48);
+  }
+
+  .ng-profile-card::after {
+    content: "";
+
+    width: 90px;
+    height: 90px;
+
+    position: absolute;
+
+    right: -37px;
+    top: -38px;
+
+    border-radius: 50%;
+
+    background:
+      rgba(202, 255, 61, 0.14);
+  }
+
+  .ng-profile-icon {
+    width: 40px;
+    height: 40px;
+
+    position: relative;
+
+    z-index: 2;
+
+    margin-bottom: 18px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    color: #365314;
+
+    background: #efffc4;
+
+    font-size: 0.78rem;
+  }
+
+  .ng-profile-label {
+    color: #64748b;
+
+    font-size: 0.67rem;
+
+    font-weight: 750;
+  }
+
+  .ng-profile-value {
+    margin-top: 5px;
+
+    color: #111827;
+
+    font-size: 1.55rem;
+
+    line-height: 1.1;
+
+    font-weight: 950;
+
+    letter-spacing: -0.9px;
+  }
+
+  .ng-profile-unit {
+    color: #94a3b8;
+
+    font-size: 0.68rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0;
+  }
+
+  .ng-profile-note {
+    margin:
+      5px
+      0
+      0;
+
+    color: #94a3b8;
+
+    font-size: 0.58rem;
+
+    line-height: 1.45;
+  }
+
+  .ng-bmi-badge {
+    margin-top: 8px;
+
+    display: inline-flex;
+
+    padding:
+      5px
+      8px;
+
+    border-radius: 999px;
+
+    color: #047857;
+
+    background: #ecfdf5;
+
+    font-size: 0.51rem;
+
+    font-weight: 900;
+  }
+
+
+  /* =========================================================
+     TODAY GRID
+     ========================================================= */
+
+  .ng-today-grid {
+    display: grid;
+
+    grid-template-columns:
+      minmax(
+        0,
+        1.35fr
+      )
+      minmax(
+        315px,
+        0.65fr
+      );
+
+    gap: 16px;
+
+    align-items: stretch;
+  }
+
+
+  /* =========================================================
+     SUGAR CARD
+     ========================================================= */
+
+  .ng-sugar-card {
+    min-height: 300px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 29px;
+
+    border:
+      1px solid
+      rgba(132, 204, 22, 0.19);
+
+    border-radius: 25px;
+
+    background:
+      radial-gradient(
+        circle at 92% 8%,
+        rgba(255, 255, 255, 0.94),
+        transparent 30%
+      ),
+      linear-gradient(
+        135deg,
+        #efffbd 0%,
+        #f8ffe7 52%,
+        #ecfaf3 100%
+      );
+  }
+
+  .ng-sugar-card::before {
+    content: "";
+
+    width: 230px;
+    height: 230px;
+
+    position: absolute;
+
+    right: -85px;
+    top: -105px;
+
+    border-radius: 50%;
+
+    border:
+      1px solid
+      rgba(15, 23, 42, 0.07);
+  }
+
+  .ng-sugar-card::after {
+    content: "";
+
+    width: 145px;
+    height: 145px;
+
+    position: absolute;
+
+    right: 65px;
+    bottom: -110px;
+
+    border-radius: 50%;
+
+    background:
+      rgba(202, 255, 61, 0.23);
+  }
+
+  .ng-sugar-content {
+    position: relative;
+
+    z-index: 3;
+  }
+
+  .ng-sugar-head {
+    margin-bottom: 27px;
+
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+  }
+
+  .ng-sugar-head h3 {
+    margin:
+      0
+      0
+      5px;
+
+    color: #111827;
+
+    font-size: 1rem;
+
+    font-weight: 950;
+
+    letter-spacing: -0.3px;
+  }
+
+  .ng-sugar-head p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 0.63rem;
+  }
+
+  .ng-sugar-status {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding:
+      7px
+      10px;
+
+    border-radius: 999px;
+
+    color: #047857;
+
+    background:
+      rgba(255, 255, 255, 0.8);
+
+    border:
+      1px solid
+      rgba(16, 185, 129, 0.14);
+
+    font-size: 0.54rem;
+
+    font-weight: 900;
+  }
+
+  .ng-sugar-status.warning {
+    color: #b45309;
+
+    background: #fffbeb;
+
+    border-color: #fde68a;
+  }
+
+  .ng-sugar-status.danger {
+    color: #b91c1c;
+
+    background: #fef2f2;
+
+    border-color: #fecaca;
+  }
+
+
+  /* =========================================================
+     SUGAR BODY
+     ========================================================= */
+
+  .ng-sugar-body {
+    display: grid;
+
+    grid-template-columns:
+      minmax(
+        0,
+        1fr
+      )
+      270px;
+
+    align-items: center;
+
+    gap: 32px;
+  }
+
+  .ng-sugar-value-row {
+    display: flex;
+
+    align-items: flex-end;
+
+    gap: 7px;
+  }
+
+  .ng-sugar-value {
+    color: #111827;
+
+    font-size: 3.6rem;
+
+    line-height: 0.92;
+
+    font-weight: 950;
+
+    letter-spacing: -2.4px;
+  }
+
+  .ng-sugar-value-unit {
+    padding-bottom: 7px;
+
+    color: #64748b;
+
+    font-size: 0.77rem;
+
+    font-weight: 800;
+  }
+
+  .ng-sugar-limit {
+    margin-top: 9px;
+
+    color: #64748b;
+
+    font-size: 0.63rem;
+  }
+
+  .ng-sugar-limit strong {
+    color: #111827;
+
+    font-weight: 950;
+  }
+
+
+  /* =========================================================
+     SUGAR METRIC
+     ========================================================= */
+
+  .ng-sugar-metrics {
+    display: grid;
+
+    grid-template-columns:
+      1fr
+      1fr;
+
+    gap: 9px;
+  }
+
+  .ng-sugar-metric {
+    min-height: 74px;
+
+    padding:
+      12px
+      13px;
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.9);
+
+    border-radius: 15px;
+
+    background:
+      rgba(255, 255, 255, 0.64);
+  }
+
+  .ng-sugar-metric span {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 0.53rem;
+
+    font-weight: 700;
+  }
+
+  .ng-sugar-metric strong {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #111827;
+
+    font-size: 0.78rem;
+
+    font-weight: 950;
+  }
+
+  .ng-sugar-progress {
+    height: 8px;
+
+    margin-top: 25px;
+
+    overflow: hidden;
+
+    border:
+      1px solid
+      rgba(15, 23, 42, 0.05);
+
+    border-radius: 999px;
+
+    background:
+      rgba(255, 255, 255, 0.88);
+  }
+
+  .ng-sugar-progress-fill {
+    width: 0%;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+      linear-gradient(
+        90deg,
+        #111827,
+        #10b981
+      );
+
+    transition:
+      width 0.45s ease;
+  }
+
+  .ng-progress-labels {
+    margin-top: 8px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    color: #64748b;
+
+    font-size: 0.51rem;
+  }
+
+  .ng-progress-labels strong {
+    color: #111827;
+  }
+
+
+  /* =========================================================
+     GENERIC PANEL
+     ========================================================= */
+
+  .ng-panel {
+    overflow: hidden;
+
+    border:
+      1px solid var(--ng-border);
+
+    border-radius: 24px;
+
+    background: #ffffff;
+
+    box-shadow:
+      0 22px 55px -48px
+      rgba(15, 23, 42, 0.38);
+  }
+
+  .ng-panel-body {
+    padding: 24px;
+  }
+
+  .ng-panel-title {
+    margin:
+      0
+      0
+      5px;
+
+    color: #111827;
+
+    font-size: 0.9rem;
+
+    font-weight: 950;
+  }
+
+  .ng-panel-description {
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 0.59rem;
+
+    line-height: 1.5;
+  }
+
+
+  /* =========================================================
+     SUMMARY
+     ========================================================= */
+
+  .ng-summary-list {
+    margin-top: 19px;
+
+    display: grid;
+
+    gap: 9px;
+  }
+
+  .ng-summary-item {
+    min-height: 50px;
+
+    padding:
+      10px
+      12px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 11px;
+
+    border-radius: 13px;
+
+    background: #f8faf9;
+  }
+
+  .ng-summary-left {
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+  }
+
+  .ng-summary-icon {
+    width: 31px;
+    height: 31px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    color: #047857;
+
+    background: #ecfdf5;
+
+    font-size: 0.59rem;
+  }
+
+  .ng-summary-item:nth-child(2)
+  .ng-summary-icon {
+    color: #b45309;
+
+    background: #fffbeb;
+  }
+
+  .ng-summary-item:nth-child(3)
+  .ng-summary-icon {
+    color: #2563eb;
+
+    background: #eff6ff;
+  }
+
+  .ng-summary-item:nth-child(4)
+  .ng-summary-icon {
+    color: #4d7c0f;
+
+    background: #f7fee7;
+  }
+
+  .ng-summary-label {
+    color: #64748b;
+
+    font-size: 0.59rem;
+
+    font-weight: 750;
+  }
+
+  .ng-summary-value {
+    flex-shrink: 0;
+
+    color: #111827;
+
+    font-size: 0.7rem;
+
+    font-weight: 950;
+  }
+
+
+  /* =========================================================
+     QUICK ACTIONS
+     ========================================================= */
+
+  .ng-quick-actions {
+    margin-top: 10px;
+
+    display: grid;
+
+    grid-template-columns:
+      1fr
+      1fr;
+
+    gap: 8px;
+  }
+
+  .ng-quick-action {
+    min-height: 54px;
+
+    padding: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    border:
+      1px solid #e7ece9;
+
+    border-radius: 13px;
+
+    color: #111827;
+
+    background: #ffffff;
+
+    text-decoration: none;
+
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .ng-quick-action:hover {
+    color: #111827;
+
+    transform:
+      translateY(-2px);
+
+    border-color:
+      rgba(16, 185, 129, 0.3);
+  }
+
+  .ng-quick-icon {
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    color: #17200d;
+
+    background: var(--ng-lime);
+
+    font-size: 0.56rem;
+  }
+
+  .ng-quick-action strong {
+    font-size: 0.56rem;
+
+    font-weight: 900;
+  }
+
+
+  /* =========================================================
+     ANALYTICS
+     ========================================================= */
+
+  .ng-analytics-grid {
+    display: grid;
+
+    grid-template-columns:
+      minmax(
+        0,
+        1.35fr
+      )
+      minmax(
+        315px,
+        0.65fr
+      );
+
+    gap: 16px;
+  }
+
+  .ng-chart-head {
+    padding:
+      22px
+      24px
+      0;
+
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+  }
+
+  .ng-chart-head h3 {
+    margin:
+      0
+      0
+      5px;
+
+    color: #111827;
+
+    font-size: 0.9rem;
+
+    font-weight: 950;
+  }
+
+  .ng-chart-head p {
+    max-width: 500px;
+
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 0.58rem;
+
+    line-height: 1.5;
+  }
+
+  .ng-chart-stat {
+    flex-shrink: 0;
+
+    text-align: right;
+  }
+
+  .ng-chart-stat span {
+    display: block;
+
+    color: #94a3b8;
+
+    font-size: 0.5rem;
+  }
+
+  .ng-chart-stat strong {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #111827;
+
+    font-size: 0.8rem;
+
+    font-weight: 950;
+  }
+
+  .ng-chart-area {
+    height: 310px;
+
+    position: relative;
+
+    padding:
+      17px
+      20px
+      23px;
+  }
+
+  .ng-donut-area {
+    height: 310px;
+
+    position: relative;
+
+    padding:
+      22px;
+  }
+
+
+  /* =========================================================
+     HISTORY
+     ========================================================= */
+
+  .ng-history-head {
+    padding:
+      22px
+      24px;
+
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    border-bottom:
+      1px solid #edf1ef;
+  }
+
+  .ng-history-head h3 {
+    margin:
+      0
+      0
+      5px;
+
+    color: #111827;
+
+    font-size: 0.9rem;
+
+    font-weight: 950;
+  }
+
+  .ng-history-head p {
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 0.58rem;
+  }
+
+  .ng-see-all {
+    min-height: 36px;
+
+    padding:
+      0
+      12px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    flex-shrink: 0;
+
+    border:
+      1px solid #e2e8e5;
+
+    border-radius: 10px;
+
+    color: #111827;
+
+    background: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 0.55rem;
+
+    font-weight: 900;
+  }
+
+  .ng-see-all:hover {
+    color: #047857;
+
+    border-color:
+      rgba(16, 185, 129, 0.3);
+  }
+
+  .ng-history-scroll {
+    width: 100%;
+
+    overflow-x: auto;
+  }
+
+  .ng-history-table {
+    width: 100%;
+
+    margin: 0;
+
+    border-collapse: collapse;
+  }
+
+  .ng-history-table th {
+    padding:
+      12px
+      15px;
+
+    background: #fafcfb;
+
+    border-bottom:
+      1px solid #edf1ef;
+
+    color: #94a3b8;
+
+    text-align: left;
+
+    font-size: 0.5rem;
+
+    font-weight: 950;
+
+    letter-spacing: 0.045em;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+  }
+
+  .ng-history-table td {
+    padding:
+      14px
+      15px;
+
+    border-bottom:
+      1px solid #f0f3f1;
+
+    color: #475569;
+
+    font-size: 0.6rem;
+
+    vertical-align: middle;
+  }
+
+  .ng-history-table tbody
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  .ng-history-table tbody tr {
+    transition:
+      background 0.15s ease;
+  }
+
+  .ng-history-table tbody
+  tr:hover {
+    background: #fbfdfc;
+  }
+
+  .ng-product-name {
+    max-width: 205px;
+
+    overflow: hidden;
+
+    color: #111827;
+
+    font-size: 0.65rem;
+
+    font-weight: 900;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+  }
+
+  .ng-product-meta {
+    margin-top: 3px;
+
+    color: #94a3b8;
+
+    font-size: 0.48rem;
+  }
+
+
+  /* =========================================================
+     GRADE
+     ========================================================= */
+
+  .ng-grade {
+    width: 31px;
+    height: 31px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    color: #ffffff;
+
+    font-size: 0.6rem;
+
+    font-weight: 950;
+  }
+
+  .grade-a {
+    background: #038141;
+  }
+
+  .grade-b {
+    background: #85bb2f;
+  }
+
+  .grade-c {
+    color: #5b4500;
+
+    background: #fecb02;
+  }
+
+  .grade-d {
+    background: #ee8100;
+  }
+
+  .grade-e {
+    background: #e63e11;
+  }
+
+  .grade-- {
+    background: #94a3b8;
+  }
+
+
+  /* =========================================================
+     HISTORY STATUS
+     ========================================================= */
+
+  .ng-history-status {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding:
+      6px
+      8px;
+
+    border-radius: 999px;
+
+    font-size: 0.49rem;
+
+    font-weight: 900;
+
+    white-space: nowrap;
+  }
+
+  .ng-history-status.consumed {
+    color: #047857;
+
+    background: #ecfdf5;
+  }
+
+  .ng-history-status.saved {
+    color: #b45309;
+
+    background: #fffbeb;
+  }
+
+  .ng-consume-btn {
+    min-height: 30px;
+
+    padding:
+      0
+      10px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    color: #17200d;
+
+    background: var(--ng-lime);
+
+    font-size: 0.5rem;
+
+    font-weight: 900;
+
+    transition:
+      transform 0.15s ease,
+      background 0.15s ease;
+  }
+
+  .ng-consume-btn:hover {
+    transform:
+      translateY(-1px);
+
+    background: #d7ff6d;
+  }
+
+  .ng-consume-btn:disabled {
+    opacity: 0.6;
+
+    transform: none;
+  }
+
+  .ng-done {
+    color: #94a3b8;
+
+    font-size: 0.5rem;
+
+    font-weight: 750;
+  }
+
+
+  /* =========================================================
+     INFO
+     ========================================================= */
+
+  .ng-info-strip {
+    margin-top: 14px;
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        3,
+        1fr
+      );
+
+    gap: 12px;
+  }
+
+  .ng-info-card {
+    min-height: 128px;
+
+    padding: 18px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 13px;
+
+    border:
+      1px solid var(--ng-border);
+
+    border-radius: 18px;
+
+    background: #ffffff;
+  }
+
+  .ng-info-icon {
+    width: 37px;
+    height: 37px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    color: #365314;
+
+    background: var(--ng-lime-soft);
+
+    font-size: 0.67rem;
+  }
+
+  .ng-info-card:nth-child(2)
+  .ng-info-icon {
+    color: #047857;
+
+    background: #ecfdf5;
+  }
+
+  .ng-info-card:nth-child(3)
+  .ng-info-icon {
+    color: #111827;
+
+    background: #f1f5f3;
+  }
+
+  .ng-info-card h4 {
+    margin:
+      1px
+      0
+      5px;
+
+    color: #111827;
+
+    font-size: 0.66rem;
+
+    font-weight: 950;
+  }
+
+  .ng-info-card p {
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 0.54rem;
+
+    line-height: 1.5;
+  }
+
+
+  /* =========================================================
+     EMPTY
+     ========================================================= */
+
+  .ng-empty {
+    padding:
+      48px
+      20px;
+
+    text-align: center;
+  }
+
+  .ng-empty-icon {
+    width: 50px;
+    height: 50px;
+
+    margin:
+      0
+      auto
+      11px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    color: #94a3b8;
+
+    background: #f1f5f3;
+  }
+
+  .ng-empty h4 {
+    margin:
+      0
+      0
+      5px;
+
+    color: #111827;
+
+    font-size: 0.7rem;
+
+    font-weight: 900;
+  }
+
+  .ng-empty p {
+    margin:
+      0
+      0
+      15px;
+
+    color: #94a3b8;
+
+    font-size: 0.55rem;
+  }
+
+
+  /* =========================================================
+     REVEAL
+     ========================================================= */
+
+  .ng-reveal {
+    opacity: 0;
+
+    transform:
+      translateY(20px);
+
+    transition:
+      opacity 0.55s ease,
+      transform 0.55s ease;
+  }
+
+  .ng-reveal.visible {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+
+  /* =========================================================
+     RESPONSIVE 1100
+     ========================================================= */
+
+  @media (max-width: 1100px) {
+
+    .ng-hero {
+      grid-template-columns:
+        minmax(0, 1fr)
+        minmax(330px, 0.75fr);
+
+      gap: 35px;
+    }
+
+    .ng-profile-grid {
+      grid-template-columns:
+        repeat(
+          2,
+          1fr
+        );
+    }
+
+    .ng-today-grid,
+    .ng-analytics-grid {
+      grid-template-columns:
+        minmax(0, 1.2fr)
+        minmax(290px, 0.8fr);
+    }
+
+  }
+
+
+  /* =========================================================
+     TABLET
+     ========================================================= */
+
+  @media (max-width: 950px) {
+
+    .ng-page-shell {
+      padding-left: 19px;
+      padding-right: 19px;
+    }
+
+    .ng-hero-shell {
+      padding-top: 20px;
+    }
+
+    .ng-hero {
+      min-height: auto;
+
+      grid-template-columns: 1fr;
+
+      gap: 35px;
+
+      padding:
+        44px
+        38px
+        36px;
+    }
+
+    .ng-hero-copy {
+      max-width: 760px;
+    }
+
+    .ng-hero-visual {
+      width: 550px;
+
+      max-width: 100%;
+
+      min-height: 285px;
+
+      margin:
+        0
+        auto;
+    }
+
+    .ng-hero-card {
+      right: 18px;
+    }
+
+    .ng-today-grid,
+    .ng-analytics-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .ng-sugar-body {
+      grid-template-columns:
+        minmax(0, 1fr)
+        280px;
+    }
+
+  }
+
+
+  /* =========================================================
+     MOBILE
+     ========================================================= */
+
+  @media (max-width: 680px) {
+
+    .nutriguard-dashboard {
+      padding-bottom: 52px;
+    }
+
+    .ng-page-shell {
+      padding-left: 13px;
+      padding-right: 13px;
+    }
+
+    .ng-hero-shell {
+      padding-top: 13px;
+    }
+
+    .ng-hero {
+      padding:
+        37px
+        22px
+        28px;
+
+      border-radius: 27px;
+    }
+
+    .ng-hero-title {
+      font-size:
+        clamp(
+          2.85rem,
+          14vw,
+          4rem
+        );
+
+      letter-spacing: -3px;
+    }
+
+    .ng-hero-description {
+      font-size: 0.81rem;
+    }
+
+    .ng-hero-actions {
+      width: 100%;
+
+      display: grid;
+
+      grid-template-columns: 1fr;
+    }
+
+    .ng-btn {
+      width: 100%;
+    }
+
+    .ng-hero-visual {
+      min-height: 300px;
+    }
+
+    .ng-hero-card {
+      width:
+        calc(100% - 13px);
+
+      right: 0;
+    }
+
+    .ng-floating-history {
+      left: 0;
+      bottom: 0;
+    }
+
+    .ng-main-content {
+      padding-top: 27px;
+    }
+
+    .ng-section {
+      margin-top: 31px;
+    }
+
+    .ng-profile-grid {
+      grid-template-columns:
+        1fr
+        1fr;
+
+      gap: 9px;
+    }
+
+    .ng-profile-card {
+      min-height: 155px;
+
+      padding: 16px;
+    }
+
+    .ng-profile-icon {
+      margin-bottom: 14px;
+    }
+
+    .ng-profile-value {
+      font-size: 1.2rem;
+    }
+
+    .ng-sugar-card {
+      padding: 22px;
+    }
+
+    .ng-sugar-head {
+      flex-direction: column;
+
+      gap: 12px;
+    }
+
+    .ng-sugar-body {
+      grid-template-columns: 1fr;
+
+      gap: 20px;
+    }
+
+    .ng-sugar-value {
+      font-size: 2.9rem;
+    }
+
+    .ng-sugar-metrics {
+      max-width: 430px;
+    }
+
+    .ng-chart-head {
+      flex-direction: column;
+
+      gap: 10px;
+    }
+
+    .ng-chart-stat {
+      text-align: left;
+    }
+
+    .ng-chart-area,
+    .ng-donut-area {
+      height: 275px;
+    }
+
+    .ng-history-head {
+      flex-direction: column;
+    }
+
+    .ng-history-scroll {
+      overflow: visible;
+    }
+
+
+    /* =======================================================
+       HISTORY -> CARD MOBILE
+       ======================================================= */
+
+    .ng-history-table,
+    .ng-history-table tbody,
+    .ng-history-table tr,
+    .ng-history-table td {
+      display: block;
+
+      width: 100%;
+    }
+
+    .ng-history-table thead {
+      display: none;
+    }
+
+    .ng-history-table tbody {
+      padding: 10px;
+    }
+
+    .ng-history-table tbody tr {
+      margin-bottom: 9px;
+
+      padding: 14px;
+
+      border:
+        1px solid var(--ng-border);
+
+      border-radius: 16px;
+
+      background: #ffffff;
+    }
+
+    .ng-history-table tbody
+    tr:last-child {
+      margin-bottom: 0;
+    }
+
+    .ng-history-table td {
+      min-height: 34px;
+
+      padding:
+        6px
+        0;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 18px;
+
+      border-bottom:
+        1px solid #eff2f0;
+    }
+
+    .ng-history-table td:last-child {
+      border-bottom: none;
+    }
+
+    .ng-history-table td::before {
+      content:
+        attr(data-label);
+
+      color: #94a3b8;
+
+      font-size: 0.46rem;
+
+      font-weight: 900;
+
+      text-transform: uppercase;
+    }
+
+    .ng-history-table td:first-child {
+      display: block;
+
+      margin-bottom: 5px;
+
+      padding-bottom: 12px;
+    }
+
+    .ng-history-table td:first-child::before {
+      display: none;
+    }
+
+    .ng-product-name {
+      max-width: none;
+
+      font-size: 0.67rem;
+    }
+
+    .ng-info-strip {
+      grid-template-columns: 1fr;
+    }
+
+  }
+
+
+  /* =========================================================
+     SMALL PHONE
+     ========================================================= */
+
+  @media (max-width: 440px) {
+
+    .ng-profile-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .ng-profile-card {
+      min-height: 130px;
+    }
+
+    .ng-hero-card-main {
+      grid-template-columns:
+        1fr
+        88px;
+    }
+
+    .ng-ring {
+      width: 84px;
+      height: 84px;
+    }
+
+    .ng-ring::before {
+      width: 64px;
+      height: 64px;
+    }
+
+    .ng-hero-card-value {
+      font-size: 2rem;
+    }
+
+    .ng-sugar-metrics {
+      grid-template-columns: 1fr;
+    }
+
+    .ng-quick-actions {
+      grid-template-columns: 1fr;
+    }
+
+  }
+
+
+  /* =========================================================
+     REDUCED MOTION
+     ========================================================= */
+
+  @media (
+    prefers-reduced-motion:
+    reduce
+  ) {
+
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration:
+        0.01ms !important;
+
+      animation-iteration-count:
+        1 !important;
+
+      transition-duration:
+        0.01ms !important;
+    }
+
+    .ng-reveal {
+      opacity: 1;
+
+      transform: none;
+    }
+
+  }
+</style>
+
+
+
+<!-- =========================================================
+     BACKEND DATA
+     ========================================================= -->
+
+<div
+  id="ngDashboardData"
+  hidden
+  data-grade-counts='{{ grade_counts|tojson|forceescape }}'
+  data-trend-labels='{{ trend_labels|tojson|forceescape }}'
+  data-trend-values='{{ trend_values|tojson|forceescape }}'
+  data-today-sugar="{{ today_sugar|default(0, true) }}"
+  data-sugar-limit="{{ batas_gula|default(0, true) }}"
+></div>
+
+
+
+<div class="nutriguard-dashboard">
+
+
+  <!-- =======================================================
+       HERO
+       ======================================================= -->
+
+  <div class="ng-page-shell ng-hero-shell">
+
+
+    <div class="ng-page-frame">
+
+
+      <section class="ng-hero">
+
+
+        <!-- LEFT -->
+
+        <div class="ng-hero-copy">
+
+
+          <div class="ng-hero-overline">
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            DASHBOARD PEMANTAUAN
+
+          </div>
+
+
+          <h1 class="ng-hero-title">
+
+            Pantau Gizi
+            <br>
+
+            Lebih Terarah
+
+            <span class="ng-hero-star">
+              ✦
+            </span>
+
+          </h1>
+
+
+          <p class="ng-hero-description">
+
+            Lihat profil kesehatan, batas gula personal,
+            tren konsumsi, kualitas Nutri-Score, dan produk
+            yang telah dianalisis dalam satu dashboard.
+
+          </p>
+
+
+          <div class="ng-hero-actions">
+
+
+            <a
+              href="{{ url_for('scan_page') }}"
+              class="ng-btn ng-btn-dark"
+            >
+
+              <i class="fa-solid fa-camera-viewfinder"></i>
+
+              Pindai Label Gizi
+
+            </a>
+
+
+            <a
+              href="{{ url_for('riwayat') }}"
+              class="ng-btn ng-btn-white"
+            >
+
+              <i class="fa-solid fa-clock-rotate-left"></i>
+
+              Lihat Riwayat
+
+            </a>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- RIGHT -->
+
+        <div class="ng-hero-visual">
+
+
+          <div class="ng-hero-card">
+
+
+            <div class="ng-hero-card-head">
+
+
+              <strong>
+                Ringkasan Hari Ini
+              </strong>
+
+
+              <span class="ng-live">
+                Live
+              </span>
+
+
+            </div>
+
+
+
+            <div class="ng-hero-card-main">
+
+
+              <div>
+
+
+                <div class="ng-hero-card-label">
+
+                  Konsumsi gula
+
+                </div>
+
+
+                <div class="ng-hero-card-value">
+
+
+                  <span
+                    id="heroSugarValue"
+                    style="
+                      color:inherit;
+                      font:inherit;
+                    "
+                  >
+
+                    {{ today_sugar|default('0', true) }}
+
+                  </span>
+
+
+                  <small>
+                    g
+                  </small>
+
+
+                </div>
+
+
+              </div>
+
+
+
+              <div
+                class="ng-ring"
+                id="heroSugarRing"
+              >
+
+
+                <div class="ng-ring-content">
+
+
+                  <strong id="heroSugarPercent">
+
+                    0%
+
+                  </strong>
+
+
+                  <span>
+
+                    digunakan
+
+                  </span>
+
+
+                </div>
+
+
+              </div>
+
+
+            </div>
+
+
+
+            <div class="ng-hero-progress">
+
+
+              <div
+                class="ng-hero-progress-fill"
+                id="heroSugarProgress"
+              ></div>
+
+
+            </div>
+
+
+
+            <div class="ng-hero-card-footer">
+
+
+              <div class="ng-hero-mini-stat">
+
+
+                <span>
+                  Batas personal
+                </span>
+
+
+                <strong>
+
+                  <span
+                    id="heroSugarLimit"
+                    style="
+                      color:inherit;
+                      font:inherit;
+                    "
+                  >
+
+                    {{ batas_gula|default('0', true) }}
+
+                  </span>
+
+                  g
+
+                </strong>
+
+
+              </div>
+
+
+
+              <div class="ng-hero-mini-stat">
+
+
+                <span>
+                  Sisa hari ini
+                </span>
+
+
+                <strong id="heroRemainingSugar">
+
+                  0 g
+
+                </strong>
+
+
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+
+
+          <div class="ng-floating-history">
+
+
+            <span>
+              Total pemindaian
+            </span>
+
+
+            <strong>
+
+              <i class="fa-solid fa-folder-open"></i>
+
+              {{ history|length }} Produk
+
+            </strong>
+
+
+          </div>
+
+
+        </div>
+
+
+      </section>
+
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- =======================================================
+       SEMUA KONTEN BAWAH HERO
+
+       Menggunakan shell dan frame yang sama dengan hero.
+       ======================================================= -->
+
+  <div class="ng-page-shell ng-main-content">
+
+
+    <div class="ng-page-frame">
+
+
+      <!-- ===================================================
+           PROFILE
+           =================================================== -->
+
+      <section class="ng-section ng-reveal">
+
+
+        <div class="ng-section-head">
+
+
+          <h2>
+            Profil & Batas Personal
+          </h2>
+
+
+          <p>
+
+            Ringkasan data personal yang digunakan sistem
+            untuk membantu proses pemantauan.
+
+          </p>
+
+
+        </div>
+
+
+
+        <div class="ng-profile-grid">
+
+
+          <article class="ng-profile-card">
+
+
+            <div class="ng-profile-icon">
+
+              <i class="fa-solid fa-user-check"></i>
+
+            </div>
+
+
+            <div class="ng-profile-label">
+
+              Indeks Massa Tubuh
+
+            </div>
+
+
+            <div class="ng-profile-value">
+
+              {{ bmi|default('0.0', true) }}
+
+            </div>
+
+
+            <p class="ng-profile-note">
+
+              Status gizi pengguna
+
+            </p>
+
+
+            <span class="ng-bmi-badge">
+
+              {{ bmi_status|default('Tidak diketahui', true) }}
+
+            </span>
+
+
+          </article>
+
+
+
+          <article class="ng-profile-card">
+
+
+            <div class="ng-profile-icon">
+
+              <i class="fa-solid fa-weight-scale"></i>
+
+            </div>
+
+
+            <div class="ng-profile-label">
+
+              Berat Badan Ideal
+
+            </div>
+
+
+            <div class="ng-profile-value">
+
+              {{ bbi|default('0', true) }}
+
+              <span class="ng-profile-unit">
+                kg
+              </span>
+
+            </div>
+
+
+            <p class="ng-profile-note">
+
+              Hasil perhitungan BBI
+
+            </p>
+
+
+          </article>
+
+
+
+          <article class="ng-profile-card">
+
+
+            <div class="ng-profile-icon">
+
+              <i class="fa-solid fa-fire-flame-curved"></i>
+
+            </div>
+
+
+            <div class="ng-profile-label">
+
+              Kebutuhan Energi
+
+            </div>
+
+
+            <div class="ng-profile-value">
+
+              {{ bmr_limit|default('0', true) }}
+
+              <span class="ng-profile-unit">
+                kkal
+              </span>
+
+            </div>
+
+
+            <p class="ng-profile-note">
+
+              Estimasi kebutuhan energi harian
+
+            </p>
+
+
+          </article>
+
+
+
+          <article class="ng-profile-card">
+
+
+            <div class="ng-profile-icon">
+
+              <i class="fa-solid fa-cubes-stacked"></i>
+
+            </div>
+
+
+            <div class="ng-profile-label">
+
+              Batas Gula Harian
+
+            </div>
+
+
+            <div class="ng-profile-value">
+
+              {{ batas_gula|default('0', true) }}
+
+              <span class="ng-profile-unit">
+                g
+              </span>
+
+            </div>
+
+
+            <p class="ng-profile-note">
+
+              Acuan pemantauan konsumsi
+
+            </p>
+
+
+          </article>
+
+
+        </div>
+
+
+      </section>
+
+
+
+      <!-- ===================================================
+           TODAY
+           =================================================== -->
+
+      <section class="ng-section ng-reveal">
+
+
+        <div class="ng-section-head">
+
+
+          <h2>
+            Pemantauan Hari Ini
+          </h2>
+
+
+          <p>
+
+            Ringkasan konsumsi berdasarkan produk
+            yang telah ditandai sebagai dikonsumsi.
+
+          </p>
+
+
+        </div>
+
+
+
+        <div class="ng-today-grid">
+
+
+          <!-- SUGAR -->
+
+          <article class="ng-sugar-card">
+
+
+            <div class="ng-sugar-content">
+
+
+              <div class="ng-sugar-head">
+
+
+                <div>
+
+
+                  <h3>
+                    Konsumsi Gula Hari Ini
+                  </h3>
+
+
+                  <p>
+
+                    Dibandingkan dengan batas gula personal.
+
+                  </p>
+
+
+                </div>
+
+
+
+                <div
+                  class="ng-sugar-status"
+                  id="sugarStatusBadge"
+                >
+
+
+                  <i class="fa-solid fa-shield-heart"></i>
+
+
+                  <span id="sugarStatusText">
+
+                    Belum ada data
+
+                  </span>
+
+
+                </div>
+
+
+              </div>
+
+
+
+              <div class="ng-sugar-body">
+
+
+                <div>
+
+
+                  <div class="ng-sugar-value-row">
+
+
+                    <span
+                      class="ng-sugar-value"
+                      id="todaySugarText"
+                    >
+
+                      {{ today_sugar|default('0', true) }}
+
+                    </span>
+
+
+                    <span class="ng-sugar-value-unit">
+
+                      gram
+
+                    </span>
+
+
+                  </div>
+
+
+                  <div class="ng-sugar-limit">
+
+                    dari batas
+
+                    <strong id="sugarLimitText">
+
+                      {{ batas_gula|default('0', true) }}
+
+                    </strong>
+
+                    g per hari
+
+                  </div>
+
+
+                </div>
+
+
+
+                <div class="ng-sugar-metrics">
+
+
+                  <div class="ng-sugar-metric">
+
+
+                    <span>
+                      Terpakai
+                    </span>
+
+
+                    <strong id="usedSugarText">
+                      0%
+                    </strong>
+
+
+                  </div>
+
+
+
+                  <div class="ng-sugar-metric">
+
+
+                    <span>
+                      Sisa
+                    </span>
+
+
+                    <strong id="remainingSugarText">
+                      0 g
+                    </strong>
+
+
+                  </div>
+
+
+
+                  <div class="ng-sugar-metric">
+
+
+                    <span>
+                      Rata-rata
+                    </span>
+
+
+                    <strong id="averageSugarText">
+                      0 g
+                    </strong>
+
+
+                  </div>
+
+
+
+                  <div class="ng-sugar-metric">
+
+
+                    <span>
+                      Periode
+                    </span>
+
+
+                    <strong>
+                      7 Hari
+                    </strong>
+
+
+                  </div>
+
+
+                </div>
+
+
+              </div>
+
+
+
+              <div class="ng-sugar-progress">
+
+
+                <div
+                  class="ng-sugar-progress-fill"
+                  id="sugarProgress"
+                ></div>
+
+
+              </div>
+
+
+
+              <div class="ng-progress-labels">
+
+
+                <span>
+                  0 g
+                </span>
+
+
+                <span>
+
+                  Batas
+
+                  <strong id="progressSugarLimit">
+
+                    {{ batas_gula|default('0', true) }}
+
+                  </strong>
+
+                  g
+
+                </span>
+
+
+              </div>
+
+
+            </div>
+
+
+          </article>
+
+
+
+          <!-- SUMMARY -->
+
+          <article class="ng-panel">
+
+
+            <div class="ng-panel-body">
+
+
+              <h3 class="ng-panel-title">
+
+                Ringkasan Pemantauan
+
+              </h3>
+
+
+              <p class="ng-panel-description">
+
+                Statistik singkat dari konsumsi
+                dan hasil pemindaian Anda.
+
+              </p>
+
+
+
+              <div class="ng-summary-list">
+
+
+                <div class="ng-summary-item">
+
+
+                  <div class="ng-summary-left">
+
+
+                    <div class="ng-summary-icon">
+
+                      <i class="fa-solid fa-camera"></i>
+
+                    </div>
+
+
+                    <span class="ng-summary-label">
+
+                      Total pemindaian
+
+                    </span>
+
+
+                  </div>
+
+
+                  <strong class="ng-summary-value">
+
+                    {{ history|length }}
+
+                  </strong>
+
+
+                </div>
+
+
+
+                <div class="ng-summary-item">
+
+
+                  <div class="ng-summary-left">
+
+
+                    <div class="ng-summary-icon">
+
+                      <i class="fa-solid fa-fire"></i>
+
+                    </div>
+
+
+                    <span class="ng-summary-label">
+
+                      Kalori hari ini
+
+                    </span>
+
+
+                  </div>
+
+
+                  <strong class="ng-summary-value">
+
+                    {{ today_cals|default('0', true) }}
+                    kkal
+
+                  </strong>
+
+
+                </div>
+
+
+
+                <div class="ng-summary-item">
+
+
+                  <div class="ng-summary-left">
+
+
+                    <div class="ng-summary-icon">
+
+                      <i class="fa-solid fa-droplet"></i>
+
+                    </div>
+
+
+                    <span class="ng-summary-label">
+
+                      Natrium hari ini
+
+                    </span>
+
+
+                  </div>
+
+
+                  <strong class="ng-summary-value">
+
+                    {{ today_salt|default('0', true) }}
+                    mg
+
+                  </strong>
+
+
+                </div>
+
+
+
+                <div class="ng-summary-item">
+
+
+                  <div class="ng-summary-left">
+
+
+                    <div class="ng-summary-icon">
+
+                      <i class="fa-solid fa-chart-line"></i>
+
+                    </div>
+
+
+                    <span class="ng-summary-label">
+
+                      Rata-rata gula
+
+                    </span>
+
+
+                  </div>
+
+
+                  <strong
+                    class="ng-summary-value"
+                    id="summaryAverageSugar"
+                  >
+
+                    0 g
+
+                  </strong>
+
+
+                </div>
+
+
+              </div>
+
+
+
+              <div class="ng-quick-actions">
+
+
+                <a
+                  href="{{ url_for('scan_page') }}"
+                  class="ng-quick-action"
+                >
+
+
+                  <div class="ng-quick-icon">
+
+                    <i class="fa-solid fa-camera"></i>
+
+                  </div>
+
+
+                  <strong>
+                    Scan Baru
+                  </strong>
+
+
+                </a>
+
+
+
+                <a
+                  href="{{ url_for('riwayat') }}"
+                  class="ng-quick-action"
+                >
+
+
+                  <div class="ng-quick-icon">
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+
+                  </div>
+
+
+                  <strong>
+                    Riwayat
+                  </strong>
+
+
+                </a>
+
+
+              </div>
+
+
+            </div>
+
+
+          </article>
+
+
+        </div>
+
+
+      </section>
+
+
+
+      <!-- ===================================================
+           ANALYTICS
+           =================================================== -->
+
+      <section class="ng-section ng-reveal">
+
+
+        <div class="ng-section-head">
+
+
+          <h2>
+            Analitik Konsumsi
+          </h2>
+
+
+          <p>
+
+            Visualisasi pola konsumsi gula serta
+            distribusi kualitas Nutri-Score.
+
+          </p>
+
+
+        </div>
+
+
+
+        <div class="ng-analytics-grid">
+
+
+          <!-- TREND -->
+
+          <article class="ng-panel">
+
+
+            <div class="ng-chart-head">
+
+
+              <div>
+
+
+                <h3>
+                  Tren Gula 7 Hari
+                </h3>
+
+
+                <p>
+
+                  Total gula dari produk yang dikonsumsi
+                  selama tujuh hari terakhir.
+
+                </p>
+
+
+              </div>
+
+
+
+              <div class="ng-chart-stat">
+
+
+                <span>
+                  Rata-rata
+                </span>
+
+
+                <strong id="chartAverageSugar">
+
+                  0 g
+
+                </strong>
+
+
+              </div>
+
+
+            </div>
+
+
+
+            <div class="ng-chart-area">
+
+              <canvas id="sugarTrendChart"></canvas>
+
+            </div>
+
+
+          </article>
+
+
+
+          <!-- NUTRI SCORE -->
+
+          <article class="ng-panel">
+
+
+            <div class="ng-chart-head">
+
+
+              <div>
+
+
+                <h3>
+                  Distribusi Nutri-Score
+                </h3>
+
+
+                <p>
+
+                  Sebaran grade A sampai E
+                  dari hasil analisis produk.
+
+                </p>
+
+
+              </div>
+
+
+            </div>
+
+
+
+            <div class="ng-donut-area">
+
+              <canvas id="nutriScoreChart"></canvas>
+
+            </div>
+
+
+          </article>
+
+
+        </div>
+
+
+      </section>
+
+
+
+      <!-- ===================================================
+           HISTORY
+           =================================================== -->
+
+      <section class="ng-section ng-reveal">
+
+
+        <div class="ng-section-head">
+
+
+          <h2>
+            Aktivitas Terbaru
+          </h2>
+
+
+          <p>
+
+            Produk yang terakhir dianalisis
+            menggunakan Nutri-Guard.
+
+          </p>
+
+
+        </div>
+
+
+
+        <article class="ng-panel">
+
+
+          <div class="ng-history-head">
+
+
+            <div>
+
+
+              <h3>
+                Riwayat Pemindaian
+              </h3>
+
+
+              <p>
+
+                Produk makanan dan minuman
+                yang telah dianalisis.
+
+              </p>
+
+
+            </div>
+
+
+
+            <a
+              href="{{ url_for('riwayat') }}"
+              class="ng-see-all"
+            >
+
+              Lihat Semua
+
+              <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+
+          </div>
+
+
+
+          {% if history %}
+
+
+          <div class="ng-history-scroll">
+
+
+            <table class="ng-history-table">
+
+
+              <thead>
+
+                <tr>
+
+                  <th>Produk</th>
+                  <th>Tanggal</th>
+                  <th>Gula</th>
+                  <th>Kalori</th>
+                  <th>Grade</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
+
+                </tr>
+
+              </thead>
+
+
+
+              <tbody>
+
+
+                {% for item in history %}
+
+                {% set scan_id = item[0] %}
+                {% set nama_produk = item[1] %}
+                {% set grade = item[2]|default('-', true)|string|upper %}
+                {% set kalori = item[3]|default('0', true) %}
+                {% set is_consumed = item[4] %}
+                {% set tanggal = item[5] %}
+                {% set gula = item[6]|default('0', true) %}
+                {% set grade_class = grade|string|lower %}
+
+
+                <tr>
+
+
+                  <td data-label="Produk">
+
+
+                    <div class="ng-product-name">
+
+                      {{ nama_produk|default('Produk kemasan', true) }}
+
+                    </div>
+
+
+                    <div class="ng-product-meta">
+
+                      Hasil pemindaian label gizi
+
+                    </div>
+
+
+                  </td>
+
+
+
+                  <td data-label="Tanggal">
+
+
+                    {% if tanggal %}
+
+                      {{ tanggal.strftime('%d %b %Y, %H:%M')
+                         if tanggal.strftime is defined
+                         else tanggal }}
+
+                    {% else %}
+
+                      -
+
+                    {% endif %}
+
+
+                  </td>
+
+
+
+                  <td data-label="Gula">
+
+                    {{ gula }} g
+
+                  </td>
+
+
+
+                  <td data-label="Kalori">
+
+                    {{ kalori }} kkal
+
+                  </td>
+
+
+
+                  <td data-label="Grade">
+
+
+                    <span
+                      class="
+                        ng-grade
+                        grade-{{ grade_class }}
+                      "
+                    >
+
+                      {{ grade }}
+
+                    </span>
+
+
+                  </td>
+
+
+
+                  <td data-label="Status">
+
+
+                    {% if is_consumed == 1 %}
+
+
+                    <span
+                      class="
+                        ng-history-status
+                        consumed
+                      "
+                    >
+
+                      <i class="fa-solid fa-circle-check"></i>
+
+                      Dikonsumsi
+
+                    </span>
+
+
+                    {% else %}
+
+
+                    <span
+                      class="
+                        ng-history-status
+                        saved
+                      "
+                    >
+
+                      <i class="fa-solid fa-bookmark"></i>
+
+                      Tersimpan
+
+                    </span>
+
+
+                    {% endif %}
+
+
+                  </td>
+
+
+
+                  <td data-label="Aksi">
+
+
+                    {% if is_consumed == 0 %}
+
+
+                    <button
+                      type="button"
+                      class="ng-consume-btn"
+                      data-scan-id="{{ scan_id }}"
+                      onclick="consumeProduct(this)"
+                    >
+
+                      Konsumsi
+
+                    </button>
+
+
+                    {% else %}
+
+
+                    <span class="ng-done">
+
+                      <i class="fa-solid fa-check me-1"></i>
+
+                      Selesai
+
+                    </span>
+
+
+                    {% endif %}
+
+
+                  </td>
+
+
+                </tr>
+
+
+                {% endfor %}
+
+
+              </tbody>
+
+
+            </table>
+
+
+          </div>
+
+
+          {% else %}
+
+
+          <div class="ng-empty">
+
+
+            <div class="ng-empty-icon">
+
+              <i class="fa-regular fa-folder-open"></i>
+
+            </div>
+
+
+            <h4>
+              Belum ada hasil pemindaian
+            </h4>
+
+
+            <p>
+
+              Pindai label gizi untuk mulai
+              menampilkan riwayat.
+
+            </p>
+
+
+            <a
+              href="{{ url_for('scan_page') }}"
+              class="ng-btn ng-btn-dark"
+            >
+
+              <i class="fa-solid fa-camera"></i>
+
+              Mulai Pindai
+
+            </a>
+
+
+          </div>
+
+
+          {% endif %}
+
+
+        </article>
+
+
+
+        <!-- ===============================================
+             INFO
+             =============================================== -->
+
+        <div class="ng-info-strip">
+
+
+          <article class="ng-info-card">
+
+
+            <div class="ng-info-icon">
+
+              <i class="fa-solid fa-scale-balanced"></i>
+
+            </div>
+
+
+            <div>
+
+
+              <h4>
+                Profil Personal
+              </h4>
+
+
+              <p>
+
+                IMT, BBI, kebutuhan energi, dan batas gula
+                berasal dari data profil pengguna.
+
+              </p>
+
+
+            </div>
+
+
+          </article>
+
+
+
+          <article class="ng-info-card">
+
+
+            <div class="ng-info-icon">
+
+              <i class="fa-solid fa-ranking-star"></i>
+
+            </div>
+
+
+            <div>
+
+
+              <h4>
+                Nutri-Score
+              </h4>
+
+
+              <p>
+
+                Grade A hingga E digunakan untuk
+                menampilkan klasifikasi kualitas gizi produk.
+
+              </p>
+
+
+            </div>
+
+
+          </article>
+
+
+
+          <article class="ng-info-card">
+
+
+            <div class="ng-info-icon">
+
+              <i class="fa-solid fa-circle-info"></i>
+
+            </div>
+
+
+            <div>
+
+
+              <h4>
+                Informasi Pendukung
+              </h4>
+
+
+              <p>
+
+                Hasil sistem digunakan sebagai informasi
+                pendukung dan bukan diagnosis medis.
+
+              </p>
+
+
+            </div>
+
+
+          </article>
+
+
+        </div>
+
+
+      </section>
+
+
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script>
+  /* =========================================================
+     DATA
+     ========================================================= */
+
+  const dashboardDataElement =
+    document.getElementById(
+      "ngDashboardData"
+    );
+
+
+  function readJsonData(
+    key,
+    fallback
+  ) {
+
+    if (
+      !dashboardDataElement
+    ) {
+
+      return fallback;
+
+    }
+
+
+    try {
+
+      const rawValue =
+        dashboardDataElement
+          .dataset[key];
+
+
+      if (
+        !rawValue
+      ) {
+
+        return fallback;
+
+      }
+
+
+      return JSON.parse(
+        rawValue
+      );
+
+    } catch (
+      error
+    ) {
+
+      console.warn(
+        "Dashboard data parse error:",
+        key,
+        error
+      );
+
+
+      return fallback;
+
+    }
+
+  }
+
+
+
+  function toNumber(
+    value
+  ) {
+
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) {
+
+      return 0;
+
+    }
+
+
+    const parsed =
+      Number(
+        String(
+          value
+        ).replace(
+          ",",
+          "."
+        )
+      );
+
+
+    return Number.isFinite(
+      parsed
+    )
+      ? parsed
+      : 0;
+
+  }
+
+
+
+  function displayNumber(
+    value,
+    decimal = 2
+  ) {
+
+    return Number(
+      toNumber(
+        value
+      ).toFixed(
+        decimal
+      )
+    ).toString();
+
+  }
+
+
+
+  function setText(
+    id,
+    value
+  ) {
+
+    const target =
+      document.getElementById(
+        id
+      );
+
+
+    if (
+      target
+    ) {
+
+      target.textContent =
+        value;
+
+    }
+
+  }
+
+
+
+  /* =========================================================
+     SERVER DATA
+     ========================================================= */
+
+  const gradeCounts =
+    readJsonData(
+      "gradeCounts",
+      {
+        A: 0,
+        B: 0,
+        C: 0,
+        D: 0,
+        E: 0
+      }
+    );
+
+
+  const trendLabelsRaw =
+    readJsonData(
+      "trendLabels",
+      []
+    );
+
+
+  const trendValuesRaw =
+    readJsonData(
+      "trendValues",
+      []
+    );
+
+
+  const todaySugar =
+    toNumber(
+      dashboardDataElement
+        ? dashboardDataElement
+            .dataset
+            .todaySugar
+        : 0
+    );
+
+
+  const sugarLimit =
+    toNumber(
+      dashboardDataElement
+        ? dashboardDataElement
+            .dataset
+            .sugarLimit
+        : 0
+    );
+
+
+
+  /* =========================================================
+     NUTRI SCORE DATA
+     ========================================================= */
+
+  const nutriLabels = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+  ];
+
+
+  const nutriValues =
+    nutriLabels.map(
+      function (
+        grade
+      ) {
+
+        return toNumber(
+          gradeCounts[
+            grade
+          ]
+        );
+
+      }
+    );
+
+
+  const nutriTotal =
+    nutriValues.reduce(
+      function (
+        total,
+        value
+      ) {
+
+        return (
+          total +
+          value
+        );
+
+      },
+      0
+    );
+
+
+
+  /* =========================================================
+     TREND DATA
+     ========================================================= */
+
+  const fallbackTrendLabels = [
+    "Hari 1",
+    "Hari 2",
+    "Hari 3",
+    "Hari 4",
+    "Hari 5",
+    "Hari 6",
+    "Hari 7"
+  ];
+
+
+  const fallbackTrendValues = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ];
+
+
+  const trendLabels =
+    Array.isArray(
+      trendLabelsRaw
+    ) &&
+    trendLabelsRaw.length
+      ? trendLabelsRaw
+      : fallbackTrendLabels;
+
+
+  const trendValues =
+    Array.isArray(
+      trendValuesRaw
+    ) &&
+    trendValuesRaw.length
+      ? trendValuesRaw.map(
+          toNumber
+        )
+      : fallbackTrendValues;
+
+
+
+  /* =========================================================
+     SUGAR CALCULATION
+     ========================================================= */
+
+  const remainingSugar =
+    Math.max(
+      sugarLimit -
+      todaySugar,
+      0
+    );
+
+
+  let sugarPercentage =
+    0;
+
+
+  if (
+    sugarLimit > 0
+  ) {
+
+    sugarPercentage =
+      Math.min(
+        (
+          todaySugar /
+          sugarLimit
+        ) *
+        100,
+        100
+      );
+
+  }
+
+
+
+  const totalTrend =
+    trendValues.reduce(
+      function (
+        total,
+        value
+      ) {
+
+        return (
+          total +
+          toNumber(
+            value
+          )
+        );
+
+      },
+      0
+    );
+
+
+  const averageSugar =
+    trendValues.length
+      ? totalTrend /
+        trendValues.length
+      : 0;
+
+
+
+  /* =========================================================
+     UPDATE UI
+     ========================================================= */
+
+  setText(
+    "heroSugarValue",
+    displayNumber(
+      todaySugar
+    )
+  );
+
+
+  setText(
+    "heroSugarLimit",
+    displayNumber(
+      sugarLimit
+    )
+  );
+
+
+  setText(
+    "heroSugarPercent",
+    Math.round(
+      sugarPercentage
+    ) +
+    "%"
+  );
+
+
+  setText(
+    "heroRemainingSugar",
+    displayNumber(
+      remainingSugar
+    ) +
+    " g"
+  );
+
+
+  setText(
+    "todaySugarText",
+    displayNumber(
+      todaySugar
+    )
+  );
+
+
+  setText(
+    "sugarLimitText",
+    displayNumber(
+      sugarLimit
+    )
+  );
+
+
+  setText(
+    "progressSugarLimit",
+    displayNumber(
+      sugarLimit
+    )
+  );
+
+
+  setText(
+    "usedSugarText",
+    Math.round(
+      sugarPercentage
+    ) +
+    "%"
+  );
+
+
+  setText(
+    "remainingSugarText",
+    displayNumber(
+      remainingSugar
+    ) +
+    " g"
+  );
+
+
+  setText(
+    "averageSugarText",
+    displayNumber(
+      averageSugar
+    ) +
+    " g"
+  );
+
+
+  setText(
+    "summaryAverageSugar",
+    displayNumber(
+      averageSugar
+    ) +
+    " g"
+  );
+
+
+  setText(
+    "chartAverageSugar",
+    displayNumber(
+      averageSugar
+    ) +
+    " g"
+  );
+
+
+
+  /* =========================================================
+     PROGRESS
+     ========================================================= */
+
+  const heroSugarProgress =
+    document.getElementById(
+      "heroSugarProgress"
+    );
+
+
+  const sugarProgress =
+    document.getElementById(
+      "sugarProgress"
+    );
+
+
+  const heroSugarRing =
+    document.getElementById(
+      "heroSugarRing"
+    );
+
+
+  if (
+    heroSugarProgress
+  ) {
+
+    heroSugarProgress
+      .style
+      .width =
+      sugarPercentage +
+      "%";
+
+  }
+
+
+  if (
+    sugarProgress
+  ) {
+
+    sugarProgress
+      .style
+      .width =
+      sugarPercentage +
+      "%";
+
+  }
+
+
+  if (
+    heroSugarRing
+  ) {
+
+    heroSugarRing
+      .style
+      .setProperty(
+        "--ring-angle",
+        (
+          sugarPercentage *
+          3.6
+        ) +
+        "deg"
+      );
+
+  }
+
+
+
+  /* =========================================================
+     STATUS
+     ========================================================= */
+
+  let sugarStatus =
+    "Belum ada data";
+
+
+  let sugarStatusClass =
+    "normal";
+
+
+  if (
+    todaySugar > 0
+  ) {
+
+    if (
+      sugarLimit > 0 &&
+      todaySugar <=
+        sugarLimit * 0.7
+    ) {
+
+      sugarStatus =
+        "Dalam rentang normal";
+
+
+      sugarStatusClass =
+        "normal";
+
+    } else if (
+      sugarLimit > 0 &&
+      todaySugar <=
+        sugarLimit
+    ) {
+
+      sugarStatus =
+        "Waspada";
+
+
+      sugarStatusClass =
+        "warning";
+
+    } else if (
+      sugarLimit > 0 &&
+      todaySugar >
+        sugarLimit
+    ) {
+
+      sugarStatus =
+        "Perlu dibatasi";
+
+
+      sugarStatusClass =
+        "danger";
+
+    }
+
+  }
+
+
+  setText(
+    "sugarStatusText",
+    sugarStatus
+  );
+
+
+  const sugarStatusBadge =
+    document.getElementById(
+      "sugarStatusBadge"
+    );
+
+
+  if (
+    sugarStatusBadge
+  ) {
+
+    sugarStatusBadge
+      .classList
+      .remove(
+        "warning",
+        "danger"
+      );
+
+
+    if (
+      sugarStatusClass ===
+      "warning"
+    ) {
+
+      sugarStatusBadge
+        .classList
+        .add(
+          "warning"
+        );
+
+    }
+
+
+    if (
+      sugarStatusClass ===
+      "danger"
+    ) {
+
+      sugarStatusBadge
+        .classList
+        .add(
+          "danger"
+        );
+
+    }
+
+  }
+
+
+
+  /* =========================================================
+     CHART DEFAULT
+     ========================================================= */
+
+  if (
+    typeof Chart !==
+    "undefined"
+  ) {
+
+    Chart.defaults.font.family =
+      "Inter, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif";
+
+
+    Chart.defaults.color =
+      "#64748b";
+
+  }
+
+
+
+  /* =========================================================
+     SUGAR CHART
+     ========================================================= */
+
+  const sugarTrendCanvas =
+    document.getElementById(
+      "sugarTrendChart"
+    );
+
+
+  if (
+    sugarTrendCanvas &&
+    typeof Chart !==
+      "undefined"
+  ) {
+
+    const context =
+      sugarTrendCanvas
+        .getContext(
+          "2d"
+        );
+
+
+    const gradient =
+      context
+        .createLinearGradient(
+          0,
+          0,
+          0,
+          300
+        );
+
+
+    gradient.addColorStop(
+      0,
+      "rgba(202,255,61,0.38)"
+    );
+
+
+    gradient.addColorStop(
+      0.48,
+      "rgba(16,185,129,0.10)"
+    );
+
+
+    gradient.addColorStop(
+      1,
+      "rgba(16,185,129,0)"
+    );
+
+
+    new Chart(
+      sugarTrendCanvas,
+      {
+
+        type:
+          "line",
+
+
+        data: {
+
+          labels:
+            trendLabels,
+
+
+          datasets: [
+
+            {
+
+              label:
+                "Total gula",
+
+              data:
+                trendValues,
+
+              borderColor:
+                "#111827",
+
+              backgroundColor:
+                gradient,
+
+              fill:
+                true,
+
+              tension:
+                0.38,
+
+              borderWidth:
+                2.5,
+
+              pointRadius:
+                4,
+
+              pointHoverRadius:
+                6,
+
+              pointBackgroundColor:
+                "#caff3d",
+
+              pointBorderColor:
+                "#111827",
+
+              pointBorderWidth:
+                2
+
+            }
+
+          ]
+
+        },
+
+
+        options: {
+
+          responsive:
+            true,
+
+          maintainAspectRatio:
+            false,
+
+
+          interaction: {
+
+            intersect:
+              false,
+
+            mode:
+              "index"
+
+          },
+
+
+          scales: {
+
+            x: {
+
+              grid: {
+
+                display:
+                  false
+
+              },
+
+              border: {
+
+                display:
+                  false
+
+              },
+
+              ticks: {
+
+                color:
+                  "#94a3b8",
+
+                font: {
+
+                  size:
+                    10,
+
+                  weight:
+                    "600"
+
+                }
+
+              }
+
+            },
+
+
+            y: {
+
+              beginAtZero:
+                true,
+
+              border: {
+
+                display:
+                  false
+
+              },
+
+              grid: {
+
+                color:
+                  "#edf1ef",
+
+                drawTicks:
+                  false
+
+              },
+
+              ticks: {
+
+                padding:
+                  9,
+
+                color:
+                  "#94a3b8",
+
+                font: {
+
+                  size:
+                    10,
+
+                  weight:
+                    "600"
+
+                },
+
+                callback:
+                  function (
+                    value
+                  ) {
+
+                    return (
+                      value +
+                      " g"
+                    );
+
+                  }
+
+              }
+
+            }
+
+          },
+
+
+          plugins: {
+
+            legend: {
+
+              display:
+                false
+
+            },
+
+
+            tooltip: {
+
+              backgroundColor:
+                "#111827",
+
+              titleColor:
+                "#ffffff",
+
+              bodyColor:
+                "#ffffff",
+
+              padding:
+                11,
+
+              cornerRadius:
+                9,
+
+              displayColors:
+                false,
+
+              callbacks: {
+
+                label:
+                  function (
+                    context
+                  ) {
+
+                    return (
+                      "Gula: " +
+                      displayNumber(
+                        context.parsed.y
+                      ) +
+                      " g"
+                    );
+
+                  }
+
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+    );
+
+  }
+
+
+
+  /* =========================================================
+     CENTER DONUT TEXT
+     ========================================================= */
+
+  const nutriCenterPlugin = {
+
+    id:
+      "nutriGuardCenterText",
+
+
+    afterDraw:
+      function (
+        chart
+      ) {
+
+        if (
+          chart.config.type !==
+          "doughnut"
+        ) {
+
+          return;
+
+        }
+
+
+        const chartArea =
+          chart.chartArea;
+
+
+        if (
+          !chartArea
+        ) {
+
+          return;
+
+        }
+
+
+        const context =
+          chart.ctx;
+
+
+        const centerX =
+          (
+            chartArea.left +
+            chartArea.right
+          ) /
+          2;
+
+
+        const centerY =
+          (
+            chartArea.top +
+            chartArea.bottom
+          ) /
+          2;
+
+
+        context.save();
+
+
+        context.textAlign =
+          "center";
+
+
+        context.textBaseline =
+          "middle";
+
+
+        context.fillStyle =
+          "#111827";
+
+
+        context.font =
+          "900 24px Inter, Arial";
+
+
+        context.fillText(
+          nutriTotal,
+          centerX,
+          centerY - 7
+        );
+
+
+        context.fillStyle =
+          "#94a3b8";
+
+
+        context.font =
+          "700 9px Inter, Arial";
+
+
+        context.fillText(
+          "Produk",
+          centerX,
+          centerY + 15
+        );
+
+
+        context.restore();
+
+      }
+
+  };
+
+
+
+  /* =========================================================
+     NUTRI SCORE
+     ========================================================= */
+
+  const nutriScoreCanvas =
+    document.getElementById(
+      "nutriScoreChart"
+    );
+
+
+  if (
+    nutriScoreCanvas &&
+    typeof Chart !==
+      "undefined"
+  ) {
+
+    const hasNutriData =
+      nutriTotal > 0;
+
+
+    const donutLabels =
+      hasNutriData
+        ? nutriLabels
+        : [
+            "Belum ada data"
+          ];
+
+
+    const donutValues =
+      hasNutriData
+        ? nutriValues
+        : [
+            1
+          ];
+
+
+    const donutColors =
+      hasNutriData
+        ? [
+            "#038141",
+            "#85BB2F",
+            "#FECB02",
+            "#EE8100",
+            "#E63E11"
+          ]
+        : [
+            "#e7ece9"
+          ];
+
+
+    new Chart(
+      nutriScoreCanvas,
+      {
+
+        type:
+          "doughnut",
+
+
+        data: {
+
+          labels:
+            donutLabels,
+
+
+          datasets: [
+
+            {
+
+              data:
+                donutValues,
+
+              backgroundColor:
+                donutColors,
+
+              borderColor:
+                "#ffffff",
+
+              borderWidth:
+                hasNutriData
+                  ? 4
+                  : 0,
+
+              hoverOffset:
+                hasNutriData
+                  ? 6
+                  : 0
+
+            }
+
+          ]
+
+        },
+
+
+        options: {
+
+          responsive:
+            true,
+
+          maintainAspectRatio:
+            false,
+
+          cutout:
+            "73%",
+
+
+          plugins: {
+
+            legend: {
+
+              display:
+                hasNutriData,
+
+              position:
+                "bottom",
+
+              labels: {
+
+                usePointStyle:
+                  true,
+
+                pointStyle:
+                  "circle",
+
+                padding:
+                  13,
+
+                color:
+                  "#64748b",
+
+                font: {
+
+                  size:
+                    9,
+
+                  weight:
+                    "700"
+
+                }
+
+              }
+
+            },
+
+
+            tooltip: {
+
+              enabled:
+                hasNutriData,
+
+              backgroundColor:
+                "#111827",
+
+              padding:
+                10,
+
+              cornerRadius:
+                9,
+
+              callbacks: {
+
+                label:
+                  function (
+                    context
+                  ) {
+
+                    return (
+                      "Grade " +
+                      context.label +
+                      ": " +
+                      context.raw +
+                      " produk"
+                    );
+
+                  }
+
+              }
+
+            }
+
+          }
+
+        },
+
+
+        plugins: [
+          nutriCenterPlugin
+        ]
+
+      }
+    );
+
+  }
+
+
+
+  /* =========================================================
+     CONSUME PRODUCT
+     ========================================================= */
+
+  async function consumeProduct(
+    button
+  ) {
+
+    if (
+      !button
+    ) {
+
+      return;
+
+    }
+
+
+    const scanId =
+      button.dataset
+        .scanId;
+
+
+    if (
+      !scanId
+    ) {
+
+      return;
+
+    }
+
+
+    const runConsumeRequest =
+      async function () {
+
+        const originalContent =
+          button.innerHTML;
+
+
+        button.disabled =
+          true;
+
+
+        button.innerHTML =
+          `
+          <span
+            class="
+              spinner-border
+              spinner-border-sm
+            "
+          ></span>
+          `;
+
+
+        try {
+
+          const response =
+            await fetch(
+              "/consume_product/" +
+              encodeURIComponent(
+                scanId
+              ),
+              {
+
+                method:
+                  "POST",
+
+                headers: {
+
+                  "Content-Type":
+                    "application/json"
+
+                }
+
+              }
+            );
+
+
+          const data =
+            await response.json();
+
+
+          if (
+            data.status !==
+            "success"
+          ) {
+
+            throw new Error(
+              data.message ||
+              "Gagal memperbarui status konsumsi."
+            );
+
+          }
+
+
+          if (
+            typeof Swal !==
+            "undefined"
+          ) {
+
+            await Swal.fire({
+
+              toast:
+                true,
+
+              position:
+                "top-end",
+
+              icon:
+                "success",
+
+              title:
+                "Produk ditandai dikonsumsi",
+
+              showConfirmButton:
+                false,
+
+              timer:
+                1100
+
+            });
+
+          }
+
+
+          window.location.reload();
+
+
+        } catch (
+          error
+        ) {
+
+          button.disabled =
+            false;
+
+
+          button.innerHTML =
+            originalContent;
+
+
+          if (
+            typeof Swal !==
+            "undefined"
+          ) {
+
+            Swal.fire({
+
+              title:
+                "Gagal",
+
+              text:
+                error.message ||
+                "Terjadi kesalahan saat menghubungi server.",
+
+              icon:
+                "error"
+
+            });
+
+          } else {
+
+            window.alert(
+              error.message ||
+              "Terjadi kesalahan saat menghubungi server."
+            );
+
+          }
+
+        }
+
+      };
+
+
+    if (
+      typeof Swal !==
+      "undefined"
+    ) {
+
+      const confirmation =
+        await Swal.fire({
+
+          title:
+            "Tandai sebagai dikonsumsi?",
+
+          text:
+            "Produk akan dimasukkan ke perhitungan konsumsi hari ini.",
+
+          icon:
+            "question",
+
+          showCancelButton:
+            true,
+
+          confirmButtonText:
+            "Ya, konsumsi",
+
+          cancelButtonText:
+            "Batal",
+
+          reverseButtons:
+            true,
+
+          confirmButtonColor:
+            "#111827"
+
+        });
+
+
+      if (
+        confirmation
+          .isConfirmed
+      ) {
+
+        runConsumeRequest();
+
+      }
+
+    } else {
+
+      const confirmed =
+        window.confirm(
+          "Tandai produk ini sebagai dikonsumsi?"
+        );
+
+
+      if (
+        confirmed
+      ) {
+
+        runConsumeRequest();
+
+      }
+
+    }
+
+  }
+
+
+
+  /* =========================================================
+     REVEAL
+     ========================================================= */
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+      const revealItems =
+        document.querySelectorAll(
+          ".ng-reveal"
+        );
+
+
+      if (
+        !(
+          "IntersectionObserver"
+          in window
+        )
+      ) {
+
+        revealItems.forEach(
+          function (
+            item
+          ) {
+
+            item
+              .classList
+              .add(
+                "visible"
+              );
+
+          }
+        );
+
+
+        return;
+
+      }
+
+
+      const observer =
+        new IntersectionObserver(
+          function (
+            entries,
+            activeObserver
+          ) {
+
+            entries.forEach(
+              function (
+                entry
+              ) {
+
+                if (
+                  entry.isIntersecting
+                ) {
+
+                  entry
+                    .target
+                    .classList
+                    .add(
+                      "visible"
+                    );
+
+
+                  activeObserver
+                    .unobserve(
+                      entry.target
+                    );
+
+                }
+
+              }
+            );
+
+          },
+          {
+
+            threshold:
+              0.08,
+
+            rootMargin:
+              "0px 0px -25px 0px"
+
+          }
+        );
+
+
+      revealItems.forEach(
+        function (
+          item
+        ) {
+
+          observer.observe(
+            item
+          );
+
+        }
+      );
+
+    }
+  );
+
+</script>
+
+{% endblock %}

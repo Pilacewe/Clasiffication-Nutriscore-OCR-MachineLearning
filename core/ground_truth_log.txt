@@ -1,0 +1,242 @@
+2026-07-14 02:15:33,665 - INFO - Memulai evaluasi OCR untuk 7 gambar.
+2026-07-14 02:15:33,706 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-14 02:15:34,034 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent "HTTP/1.1 404 Not Found"
+2026-07-14 02:15:34,035 - INFO - [8ae2678b-1c0d-407f-ab0c-c25a7799a84b.jpg] Evaluasi sukses. Field Acc: 9.09%, CER: 129.03%
+2026-07-14 02:15:36,047 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-14 02:15:36,239 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent "HTTP/1.1 404 Not Found"
+2026-07-14 02:15:36,241 - INFO - [9b8b428e-091f-41db-ab0c-aae4ccf674ee.jpg] Evaluasi sukses. Field Acc: 9.09%, CER: 108.82%
+2026-07-14 02:15:38,245 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-14 02:15:38,399 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent "HTTP/1.1 404 Not Found"
+2026-07-14 02:15:38,400 - INFO - [Cadbury Dairy Milk.jpg] Evaluasi sukses. Field Acc: 9.09%, CER: 284.62%
+2026-07-14 02:15:40,404 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-14 02:15:40,535 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent "HTTP/1.1 404 Not Found"
+2026-07-14 02:15:40,537 - INFO - [Cimory Squeeze.jpg] Evaluasi sukses. Field Acc: 9.09%, CER: 143.48%
+2026-07-14 02:15:42,542 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-14 02:15:42,673 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent "HTTP/1.1 404 Not Found"
+2026-07-14 02:15:42,674 - INFO - [Floridina Orange 350ML.jpg] Evaluasi sukses. Field Acc: 0.00%, CER: 115.38%
+2026-07-14 02:15:44,760 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-14 02:15:45,434 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent "HTTP/1.1 404 Not Found"
+2026-07-14 02:15:45,435 - INFO - [Fruit Tea Apple.jpg] Evaluasi sukses. Field Acc: 0.00%, CER: 120.69%
+2026-07-14 02:15:47,438 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-14 02:15:47,573 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent "HTTP/1.1 404 Not Found"
+2026-07-14 02:15:47,573 - INFO - [Gerry snack sereal.jpg] Evaluasi sukses. Field Acc: 9.09%, CER: 276.92%
+2026-07-14 02:15:49,599 - INFO - Evaluasi selesai. Total: 7, Avg Field Acc: 6.49%, Avg CER: 168.42%
+2026-07-14 02:30:37,774 - INFO - Memulai evaluasi OCR untuk 7 gambar.
+2026-07-14 02:30:37,813 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-14 02:30:39,984 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-07-14 02:30:39,985 - ERROR - [8ae2678b-1c0d-407f-ab0c-c25a7799a84b.jpg] Error OCR saat evaluasi: OCR Gagal: Error System: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+2026-07-14 02:30:55,000 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-14 02:30:57,044 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-07-14 02:30:57,045 - ERROR - [9b8b428e-091f-41db-ab0c-aae4ccf674ee.jpg] Error OCR saat evaluasi: OCR Gagal: Error System: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+2026-07-14 02:31:12,053 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-14 02:31:13,932 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-07-14 02:31:13,935 - ERROR - [Cadbury Dairy Milk.jpg] Error OCR saat evaluasi: OCR Gagal: Error System: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+2026-07-14 03:16:38,690 - INFO - Memulai evaluasi OCR untuk 7 gambar.
+2026-07-14 03:16:38,732 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-14 03:16:40,717 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-07-14 03:16:40,718 - ERROR - [8ae2678b-1c0d-407f-ab0c-c25a7799a84b.jpg] Error OCR saat evaluasi: OCR Gagal: Error System: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+2026-07-14 06:51:25,779 - INFO - Memulai evaluasi OCR untuk 7 gambar.
+2026-07-14 06:51:25,822 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-14 06:52:24,704 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 200 OK"
+2026-07-14 06:52:24,708 - INFO - [8ae2678b-1c0d-407f-ab0c-c25a7799a84b.jpg] Evaluasi sukses. Field Acc: 18.18%, CER: 112.90%
+2026-07-14 06:52:39,722 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-14 06:53:35,325 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 200 OK"
+2026-07-14 06:53:35,327 - INFO - [9b8b428e-091f-41db-ab0c-aae4ccf674ee.jpg] Evaluasi sukses. Field Acc: 18.18%, CER: 88.24%
+2026-07-14 06:53:50,332 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-14 06:54:21,902 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 200 OK"
+2026-07-14 06:54:21,905 - ERROR - [Cadbury Dairy Milk.jpg] Error OCR saat evaluasi: OCR Gagal: Error System: Expecting ',' delimiter: line 12 column 16 (char 235)
+2026-07-14 06:54:36,909 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-14 06:55:06,355 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 200 OK"
+2026-07-14 06:55:06,359 - INFO - [Cimory Squeeze.jpg] Evaluasi sukses. Field Acc: 9.09%, CER: 143.48%
+2026-07-14 06:55:21,365 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-14 06:55:50,826 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 200 OK"
+2026-07-14 06:55:50,846 - INFO - [Floridina Orange 350ML.jpg] Evaluasi sukses. Field Acc: 18.18%, CER: 46.15%
+2026-07-14 06:56:05,922 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-14 06:56:39,122 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 200 OK"
+2026-07-14 06:56:39,126 - INFO - [Fruit Tea Apple.jpg] Evaluasi sukses. Field Acc: 9.09%, CER: 100.00%
+2026-07-14 06:56:54,133 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-14 06:57:20,605 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent "HTTP/1.1 200 OK"
+2026-07-14 06:57:20,605 - INFO - [Gerry snack sereal.jpg] Evaluasi sukses. Field Acc: 27.27%, CER: 123.08%
+2026-07-14 06:57:35,631 - INFO - Evaluasi selesai. Total: 6, Avg Field Acc: 16.67%, Avg CER: 102.31%
+2026-07-15 14:42:15,900 - INFO - Memulai evaluasi OCR untuk 50 gambar.
+2026-07-15 14:42:17,396 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:42:17,408 - INFO - [06e37dcd-b9ea-4840-871c-735d6822acd8.jpg] [blur] Evaluasi sukses. Field Acc: 27.27%, CER: 86.96%
+2026-07-15 14:42:20,142 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:42:20,144 - INFO - [23641489-6131-45a8-bf2b-d586d7af97ca.jpg] [blur] Evaluasi sukses. Field Acc: 27.27%, CER: 123.08%
+2026-07-15 14:42:23,235 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:42:23,236 - INFO - [44de950b-2728-4181-a75b-64505e42e85b.jpg] [blur] Evaluasi sukses. Field Acc: 45.45%, CER: 33.33%
+2026-07-15 14:42:26,685 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:42:26,687 - INFO - [4d6371e5-8dde-4d80-87c5-16f66bfe03d5.jpg] [blur] Evaluasi sukses. Field Acc: 27.27%, CER: 70.00%
+2026-07-15 14:42:29,659 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:42:29,662 - INFO - [5841f9fe-3383-4092-bb3c-0fbaffa57a16.jpg] [blur] Evaluasi sukses. Field Acc: 36.36%, CER: 114.29%
+2026-07-15 14:42:33,625 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:42:33,627 - INFO - [9dec57a5-bd1c-4956-a8ac-d7b1da79c05a.jpg] [blur] Evaluasi sukses. Field Acc: 27.27%, CER: 61.54%
+2026-07-15 14:42:36,864 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:42:36,866 - INFO - [9fac67b7-9e87-47e4-9ef1-990fcd69ae78.jpg] [blur] Evaluasi sukses. Field Acc: 27.27%, CER: 56.41%
+2026-07-15 14:42:39,635 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:42:39,636 - INFO - [a8ebb116-0c08-4a9a-b5bb-22b3233a7144.jpg] [blur] Evaluasi sukses. Field Acc: 36.36%, CER: 100.00%
+2026-07-15 14:42:41,885 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:42:41,886 - INFO - Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2026-07-15 14:42:45,596 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:42:45,597 - INFO - [ac99d573-c10b-4fbf-adb1-50b7186a1a8b.jpg] [blur] Evaluasi sukses. Field Acc: 36.36%, CER: 100.00%
+2026-07-15 14:42:47,866 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:42:47,866 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:42:52,696 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:42:52,697 - INFO - [cca99856-6eab-47af-ab69-ef945f79884b (1).jpg] [blur] Evaluasi sukses. Field Acc: 27.27%, CER: 48.48%
+2026-07-15 14:42:54,981 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:42:54,982 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:42:59,896 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:42:59,897 - INFO - [d5920eb9-ec04-42e4-849c-f32f5aa0a3de.jpg] [blur] Evaluasi sukses. Field Acc: 18.18%, CER: 45.24%
+2026-07-15 14:43:02,210 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:43:02,210 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:43:07,227 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:43:07,228 - INFO - [e106a93f-7794-4bca-9682-d01ac34ba1e4.jpg] [blur] Evaluasi sukses. Field Acc: 27.27%, CER: 80.65%
+2026-07-15 14:43:09,594 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:43:09,594 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:43:14,297 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:43:14,298 - INFO - [f96499d5-caf1-479a-ac78-80c4a56e7b69.jpg] [blur] Evaluasi sukses. Field Acc: 27.27%, CER: 100.00%
+2026-07-15 14:43:16,477 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:43:16,477 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:43:23,136 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:43:23,139 - INFO - [0423dbbe-298b-4295-980f-f45974fe3967.jpg] [gelap] Evaluasi sukses. Field Acc: 9.09%, CER: 74.36%
+2026-07-15 14:43:25,335 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:43:25,335 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:43:30,156 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:43:30,159 - INFO - [0d5795b9-c3f0-4edc-85da-3b4b807ecd90.jpg] [gelap] Evaluasi sukses. Field Acc: 54.55%, CER: 23.26%
+2026-07-15 14:43:32,295 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:43:32,295 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:43:37,056 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:43:37,057 - INFO - [2167e30c-faed-4644-b743-c2a4aaf5609b.jpg] [gelap] Evaluasi sukses. Field Acc: 18.18%, CER: 69.70%
+2026-07-15 14:43:39,193 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:43:39,193 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:43:43,874 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:43:43,876 - INFO - [2cb16ef1-8b3d-4f64-8359-b0eae6cf6e6f.jpg] [gelap] Evaluasi sukses. Field Acc: 36.36%, CER: 93.33%
+2026-07-15 14:43:46,025 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:43:46,025 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:43:51,942 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:43:51,943 - INFO - [4f37b4a8-1d03-4e2f-b049-c0b913322575.jpg] [gelap] Evaluasi sukses. Field Acc: 27.27%, CER: 114.29%
+2026-07-15 14:43:54,104 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:43:54,105 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:43:58,816 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:43:58,819 - INFO - [5af25d49-cc58-4e60-bf78-87ed7886a7e3.jpg] [gelap] Evaluasi sukses. Field Acc: 18.18%, CER: 65.62%
+2026-07-15 14:44:00,996 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:44:00,996 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:44:05,825 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:44:05,827 - INFO - [5b09cf58-744c-4938-81cc-2da2cbebe6fc.jpg] [gelap] Evaluasi sukses. Field Acc: 36.36%, CER: 121.43%
+2026-07-15 14:44:08,026 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:44:08,027 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:44:13,039 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:44:13,040 - INFO - [5ebf728d-5775-41ba-9592-d5c7e395cd80.jpg] [gelap] Evaluasi sukses. Field Acc: 27.27%, CER: 130.77%
+2026-07-15 14:44:15,308 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:44:15,308 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:44:20,469 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:44:20,470 - INFO - [6bffbdb7-c773-4157-b229-5b540695532b.jpg] [gelap] Evaluasi sukses. Field Acc: 27.27%, CER: 56.25%
+2026-07-15 14:44:22,731 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:44:22,731 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:44:27,715 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:44:27,716 - INFO - [9011ebe4-150d-4b55-a569-4ea426c999f5.jpg] [gelap] Evaluasi sukses. Field Acc: 27.27%, CER: 111.76%
+2026-07-15 14:44:29,897 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:44:29,897 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:44:34,825 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:44:34,826 - INFO - [b341083e-248a-4b93-8f46-00f4f8890f59.jpg] [gelap] Evaluasi sukses. Field Acc: 27.27%, CER: 47.37%
+2026-07-15 14:44:37,085 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:44:37,087 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:44:41,968 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:44:41,970 - INFO - [cff92ede-5ff3-4789-b27f-801774d725b4.jpg] [gelap] Evaluasi sukses. Field Acc: 27.27%, CER: 116.67%
+2026-07-15 14:44:44,183 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:44:44,184 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:44:48,925 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:44:48,926 - INFO - [d2c37505-9c35-430c-8398-c45ed5413edd.jpg] [gelap] Evaluasi sukses. Field Acc: 27.27%, CER: 100.00%
+2026-07-15 14:44:51,105 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:44:51,105 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:44:56,165 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:44:56,166 - INFO - [dc91b7f1-4ae2-4cda-8e02-b1d30a2e7da0.jpg] [gelap] Evaluasi sukses. Field Acc: 36.36%, CER: 72.73%
+2026-07-15 14:44:58,547 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:44:58,548 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:45:03,325 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:45:03,326 - INFO - [e202bf65-4426-4258-94e5-030938d4af57.jpg] [gelap] Evaluasi sukses. Field Acc: 36.36%, CER: 40.00%
+2026-07-15 14:45:05,673 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:45:05,673 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:45:11,255 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:45:11,256 - INFO - [873595f3-81ff-484a-ac75-3ebf5552c6bb.jpg] [ketekuk] Evaluasi sukses. Field Acc: 9.09%, CER: 126.67%
+2026-07-15 14:45:13,495 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:45:13,495 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:45:18,306 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:45:18,309 - INFO - [8f970043-fb4a-4f6c-b3be-1bd9e9fc075e.jpg] [ketekuk] Evaluasi sukses. Field Acc: 27.27%, CER: 113.33%
+2026-07-15 14:45:20,711 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:45:20,711 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:45:25,582 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:45:25,583 - INFO - [96b2db82-23a3-4d7d-a2fc-5049a7dc1bbb.jpg] [ketekuk] Evaluasi sukses. Field Acc: 27.27%, CER: 65.38%
+2026-07-15 14:45:27,805 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:45:27,806 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:45:32,832 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:45:32,833 - INFO - [c132d586-bc1b-4de9-a510-847a5aea50f3.jpg] [ketekuk] Evaluasi sukses. Field Acc: 27.27%, CER: 141.67%
+2026-07-15 14:45:35,035 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:45:35,035 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:45:39,786 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:45:39,787 - INFO - [dbfce53c-9eb5-4d7a-b530-4a3499f95c66.jpg] [ketekuk] Evaluasi sukses. Field Acc: 36.36%, CER: 113.33%
+2026-07-15 14:45:42,037 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:45:42,037 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:45:46,848 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:45:46,849 - INFO - [f207a81c-d969-4271-9678-8921789584cc.jpg] [ketekuk] Evaluasi sukses. Field Acc: 27.27%, CER: 61.29%
+2026-07-15 14:45:49,202 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:45:49,202 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:45:53,955 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:45:53,956 - INFO - [fb1a4651-a068-47af-b142-a2edae8e3dda.jpg] [ketekuk] Evaluasi sukses. Field Acc: 27.27%, CER: 114.29%
+2026-07-15 14:45:56,115 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:45:56,115 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:46:02,345 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:46:02,345 - INFO - [212dbe1f-44d5-45ab-a83a-ee8dfc27c9e2.jpg] [normal] Evaluasi sukses. Field Acc: 18.18%, CER: 100.00%
+2026-07-15 14:46:04,535 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:46:04,535 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:46:09,397 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:46:09,398 - INFO - [37d7086d-1187-420e-be99-46947247da8c.jpg] [normal] Evaluasi sukses. Field Acc: 27.27%, CER: 56.25%
+2026-07-15 14:46:11,580 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:46:11,580 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:46:16,755 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:46:16,757 - INFO - [3ab22ad9-3301-4e1e-a823-8e8eb90dc1ba.jpg] [normal] Evaluasi sukses. Field Acc: 36.36%, CER: 121.43%
+2026-07-15 14:46:19,037 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:46:19,038 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:46:24,344 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:46:24,346 - INFO - [6de403e8-2817-4614-8d19-49a9cedcb0d8.jpg] [normal] Evaluasi sukses. Field Acc: 27.27%, CER: 42.11%
+2026-07-15 14:46:26,555 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:46:26,555 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:46:31,434 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:46:31,435 - INFO - [89c0548e-d4da-4305-8a4a-20e009b355e8.jpg] [normal] Evaluasi sukses. Field Acc: 27.27%, CER: 100.00%
+2026-07-15 14:46:33,624 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:46:33,624 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:46:38,425 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:46:38,427 - INFO - [cca99856-6eab-47af-ab69-ef945f79884b.jpg] [normal] Evaluasi sukses. Field Acc: 27.27%, CER: 48.48%
+2026-07-15 14:46:40,865 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:46:40,865 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:46:45,628 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:46:45,631 - INFO - [ce7d39e2-0a06-4b07-aecb-4a4f34499683.jpg] [normal] Evaluasi sukses. Field Acc: 36.36%, CER: 100.00%
+2026-07-15 14:46:48,168 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:46:48,170 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:46:52,964 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:46:52,965 - INFO - [cf01dabe-216b-46a9-be0b-ba42cbd53c5f.jpg] [normal] Evaluasi sukses. Field Acc: 45.45%, CER: 30.00%
+2026-07-15 14:46:55,456 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:46:55,456 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:47:00,232 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:47:00,234 - INFO - [d6859ca6-c665-428e-b677-a093988f32a0.jpg] [normal] Evaluasi sukses. Field Acc: 36.36%, CER: 100.00%
+2026-07-15 14:47:02,623 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:47:02,623 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:47:07,455 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:47:07,456 - INFO - [dec8d905-9ffa-4662-ac31-1c4df684d8f9.jpg] [normal] Evaluasi sukses. Field Acc: 27.27%, CER: 82.61%
+2026-07-15 14:47:09,754 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:47:09,756 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:47:15,045 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:47:15,048 - INFO - [dfaf9f2d-04bc-4e04-b83d-46f148048adc.jpg] [normal] Evaluasi sukses. Field Acc: 27.27%, CER: 100.00%
+2026-07-15 14:47:17,265 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:47:17,266 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:47:22,080 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:47:22,084 - INFO - [e7e34e69-c6d2-4817-88ce-44538d3c29f9.jpg] [normal] Evaluasi sukses. Field Acc: 27.27%, CER: 51.43%
+2026-07-15 14:47:24,384 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:47:24,385 - INFO - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-07-15 14:47:29,610 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-15 14:47:29,613 - INFO - [f4339378-85ce-4daa-bd28-1742f76cf46b.jpg] [normal] Evaluasi sukses. Field Acc: 27.27%, CER: 37.21%
+2026-07-15 14:47:32,105 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:47:32,106 - INFO - [f659c5cb-a91f-412c-95c3-0b285025bb92.jpg] [normal] Evaluasi sukses. Field Acc: 9.09%, CER: 226.67%
+2026-07-15 14:47:34,318 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-15 14:47:34,320 - INFO - [f72b8428-5062-49ad-b660-762ee8e0558c.jpg] [normal] Evaluasi sukses. Field Acc: 0.00%, CER: 153.85%
+2026-07-15 14:47:36,359 - INFO - Evaluasi selesai. Total: 50, Avg Field Acc: 28.18%, Avg CER: 86.87%

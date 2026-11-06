@@ -1,0 +1,147 @@
+{% extends 'layout/base.html' %} {% block content %}
+<style>
+  body {
+    background-color: #f8fafc;
+  }
+
+  .result-card {
+    background: #ffffff;
+    border-radius: 24px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+  }
+
+  /* Warna Nutri-Score Raksasa */
+  .score-giant {
+    font-size: 6rem;
+    font-weight: 900;
+    line-height: 1;
+    padding: 2rem;
+    border-radius: 24px;
+    color: white;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  .bg-score-A {
+    background: linear-gradient(135deg, #059669, #10b981);
+  }
+  .bg-score-B {
+    background: linear-gradient(135deg, #84cc16, #a3e635);
+  }
+  .bg-score-C {
+    background: linear-gradient(135deg, #eab308, #fde047);
+    color: #854d0e !important;
+  }
+  .bg-score-D {
+    background: linear-gradient(135deg, #ea580c, #f97316);
+  }
+  .bg-score-E {
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+  }
+
+  /* Alert Medis Custom */
+  .alert-Aman {
+    background-color: #ecfdf5;
+    border-left: 5px solid #10b981;
+    color: #065f46;
+  }
+  .alert-Waspada {
+    background-color: #fefce8;
+    border-left: 5px solid #eab308;
+    color: #854d0e;
+  }
+  .alert-Bahaya {
+    background-color: #fef2f2;
+    border-left: 5px solid #ef4444;
+    color: #991b1b;
+  }
+</style>
+
+<div class="container py-5 mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-xl-7">
+      <div class="result-card p-4 p-md-5 text-center">
+        <h6 class="text-uppercase tracking-wider text-muted fw-bold mb-3">
+          Hasil Evaluasi AI & Medis
+        </h6>
+        <h2 class="fw-bold text-dark mb-4">{{ hasil.nama_produk }}</h2>
+
+        <!-- Hasil Random Forest (Nutri-Score) -->
+        <div class="mb-5">
+          <p class="text-muted small mb-3">
+            Klasifikasi Kualitas Gizi (Random Forest)
+          </p>
+          <div class="score-giant bg-score-{{ hasil.nutriscore }}">
+            {{ hasil.nutriscore }}
+          </div>
+        </div>
+
+        <!-- Hasil Forward Chaining (Evaluasi Gula) -->
+        <div
+          class="alert alert-{{ hasil.status_gula }} text-start p-4 mb-4"
+          role="alert"
+        >
+          <h5 class="fw-bold mb-2">
+            {% if hasil.status_gula == 'Aman' %}<i
+              class="fa-solid fa-circle-check me-2"
+            ></i
+            >Status: Aman {% elif hasil.status_gula == 'Waspada' %}<i
+              class="fa-solid fa-triangle-exclamation me-2"
+            ></i
+            >Status: Waspada {% else %}<i
+              class="fa-solid fa-skull-crossbones me-2"
+            ></i
+            >Status: BAHAYA HIPERGLIKEMIA {% endif %}
+          </h5>
+          <p class="mb-0 fw-medium">{{ hasil.pesan_medis }}</p>
+        </div>
+
+        <!-- Fakta Nutrisi Singkat -->
+        <div class="row g-3 mb-5">
+          <div class="col-6">
+            <div class="bg-light rounded-3 p-3 border">
+              <span class="d-block small text-muted fw-bold mb-1"
+                >Gula Produk</span
+              >
+              <h4 class="fw-bold text-dark mb-0">{{ hasil.gula }}g</h4>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="bg-light rounded-3 p-3 border">
+              <span class="d-block small text-muted fw-bold mb-1"
+                >Energi Total</span
+              >
+              <h4 class="fw-bold text-dark mb-0">{{ hasil.kalori }} kkal</h4>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tombol Navigasi -->
+        <div
+          class="d-flex flex-column flex-sm-row justify-content-center gap-3"
+        >
+          <a
+            href="{{ url_for('scan_page') }}"
+            class="btn btn-outline-dark rounded-pill px-4 py-2 fw-semibold"
+          >
+            <i class="fa-solid fa-camera me-2"></i> Pindai Lagi
+          </a>
+          <a
+            href="{{ url_for('dashboard') }}"
+            class="btn btn-dark rounded-pill px-4 py-2 fw-semibold"
+            style="
+              background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+              border: none;
+            "
+          >
+            <i class="fa-solid fa-house me-2"></i> Kembali ke Dashboard
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
